@@ -1,0 +1,12 @@
+{
+  "newCard": "Thẻ mới từ {who}",
+  "interrupted": "Đã gửi interrupt — lượt của {who} dừng, phiên vẫn sống",
+  "stopAll": "Dừng an toàn tất cả lane? Mỗi lane làm xong việc đang dở, commit, viết handoff rồi dừng.",
+  "soundOn": "Đã bật âm (M)",
+  "soundOff": "Đã tắt âm (M)",
+  "local.lanes": "[cc-slaves] {n} lane trên {project}",
+  "local.handoff": "[cc-slaves] /handoff — dừng an toàn {n} lane, mỗi lane viết handoff",
+  "local.new": "[cc-slaves] /new — phiên cũ đang viết handoff…",
+  "switching": "Đang chuyển {name} sang {to} — resume đúng session",
+  "autoAcc": "account engine chọn"
+}

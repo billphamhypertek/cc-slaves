@@ -1,0 +1,6 @@
+{
+  "parent": "parent lane",
+  "loading": "Loading the stream…",
+  "empty": "No activity yet.",
+  "returned": "Returned:"
+}

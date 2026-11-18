@@ -1,0 +1,49 @@
+/* v2.7 §4.3 the issue detail (IS2, IS3, IS5, IS5b, IS6, IS9) and its narrow overlay (IS10, 360 from the right). */
+.tsk .idet{background:var(--tk-bg)}
+.tsk .tgrid.nw{grid-template-columns:minmax(0,1fr);position:relative}
+.tsk .tgrid>.tdet.ov{position:absolute;top:0;right:0;bottom:0;width:360px;z-index:10;background:var(--tk-bg);border-left:1px solid var(--line-2);box-shadow:var(--shadow)}
+.tsk .idet .dtop{flex:none;padding:var(--s5) var(--s6) var(--s5);border-bottom:1px solid var(--line)}
+.tsk .idet .dmeta{display:flex;align-items:center;gap:var(--s3);font-size:var(--xs);color:var(--fg-3)}
+.tsk .idet .dmeta .k{font:600 var(--xs) var(--f-mono);color:var(--fg)}
+.tsk .idet .dmeta .lgap{flex:1}
+.tsk .idet h3{margin:var(--s4) 0 0;font:600 var(--lg)/1.35 var(--f-body);color:var(--fg)}
+.tsk .idet .dsub{margin:var(--s3) 0 0;font-size:var(--xs);color:var(--fg-2)}
+.tsk .idet .dok,.tsk .idet .dcx,.tsk .idet .dkeep{display:inline-flex;align-items:center;height:var(--h-ctl-sm);padding:0 var(--s4);border-radius:5px;font:600 var(--xs) var(--f-body);cursor:pointer}
+.tsk .idet .dok{border:1px solid var(--accent);background:var(--accent);color:var(--ink)}
+.tsk .idet .dcx{border:1px solid var(--bad);background:transparent;color:var(--bad)}
+.tsk .idet .dkeep{border:1px solid var(--line-2);background:var(--sel);color:var(--fg)}
+.tsk .idet .dok:disabled,.tsk .idet .dcx:disabled,.tsk .idet .dkeep:disabled{opacity:.4;cursor:not-allowed}
+.tsk .idet .dclose{display:inline-flex;align-items:center;justify-content:center;width:var(--h-ctl-sm);height:var(--h-ctl-sm);border:0;border-radius:5px;background:transparent;color:var(--fg-2);cursor:pointer}
+.tsk .idet .dclose:hover{background:var(--sel)}
+.tsk .idet .dbody{flex:1;min-height:0;overflow:auto;padding-bottom:var(--s6)}
+/* §5.7-5 IS5b the red conflict strip (a warning panel, not a selection state) */
+.tsk .idet .dstrip{margin:var(--s5) var(--s6) 0;padding:var(--s4) var(--s5);border:1px solid color-mix(in srgb,var(--bad) 45%,transparent);border-radius:8px;background:var(--bad-2);
+  font-size:var(--sm);color:var(--fg)}
+.tsk .idet .dstrip p{margin:0}
+.tsk .idet .dsb{display:flex;gap:var(--s3);margin-top:var(--s4)}
+.tsk .idet .dtab{display:grid;grid-template-columns:114px minmax(0,1fr);gap:var(--s3) var(--s4);margin:0;padding:var(--s5) var(--s6);border-bottom:1px solid var(--line);font-size:var(--sm)}
+.tsk .idet .dtab dt{color:var(--fg-3)}
+.tsk .idet .dtab dd{margin:0;color:var(--fg);overflow-wrap:anywhere}
+.tsk .idet .dtab dd.mono{font:var(--xs)/1.5 var(--f-mono)}
+.tsk .idet .dsec{padding:var(--s5) var(--s6) 0}
+.tsk .idet .dsec h4{margin:0 0 var(--s3);font:600 var(--xxs) var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--fg-3)}
+.tsk .idet .dmd{font-size:var(--sm);color:var(--fg)}
+.tsk .idet .dchk,.tsk .idet .dfiles,.tsk .idet .dhist{list-style:none;margin:0;padding:0;font-size:var(--sm)}
+.tsk .idet .dchk li{display:flex;align-items:flex-start;gap:var(--s3);margin-bottom:var(--s2)}
+.tsk .idet .dchk input{margin:var(--s1) 0 0;accent-color:var(--fg-3);pointer-events:none}
+.tsk .idet .dfiles li{margin-bottom:var(--s4);color:var(--fg)}
+.tsk .idet .dfiles .fln{display:flex;align-items:center;gap:var(--s3)}
+.tsk .idet .dfiles small{color:var(--fg-3);font-size:var(--xs)}
+/* review MINOR-2 the mockup `.thumb` (200 × 112) and the full view over the app */
+.tsk .idet .dthumb{display:flex;align-items:center;justify-content:center;margin-top:var(--s3);width:200px;height:112px;padding:0;border:1px solid var(--line-2);
+  border-radius:5px;overflow:hidden;background:var(--bg-2);cursor:zoom-in}
+.tsk .idet .dthumb:disabled{cursor:default}
+.tsk .idet .dthumb img{width:100%;height:100%;object-fit:cover}
+.tsk .dimgv{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;padding:var(--s6);background:color-mix(in srgb,var(--bg) 88%,transparent);cursor:zoom-out}
+.tsk .dimgv img{max-width:100%;max-height:100%;object-fit:contain}
+.tsk .dimgv .dclose{position:absolute;top:var(--s5);right:var(--s5);display:inline-flex;align-items:center;justify-content:center;width:var(--h-ctl-sm);
+  height:var(--h-ctl-sm);border:0;border-radius:5px;background:var(--panel-2);color:var(--fg);cursor:pointer}
+.tsk .idet .dhist li{display:flex;gap:var(--s4);margin-bottom:var(--s2)}
+.tsk .idet .dhist time{flex:none;font:var(--xs)/1.6 var(--f-mono);color:var(--fg-3)}
+.tsk .tkey{border:0;background:transparent;padding:0;color:inherit;font:inherit;text-decoration:underline;text-decoration-color:var(--line-2);text-underline-offset:3px;cursor:pointer}
+.tsk .tkey:hover{text-decoration-color:currentColor}

@@ -1,0 +1,33 @@
+/* v2.9 §4.1 / §4.6 the workflow chip, its menu (WF6a) and the Áp dụng box (WF6b). Selection = neutral --sel only (D90). */
+.tsk .wfchip{position:relative;flex:none;padding:var(--s3) var(--s4) 0 var(--s4)}
+.tsk .wfc{display:inline-flex;align-items:center;gap:var(--s1);height:22px;padding:0 var(--s2);border:0;border-radius:5px;background:transparent;
+  font:var(--xs) var(--f-body);color:var(--fg-3);cursor:pointer}
+.tsk .wfc:hover,.tsk .wfc.open{background:var(--sel);color:var(--fg-2)}
+.tsk .wfc:focus-visible{outline:2px solid var(--fg-2);outline-offset:1px}
+.tsk .wfmenu{position:fixed;z-index:30;width:400px;max-width:calc(100vw - 24px);padding:var(--s2);
+  border:1px solid var(--line-2);border-radius:8px;background:var(--solid);box-shadow:var(--shadow)}
+.tsk .wfmenu .why{margin:0 var(--s3) var(--s2);font-size:var(--xs);color:var(--fg-3);line-height:1.45}
+.tsk .wfmenu h4{margin:var(--s2) var(--s3);font:600 var(--xxs) var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--fg-3)}
+.tsk .wfmenu>button{display:grid;grid-template-columns:18px 1fr;gap:var(--s1) var(--s3);width:100%;padding:var(--s2) var(--s3);border:0;border-radius:6px;background:transparent;
+  color:var(--fg);font:var(--sm) var(--f-body);text-align:left;cursor:pointer}
+.tsk .wfmenu>button .ck{grid-row:span 2;display:inline-flex;padding-top:var(--None);color:var(--fg-2)}
+.tsk .wfmenu>button small{grid-column:2;font-size:var(--xs);color:var(--fg-3);line-height:1.35}
+.tsk .wfmenu>button.on{font-weight:600}
+.tsk .wfmenu>button.on small{font-weight:400}
+.tsk .wfmenu>button:hover:not(:disabled),.tsk .wfmenu>button:focus-visible{background:var(--sel);outline:0}
+.tsk .wfmenu>button:disabled{opacity:.45;cursor:not-allowed}
+.tsk .wfmenu .sep{height:1px;margin:var(--s2) var(--s1);background:var(--line)}
+.tsk .wfscrim{position:fixed;inset:0;z-index:40;display:grid;place-items:center;padding:var(--s6) var(--s5);background:var(--scrim)}
+/* the box keeps the dialog look and reads left even inside the centred empty state of a new project (WF6b, v29-ux M1) */
+.tsk .wfapply{width:min(720px,100%);text-align:left}
+.tsk .wfapply p{margin:0;color:var(--fg);line-height:1.5}
+.tsk .wfapply .wfload{display:flex;align-items:center;gap:var(--s3);color:var(--fg-2)}
+.tsk .wfapply .btn .spin{width:12px;height:12px;border-color:currentColor;border-right-color:transparent;margin-right:var(--s2)}
+.tsk .wfmini{display:flex;flex-direction:column;gap:var(--s3);padding:var(--s4);border:1px solid var(--line);border-radius:8px;background:var(--dk-bg)}
+.tsk .wfmini .ch{display:flex;align-items:center;gap:var(--s2);flex-wrap:wrap}
+.tsk .wfmini .st{display:inline-flex;align-items:center;gap:var(--s2)}
+.tsk .wfmini .s{display:inline-flex;align-items:center;gap:var(--s2);height:26px;padding:0 var(--s3);border:1px solid var(--dk-nd-line);border-radius:4px;
+  background:var(--dk-nd);font-size:var(--xs);color:var(--dk-id);white-space:nowrap}
+.tsk .wfmini .s .i{color:var(--dk-mut)}
+.tsk .wfmini .s.e{border-radius:13px}
+.tsk .wfmini .a,.tsk .wfmini .lo{font-size:var(--xxs);color:var(--dk-mut);white-space:nowrap}

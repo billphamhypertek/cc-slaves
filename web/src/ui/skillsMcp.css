@@ -1,0 +1,232 @@
+/* v2.2 §6 the Skills & MCP sheet + dialogs (lazy chunk; font sizes from the scale only). Width min(960, window − 80);
+   below 900 px of sheet the "Chạy" column folds under the name (container query); explanation lines always wrap. */
+.modal.sm{--smst:136px;width:min(960px,calc(100vw - 80px));height:calc(100vh - 48px);max-height:none;padding:0;gap:0;overflow:hidden;position:relative;container-type:inline-size}
+.modal.sm.off .smbody{opacity:.55;pointer-events:none;filter:saturate(.4)}
+.smh{display:flex;align-items:center;gap:var(--s6);padding:0 var(--s6);border-bottom:1px solid var(--line);min-height:58px}
+.smh h2{font-size:var(--lg)!important;white-space:nowrap}
+.smtabs{display:flex;gap:var(--s2);align-self:stretch}
+.smtabs button{display:flex;align-items:center;gap:var(--s2);border:0;background:transparent;padding:0 var(--s4);font:600 var(--sm)/1 var(--f-body);color:var(--fg-2);border-bottom:2px solid transparent;white-space:nowrap}
+.smtabs button.on{color:var(--fg);background:var(--sel)}
+.smtabs .n{font-weight:400;color:var(--fg-3);font-variant-numeric:tabular-nums}
+.smtabs .b{display:inline-flex;align-items:center;gap:var(--s1);font-variant-numeric:tabular-nums}.b.red{color:var(--bad)}.b.yel{color:var(--warn)}
+.smh .esc{margin-left:auto;font:var(--xs) var(--f-mono);color:var(--fg-3);border:1px solid var(--line-2);border-radius:5px;padding:var(--s1) var(--s2)}
+.smh .x{margin-left:0;width:var(--h-ctl);height:var(--h-ctl);border-color:var(--line-2)}
+.smbody{flex:1;min-height:0;overflow:auto;padding:var(--s4) var(--s6) var(--s6)}
+.smlist{display:flex;flex-direction:column}
+.smlist .skel{height:44px;margin:var(--s2) 0;border-radius:8px;background:linear-gradient(90deg,var(--line) 0%,var(--line-2) 50%,var(--line) 100%);background-size:200% 100%;animation:sm-sk 1.2s linear infinite,sm-in .2s 300ms both}
+@keyframes sm-sk{to{background-position:-200% 0}}@keyframes sm-in{from{opacity:0}}
+.band{display:flex;align-items:center;gap:var(--s3);padding:var(--s3) var(--s4);margin-bottom:var(--s4);border-radius:8px;font-size:var(--sm);border:1px solid var(--line-2);background:var(--accent-2)}
+.band span{flex:1;min-width:0}.band code:not(.chip){background:none;border:0;padding:0;font-family:var(--f-mono);overflow-wrap:anywhere}.band .btn{flex:none;height:var(--h-ctl)}
+.band.bad{background:var(--bad-2);border-color:color-mix(in srgb,var(--bad) 45%,transparent)}
+.band.warn{background:var(--warn-2);border-color:color-mix(in srgb,var(--warn) 45%,transparent)}
+.smsum{display:flex;align-items:center;gap:var(--s4);padding:var(--s1) 0 var(--s4);font-size:var(--sm);color:var(--fg-2)}.smsum span{flex:1;min-width:0}
+.smempty{display:flex;flex-direction:column;align-items:center;gap:var(--s3);padding:var(--s6) 0;font-size:var(--sm);color:var(--fg-2);text-align:center}
+.smempty b{color:var(--fg)}.smempty .i{color:var(--fg-3)}.smempty .btn{margin-top:var(--s2)}
+.smload{margin:var(--s4) 0 var(--s2);font-size:var(--sm);color:var(--fg-3)}
+/* row grid: status · name · source · run · tools · primary · switch · ⋯ */
+.smcols>.hd,.smr>.rowbtn{display:grid;grid-template-columns:var(--smst) minmax(120px,1.4fr) minmax(90px,1fr) 64px 92px;gap:0 var(--s4);align-items:center}
+.smcols,.smr{display:grid;grid-template-columns:1fr 124px 56px 40px;align-items:center;gap:0 var(--s3)}
+.smcols{padding:0 var(--s4) var(--s2);font-size:var(--xs);color:var(--fg-3);border-bottom:1px solid var(--line)}.smcols>span:nth-child(3){justify-self:center}
+.smlist section h4{display:flex;align-items:center;gap:var(--s2);margin:var(--s5) 0 var(--s2);padding:0 var(--s4);font:600 var(--xs)/1.2 var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--fg-3)}
+.smlist section h4.warn{color:var(--warn)}.smlist section h4 span{font-weight:400}
+.smr{padding:var(--s2) var(--s4);border-bottom:1px solid var(--line);font-size:var(--sm)}
+.smr.open{background:var(--sel)}.smr.dim>.rowbtn{opacity:.7}
+.smr>.rowbtn{border:0;background:transparent;text-align:left;padding:var(--s2) 0;color:var(--fg);font:inherit;min-width:0}
+.smr .st{display:flex;align-items:center;gap:var(--s2);white-space:nowrap}.st.ok .i{color:var(--ok)}.st.bad .i{color:var(--bad)}.st.na .i{color:var(--fg-3)}.st.warn .i{color:var(--warn)}
+.smr .nm,.smr .src{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.smr .src,.smr .tools{font-size:var(--xs);color:var(--fg-2)}.smr .run{color:var(--fg-2);white-space:nowrap}
+.smr .why{grid-column:1/-1;padding:0 0 var(--s2) calc(var(--smst) + var(--s4));font-size:var(--xs);color:var(--fg-2);white-space:normal;overflow-wrap:anywhere}
+.smr .why.bad{color:var(--bad)}
+/* v2.5 K1-graph the locked row's line → Graph code: neutral text (BANNED look: no accent), focus ring --fg-2 */
+.smr .grlock{display:inline-flex;align-items:center;gap:var(--s1);color:var(--fg-2);font-weight:400;border-radius:4px}.smr .grlock:hover{color:var(--fg)}
+.smr .grlock:focus-visible{outline:none;box-shadow:inset 0 0 0 1px var(--fg-2)}
+.smr .pa{display:flex;justify-content:flex-end}.smr .pa .btn{height:var(--h-ctl)}
+.smr .sw{justify-self:center;color:var(--fg-3)}
+button.sw{width:40px;height:var(--h-ctl-sm);border-radius:99px;border:1px solid var(--line-2);background:var(--panel-2);padding:var(--s1);display:flex}
+button.sw i{width:18px;height:18px;border-radius:50%;background:var(--fg-3);transition:transform .15s var(--ease)}
+button.sw.on{background:var(--accent-2);border-color:var(--accent)}button.sw.on i{background:var(--accent);transform:translateX(16px)}
+.smr .mn{position:relative;justify-self:end}.smr .mn .ib{height:var(--h-ctl);padding:0 var(--s3)}
+.smr .rmenu{top:calc(var(--h-ctl) + var(--s1));right:0;min-width:240px}.smr .rmenu button{display:flex;align-items:center;gap:var(--s3)}.rmenu button.bad{color:var(--bad)}.rmenu button[disabled]{opacity:.45;cursor:not-allowed}
+.smr.pend{grid-template-columns:var(--smst) 1fr;gap:0 var(--s4);align-items:start;background:color-mix(in srgb,var(--warn-2) 50%,transparent)}
+.smr.pend .pmain{display:flex;flex-direction:column;gap:var(--s2);min-width:0}.smr.pend .why{padding:0}
+.cmd{display:flex;gap:var(--s3);font:400 var(--xs)/1.6 var(--f-mono);background:var(--term-bg);color:var(--term-fg);border:1px solid var(--line);border-radius:8px;padding:var(--s3) var(--s4);white-space:pre-wrap;overflow-wrap:anywhere}
+.cmd i{font-style:normal;color:var(--term-mut);flex:none}
+.cmds{display:flex;flex-direction:column;gap:var(--s2)}
+.smdet{grid-column:1/-1;margin:var(--s3) 0 var(--s2);padding:var(--s4) var(--s5);border:1px solid var(--line-2);border-radius:9px;background:var(--solid);display:grid;grid-template-columns:1fr 1fr;gap:var(--s4) var(--s6)}
+.smdet .kv{display:grid;grid-template-columns:auto 1fr;gap:var(--s2) var(--s5);align-content:start;font-size:var(--sm);min-width:0}
+.smdet .kv h4{grid-column:1/-1;margin:0 0 var(--s1);font:600 var(--xs)/1.2 var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--fg-3)}
+.smdet .kv>span:nth-of-type(odd){color:var(--fg-2)}.smdet code{overflow-wrap:anywhere;white-space:normal}
+.smdet .row{grid-column:1/-1;display:flex;gap:var(--s3);border-top:1px solid var(--line);padding-top:var(--s4)}
+.smdet .row .note,.rmenu .note{display:flex;align-items:center;gap:var(--s2);color:var(--fg-3);font-size:var(--sm)}.smdet .row .note{margin-left:auto}
+.rmenu .note{padding:var(--s3) var(--s4);border-top:1px solid var(--line);cursor:default}
+.smdet .smlogin{grid-column:1/-1;display:flex;align-items:center;gap:var(--s2);margin-bottom:var(--s2)}.smlogin.ok .i{color:var(--ok)}.smlogin.bad .i{color:var(--bad)}
+.smtools,.smlog{grid-column:1/-1;min-width:0}
+.smtools h4,.smlog h4{margin:0 0 var(--s2);font:600 var(--xs)/1.2 var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--fg-3)}
+.smtools ul{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s1) var(--s5);margin:0;padding:0;list-style:none;font-size:var(--xs);overflow-wrap:anywhere}
+.smtools .lnk{display:inline-flex;align-items:center;gap:var(--s2);margin-top:var(--s2)}.smtools .lnk[aria-expanded="true"] .i{transform:rotate(90deg)}
+.smlog ol{margin:0;padding:var(--s3) var(--s4);list-style:none;max-height:220px;overflow:auto;font-size:var(--xs);line-height:1.6;background:var(--term-bg);color:var(--term-fg);border:1px solid var(--line);border-radius:8px}
+.smlog li.bad{color:var(--bad)}.smlog .why{padding:0}
+.smr .tools.warn{display:flex;align-items:center;gap:var(--s2)}.smr .tools.warn .i{color:var(--warn)}
+.smcai{display:flex;align-items:center;gap:var(--s3);width:100%;margin-top:var(--s2);padding:var(--s4);border:0;border-bottom:1px solid var(--line);background:transparent;color:var(--fg-3);font-size:var(--sm);text-align:left}
+.smcai .i:last-child{margin-left:auto}.smcai-x{padding:var(--s2) var(--s4);font-size:var(--xs);color:var(--fg-2)}
+/* dialogs over the sheet */
+.smdlg{position:absolute;inset:0;display:grid;place-items:center;background:var(--scrim-2);z-index:2;padding:var(--s5)}
+.modal.smd{width:min(640px,100%);max-height:calc(100% - 32px)}.modal.smd.small{width:min(480px,100%)}
+.modal.smd h2{font-size:var(--lg)}
+.smd .fld{display:flex;flex-direction:column;gap:var(--s2);font-size:var(--sm);min-width:0}.smd .fld>span{color:var(--fg-2)}
+.smd .field{height:var(--h-ctl);width:100%;font-size:var(--sm)}.smd textarea.field{height:auto;padding:var(--s3);resize:vertical}
+.smd .paste{min-height:150px;font-family:var(--f-mono)}
+.smd .frow{display:grid;grid-template-columns:1fr auto;gap:var(--s4)}
+.smd .seg{border-style:solid}
+.okline{display:flex;gap:var(--s2);align-items:flex-start;color:var(--ok);font-size:var(--xs)}
+.smd .stabs button{display:flex;align-items:center;gap:var(--s2)}
+.smd .stabs button.on{color:var(--fg);background:var(--sel)}
+.k6{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:var(--s3);font-size:var(--sm)}.k6 li{display:flex;gap:var(--s3);align-items:flex-start;text-wrap:pretty}
+.btn.bad.solid{background:var(--bad);border-color:var(--bad);color:var(--bad-ink);font-weight:600}
+/* K8 Skills: name · description · location · Lane · ⋯ (description and location cut first; explanations wrap) */
+.skl .smsum{flex-wrap:wrap}.skf{display:flex;align-items:center;gap:var(--s2);flex:0 1 260px;min-width:160px;height:var(--h-ctl);padding:0 var(--s4);border:1px solid var(--line-2);border-radius:8px;background:var(--panel-2);color:var(--fg-3)}
+.skf input{flex:1;min-width:0;border:0;background:transparent;color:var(--fg);font:inherit;outline:0}.skf:focus-within{border-color:var(--fg-2)}
+.skr{display:grid;grid-template-columns:minmax(150px,1fr) minmax(0,1.4fr) minmax(0,1fr) 56px 40px;gap:0 var(--s4);align-items:center;padding:var(--s3) var(--s4);border-bottom:1px solid var(--line);font-size:var(--sm)}
+.skr.skh{padding:0 var(--s4) var(--s2);font-size:var(--xs);color:var(--fg-3)}.skr.skh>span:nth-child(4){justify-self:center}
+.skr .nm,.skr .ds,.skr .wh{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.skr .ds{color:var(--fg-2)}.skr .wh{display:flex;align-items:center;gap:var(--s2);font-size:var(--xs);color:var(--fg-3)}.skr .wh .i{flex:none}
+.skr .sw{justify-self:center}.skr .mn{position:relative;justify-self:end}.skr .mn .ib{height:var(--h-ctl);padding:0 var(--s3)}.skr .rmenu{top:calc(var(--h-ctl) + var(--s1));right:0}
+.skr .why{grid-column:1/-1;font-size:var(--xs);color:var(--fg-2);white-space:normal;overflow-wrap:anywhere}
+.skr mark{background:var(--accent-2);color:var(--accent);border-radius:3px;padding:0 var(--s1)}
+.skr .fold{display:flex;align-items:center;gap:var(--s2);border:0;background:transparent;color:var(--fg);font:inherit;font-weight:600;padding:0;text-align:left}
+.skr .fold .i{transition:transform .15s var(--ease);flex:none}.skp.open .fold .i{transform:rotate(90deg)}.skp.open>.plug{background:var(--sel)}
+.skr.kid{padding-left:calc(var(--s6) + var(--s5))}.skr.kid .wh{font-family:var(--f-body)}
+.skl section h4 em,.shl section h4 em{margin-left:auto;font:400 var(--xs)/1.2 var(--f-body);letter-spacing:0;text-transform:none;color:var(--fg-3)}
+.skown{padding:var(--s3) var(--s4) var(--s1);font-size:var(--xs);color:var(--fg-3)}
+/* K11 issue rows: icon · headline + explanation (wraps) · fix buttons */
+.ski{display:grid;grid-template-columns:24px minmax(0,1fr) auto;gap:0 var(--s4);align-items:center;padding:var(--s3) var(--s4);border-bottom:1px solid var(--line);font-size:var(--sm)}
+.ski .st.bad{color:var(--bad)}.ski .st.warn{color:var(--warn)}.ski .st.na{color:var(--fg-3)}
+.ski .im{min-width:0}.ski .im b{font-weight:600;overflow-wrap:anywhere}.ski .why{font-size:var(--xs);color:var(--fg-2);white-space:normal;overflow-wrap:anywhere}
+.ski .ia{display:flex;gap:var(--s2);flex-wrap:wrap;justify-content:flex-end}.ski .ia .btn{height:var(--h-ctl)}.ski.acked{opacity:.75}
+.skack{display:flex;align-items:center;gap:var(--s3);width:100%;padding:var(--s3) var(--s4);border:0;border-bottom:1px solid var(--line);background:transparent;color:var(--fg-2);font-size:var(--sm);text-align:left}
+.skack[aria-expanded=true] .i{transform:rotate(90deg)}.skack span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--fg-3)}.skack em{margin-left:auto;font-style:normal;font-size:var(--xs);color:var(--fg-3);white-space:nowrap}
+/* K9 */
+.k9l{display:flex;flex-direction:column;border:1px solid var(--line-2);border-radius:8px;max-height:220px;overflow:auto}
+.k9l label{display:grid;grid-template-columns:20px minmax(120px,auto) minmax(0,1fr);gap:var(--s4);align-items:center;padding:var(--s3) var(--s4);border-bottom:1px solid var(--line);font-size:var(--sm)}
+.k9l label.bad .why{color:var(--bad)}.k9l .why{font-size:var(--xs);overflow-wrap:anywhere}
+.k9l .desc{color:var(--fg-2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.k9c{display:flex;flex-direction:column;gap:var(--s2)}
+.k9o{display:flex;gap:var(--s4);align-items:flex-start;padding:var(--s4) var(--s4);border:1px solid var(--line-2);border-radius:9px;font-size:var(--sm)}.k9o.on{background:var(--sel)}
+.k9o>span{display:flex;flex-direction:column;gap:var(--s1)}.foot.bad{color:var(--bad)}
+/* K12 Thư mục chung */
+.shcols{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--s5);padding:var(--s2) 0 var(--s4)}
+.shc h4{display:flex;align-items:center;gap:var(--s2);margin:0;font:600 var(--sm)/1.3 var(--f-body)}.shc h4 span{font-weight:400;color:var(--fg-3)}
+.shc ul{list-style:none;margin:var(--s3) 0 0;padding:0;display:flex;flex-direction:column;gap:var(--s2);font-size:var(--sm)}
+.shc li{display:flex;align-items:center;gap:var(--s2);min-width:0;overflow-wrap:anywhere}.shc li .sw{margin-left:auto;flex:none}
+table.sht{width:100%;font-size:var(--sm)}table.sht td{vertical-align:middle}table.sht td.warn{color:var(--warn)}table.sht td.ok{color:var(--ok)}
+table.sht td .i{vertical-align:-2px;margin-right:var(--s2)}table.sht tr.bad{background:color-mix(in srgb,var(--warn-2) 50%,transparent)}table.sht td.wr{white-space:normal;overflow-wrap:anywhere}
+/* §6 K3 / K3e login dialog */
+.modal.smd.k3{width:min(540px,100%)}
+.k3sub{margin:0;font-size:var(--sm);color:var(--fg-2)}
+.k3steps{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:var(--s3);font-size:var(--sm)}
+.k3steps li{display:flex;align-items:center;gap:var(--s3)}.k3steps .st-ok{color:var(--ok)}.k3steps .st-bad{color:var(--bad)}.k3steps .st-todo{color:var(--fg-3)}
+.k3steps .spin{width:14px;height:14px}.k3steps .todo{width:14px;height:14px;border-radius:50%;border:1.5px solid var(--fg-3);flex:none}
+.k3err{display:flex;gap:var(--s3);align-items:flex-start;padding:var(--s4) var(--s4);border-radius:8px;border:1px solid color-mix(in srgb,var(--bad) 45%,transparent);background:var(--bad-2);font-size:var(--sm)}
+.k3err>.i{color:var(--bad);margin-top:var(--s1)}.k3err b{color:var(--bad)}.k3err p{margin:var(--s1) 0 0}
+.k3in{display:flex;gap:var(--s2);align-items:center}.k3in .field{flex:1}.smd .fld i{font-style:normal;color:var(--fg-3)}
+.k3left{display:flex;align-items:center;gap:var(--s2);margin-right:auto;font-family:var(--f-mono);font-size:var(--sm);color:var(--fg-2)}
+.k3log{margin-right:auto;display:flex;align-items:center;gap:var(--s2)}
+/* §6 narrow sheet (< 900 px): "Chạy" folds under the name; source cut first */
+@container (max-width:899px){
+  .smcols .run,.smr .run{display:none}
+  .smcols,.smr{--smst:128px}
+  .smcols>.hd,.smr>.rowbtn{grid-template-columns:var(--smst) minmax(100px,1.4fr) minmax(70px,1fr) 80px}
+  .smdet{grid-template-columns:1fr}
+  .smh{gap:var(--s4)}
+  .skr{grid-template-columns:minmax(130px,1fr) minmax(0,1.2fr) minmax(0,.8fr) 56px 40px}
+  .shcols{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+/* §6 K4 / K5 (ux-fix-b): not-on-PATH warning, K4-bad red paste box, K4e / URL-change blocks with a title line */
+.warnline{display:flex;gap:var(--s2);align-items:flex-start;color:var(--warn);font-size:var(--xs)}
+.smd .paste.bad{border-color:var(--bad)}
+.band.k4e{align-items:flex-start}.band.k4e b{display:block;margin-bottom:var(--s1)}
+/* v2.5 §6 TK2 the Bộ công cụ list: item · status (fixed width, no shift between states) · buttons (184 px: a failed row's
+   "Thử lại" + "Xem log", as the wizard). Below 950 px of sheet (1024 px window) the source drops to a third line under
+   the description (TK2-narrow). */
+.tkcols,.tkr{display:grid;grid-template-columns:minmax(0,1fr) 300px 184px;align-items:center;gap:0 var(--s4)}
+.tkcols{padding:0 var(--s4) var(--s2);font-size:var(--xs);color:var(--fg-3);border-bottom:1px solid var(--line)}
+.tkr{padding:var(--s3) var(--s4);border-bottom:1px solid var(--line);font-size:var(--sm)}
+.tkr:hover{background:var(--hov)}
+.tkn{display:grid;grid-template-columns:auto auto minmax(0,1fr);grid-template-areas:"nm src sz" "what what what";align-items:baseline;gap:var(--s1) var(--s3);min-width:0}
+.tkn code{background:none;border:0;padding:0;border-radius:0}.tkn .nm{grid-area:nm;font:600 var(--sm)/1.4 var(--f-mono);color:var(--fg)}.tkn .src{grid-area:src;font-size:var(--xs);color:var(--fg-2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tkn .sz{grid-area:sz;font-size:var(--xs);color:var(--fg-2);white-space:nowrap}.tkn .what{grid-area:what;color:var(--fg-2);text-wrap:pretty}
+@container (max-width:950px){.tkn{grid-template-columns:auto minmax(0,1fr);grid-template-areas:"nm sz" "what what" "src src"}.tkcols,.tkr{grid-template-columns:minmax(0,1fr) 240px 184px}}
+.tks{display:flex;align-items:center;gap:var(--s2);min-width:0}.tks .tx{min-width:0;overflow-wrap:anywhere}.tks.one .tx{white-space:nowrap}
+.tks .tx code:not(.chip){background:none;border:0;padding:0;border-radius:0;font-family:var(--f-mono)}
+/* fu M-4 a command / name inside a status or band line is a chip (§6.1 mockup `<code>`), a version or error line only mono */
+code.chip{padding:0 var(--s1);border-radius:4px;white-space:nowrap}
+.tks.run .spin{margin-right:0}
+.tks .dash{width:14px;height:14px;flex:none;border:1.5px dashed var(--fg-3);border-radius:50%}
+.tkskel{display:block;width:120px;height:12px;border-radius:6px;background:linear-gradient(90deg,var(--line) 0%,var(--line-2) 50%,var(--line) 100%);background-size:200% 100%;animation:sm-sk 1.2s linear infinite}
+.tka{display:flex;justify-content:flex-end;gap:var(--s2)}.tka .btn{height:var(--h-ctl)}
+/* ruling 00:27 a row's own log (TK1-run last 4 lines, TK1-fail "Xem log"), full width under the row */
+.tklog{grid-column:1/-1;margin:var(--s2) 0 0;font:400 var(--xs)/1.6 var(--f-mono);background:var(--term-bg);color:var(--term-fg);border:1px solid var(--line);border-radius:8px;padding:var(--s3) var(--s4);white-space:pre-wrap;overflow-wrap:anywhere}
+/* v2.5 §6 TK1 the wizard step 3: a tick column (D70), no side padding (the wizard has its own), "Sẽ chạy", the muted notes;
+   K3 stacks over the whole wizard */
+.wiz .tkcols,.wiz .tkr{grid-template-columns:minmax(0,1fr) 260px 184px;padding-left:0;padding-right:0}
+.wiz .tkpick .tkcols,.wiz .tkpick .tkr{grid-template-columns:24px minmax(0,1fr) 260px 184px}
+.wiz .tkn{grid-template-columns:auto minmax(0,1fr);grid-template-areas:"nm sz" "what what" "src src"}
+.tkpick .tklog{grid-column:2/-1}
+.tkp{display:flex;align-items:center}.tkp input{margin:0;accent-color:var(--accent)}
+.tkcmd .lnk{display:inline-flex;align-items:center;gap:var(--s2);color:var(--fg-2);font-size:var(--sm)}.tkcmd .tklog{margin-top:var(--s2)}
+.tknote{margin:0;color:var(--fg-2);font-size:var(--sm)}.tkall{display:flex;align-items:center;gap:var(--s2);margin:0}
+.tkdlg{position:fixed}
+.smload .spin{margin-right:var(--s2)}
+/* v2.5 §6 GR1 the Graph code tab: head (tool · version · newer / latest · checked + buttons), summary, rows project · status ·
+   one plain button · Lane dùng switch (status column flexible, button / switch columns fixed so rows do not shift), last line.
+   Below 950 px of sheet (1024 px window) the numbers drop to the second line (GR1-narrow). */
+.grtab{display:flex;flex-direction:column}
+.grh{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:var(--s2) var(--s4);align-items:center;padding:var(--s2) 0 var(--s5);border-bottom:1px solid var(--line)}
+.grh1{display:flex;flex-wrap:wrap;align-items:baseline;gap:var(--s2);font-size:var(--sm);color:var(--fg-2)}
+.grh1>span::before{content:'·';margin-right:var(--s2);color:var(--fg-3)}.grh1 .nw{color:var(--fg);font-weight:600}
+.grtab code:not(.cmd):not(.chip){background:none;border:0;padding:0;border-radius:0;font-family:var(--f-mono)}
+.grh1 .nm{font:600 var(--sm)/1.4 var(--f-mono);color:var(--fg)}
+.grh2{grid-column:1;font-size:var(--xs);color:var(--fg-2)}
+.grha{grid-column:2;grid-row:1/3;display:flex;gap:var(--s3)}.grha .btn,.gra .btn,.grlast .btn,.grband .btn{height:var(--h-ctl)}
+.grsum{display:flex;flex-wrap:wrap;gap:var(--s3);padding:var(--s5) 0 var(--s4);font-size:var(--sm);color:var(--fg-2)}
+.grsum>span+span::before{content:'·';margin-right:var(--s3);color:var(--fg-3)}.grsum b{color:var(--fg);font-weight:600}
+.grcols,.grr{display:grid;grid-template-columns:200px minmax(0,1fr) 152px 72px;align-items:center;gap:0 var(--s4)}
+.grcols{padding:0 var(--s4) var(--s2);font-size:var(--xs);color:var(--fg-3);border-bottom:1px solid var(--line)}.grcols>span:last-child{justify-self:center}
+.grr{padding:var(--s3) var(--s4);border-bottom:1px solid var(--line);font-size:var(--sm)}
+.grr:hover{background:var(--hov)}
+.grr .nm{font:600 var(--sm)/1.4 var(--f-mono);color:var(--fg);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.grs{display:flex;align-items:center;gap:var(--s3);min-width:0}.grs .tx{min-width:0;overflow-wrap:anywhere}
+.grs .dash{width:14px;height:14px;flex:none;border:1.5px dashed var(--fg-3);border-radius:50%}
+.st.q .i,.st.off .i{color:var(--fg-3)}.st.old .i{color:var(--fg-2)}.grs.bad .tx{color:var(--fg)}
+.gra{display:flex;justify-content:flex-end}.grr .sw{justify-self:center}
+.grsub{grid-column:2/-1;display:flex;flex-wrap:wrap;gap:var(--s3);padding:var(--s1) 0 0 calc(var(--s6) + var(--s2));font-size:var(--xs);color:var(--fg-2)}
+.grsub>span+span::before{content:'·';margin-right:var(--s3);color:var(--fg-3)}.grsub .old{color:var(--fg-3)}.grsub .gm2{display:none}.grsub>.gm2+span::before{content:none}
+.grr.st-off .nm{color:var(--fg-2)}
+.grdim{opacity:.55;pointer-events:none}
+.grdim button.sw.on{background:var(--panel-2);border-color:var(--line-2)}.grdim button.sw.on i{background:var(--fg-2)} /* GR-err: neutral, not a muted accent */
+.grlast{display:flex;align-items:center;gap:var(--s3);margin-top:var(--s2);padding:var(--s4) var(--s4);font-size:var(--sm);color:var(--fg-2)}
+.grlast .tx{flex:1;min-width:0}.grlast.k-done .i{color:var(--ok)}.grlast.k-fail .i,.grlast.k-err .i{color:var(--bad)}
+.grempty{display:flex;align-items:center;gap:var(--s3);padding:var(--s6) var(--s4);border-bottom:1px solid var(--line);font-size:var(--sm);color:var(--fg-3)}
+.grempty b{font-weight:500;color:var(--fg)}.grempty .lnk{font-size:var(--sm)}
+.grband{align-items:flex-start}.grband>.i{margin-top:var(--s1);color:var(--bad)}.grlog{margin:0 0 var(--s4);max-height:220px;overflow:auto}
+/* GR0 / GR0-old: the tab's one job in the middle; GR-run: title, steps, the installer's last lines */
+.gr0{display:flex;flex-direction:column;gap:var(--s4);max-width:760px;margin:var(--s6) auto;padding:var(--s6) 0;font-size:var(--sm);color:var(--fg-2)}
+.gr0 b{font-size:var(--lg);color:var(--fg)}.gr0 .pth{font:var(--xs) var(--f-mono);color:var(--fg-2)}.gr0 .mt{font-size:var(--xs)}
+.gr0 .act{display:flex}
+.grwr{display:flex;flex-direction:column;gap:var(--s2);font-size:var(--xs);color:var(--fg-2);min-width:0}
+.grrun{display:flex;flex-direction:column;gap:var(--s4);padding:var(--s2) 0 var(--s5);border-bottom:1px solid var(--line)}
+.grrun h3{margin:0;font:600 var(--md)/1.4 var(--f-body);color:var(--fg)}
+.grrun .st-cur{color:var(--fg)}.grrun .tklog{margin:0}
+/* GR-upd / GR-clean */
+.modal.smd.grd{width:min(600px,100%)}.grd h2 code,.grrun h3 code{background:none;border:0;padding:0;font-family:var(--f-mono);font-weight:600}
+.grd .k6 li>span{min-width:0}.grd .k6 li>.i{flex:none;margin-top:var(--s1);color:var(--fg-2)}
+.grdisc{display:inline-flex;align-items:center;gap:var(--s2);align-self:flex-start;color:var(--fg);font-size:var(--sm);font-weight:600}.grdisc .n{font-weight:400;color:var(--fg-3)}
+.grol{max-height:260px;overflow:auto;border:1px solid var(--line-2);border-radius:8px;font-size:var(--xs)}
+.grolh,.grolr{display:grid;grid-template-columns:minmax(0,1fr) 80px;gap:var(--s4);padding:var(--s2) var(--s4)}
+.grolh{position:sticky;top:0;background:var(--solid);color:var(--fg-3);border-bottom:1px solid var(--line)}
+.grolr span:first-child{font-family:var(--f-mono);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.grolr span:last-child,.grolh span:last-child{text-align:right}
+@container (max-width:950px){
+  .grcols,.grr{grid-template-columns:150px minmax(0,1fr) 140px 64px}
+  .grs .gm{display:none}.grsub .gm2{display:inline}.grsub>.gm2+span::before{content:'·'}
+  .grsub{grid-column:1/-1;padding-left:0}
+}

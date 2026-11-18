@@ -1,0 +1,51 @@
+/* v2.4 §4.2 the model / effort picker (MD2–MD9, MD13) and §4.4 the session dialog row (MD10–MD11); lazy chunk */
+.mdmenu{position:fixed;z-index:40;display:flex;flex-direction:column;gap:var(--s3);padding:var(--s4);font-size:var(--sm)}
+.mh3{font:600 var(--sm)/1.3 var(--f-body);color:var(--fg);padding:0 var(--s2)}
+.mlist{flex:1 1 auto;min-height:0;overflow-y:auto;display:flex;flex-direction:column}
+.mrow{display:grid;grid-template-columns:16px 104px minmax(0,1fr);align-items:center;gap:var(--s3);width:100%;min-height:26px;padding:var(--s2);border:0;border-radius:6px;background:transparent;color:var(--fg);text-align:left;font:400 var(--sm)/1.2 var(--f-body)}
+.mrow:not(:disabled):hover{background:var(--hov)}
+.mrow:disabled{opacity:.45;cursor:not-allowed}
+.mrow b{font-weight:400;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mrow .mx{display:flex;align-items:baseline;gap:var(--s4);min-width:0}
+.mrow .mn{flex:none;color:var(--fg-2);white-space:nowrap}
+.mrow code{flex:1 1 auto;min-width:0;padding:0;border:0;background:none;font:var(--xs) var(--f-mono);color:var(--fg-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mrow .mn+code{text-align:right;font-size:var(--xxs)}
+.mrow .mk{display:grid;place-items:center;color:var(--accent)}
+.mrow.pending,.mrow.busy{background:var(--panel-2)}
+.mrow.pending .mk{color:var(--fg-2)}
+.mrow.grp{position:sticky;top:0;z-index:1;margin-top:0;background:var(--panel);color:var(--fg-2);grid-template-columns:16px max-content 12px}
+.mrow.grp b{overflow:visible}
+.mrow .spin{width:12px;height:12px}
+.mskel{display:flex;flex-direction:column;gap:var(--s5);padding:var(--s3) var(--s2) var(--s3) calc(var(--s2) + var(--s6) + var(--s3))} /* under the row text: row pad + the 16 px mark column + gap */
+.mskel i{display:block;width:45%;height:10px;border-radius:5px;background:var(--accent-2)}
+.mskel i:nth-child(2){width:56%}.mskel i:nth-child(3){width:35%}
+.mfail{display:flex;align-items:center;gap:var(--s3);padding:0 var(--s2);color:var(--fg-2);font-size:var(--xs)}
+.mfail .btn{margin-left:auto}
+.meff{display:flex;align-items:center;gap:var(--s4);padding:var(--s3) var(--s2) 0;border-top:1px solid var(--line)}
+.meff .ml{font:600 var(--xxs)/1 var(--f-body);letter-spacing:.12em;text-transform:uppercase;color:var(--fg-3)}
+.meff .mseg{display:flex;flex:1;border:1px solid var(--line-2);border-radius:7px;overflow:hidden}
+.lv{flex:1;height:var(--h-ctl);display:inline-flex;align-items:center;justify-content:center;gap:var(--s2);border:0;border-left:1px solid var(--line-2);background:transparent;color:var(--fg-2);font:500 var(--sm)/1 var(--f-body)}
+.lv:first-child{border-left:0}
+.lv.lit{background:var(--sel);color:var(--fg);font-weight:600}
+.lv.pending{background:var(--panel-2);color:var(--fg)}
+.lv:disabled{opacity:.4;cursor:not-allowed}
+.lv.lit:disabled{opacity:1} /* MD2b / MD8 / MD13 the running level stays lit in a locked row */
+.mnote,.mimp{padding:0 var(--s2);color:var(--fg-2);font-size:var(--xs);line-height:1.45}
+.mnote{margin-top:calc(-1 * var(--s2));text-align:right}
+.mimp{display:flex;align-items:center;gap:var(--s4)}
+.mimp span{flex:1}
+.mimp .btn{flex:none}
+.merr{display:flex;gap:var(--s2);align-items:flex-start;padding:0 var(--s2);color:var(--bad);font-size:var(--xs);line-height:1.45}
+.merr svg{flex:none;margin-top:var(--s1)}
+.mwait{display:flex;gap:var(--s2);align-items:center;padding:0 var(--s2);color:var(--fg-2);font-size:var(--xs);line-height:1.45} /* v2.7.1 §5 G2c */
+.mmis{display:flex;gap:var(--s3);align-items:baseline;padding:0 var(--s2);color:var(--fg-2);font-size:var(--xs);line-height:1.45}
+.mpicks{display:grid;grid-template-columns:1fr 1fr;gap:var(--s3) var(--s4);position:relative}
+.mpicks .mfail{grid-column:1 / -1;margin-top:calc(-1 * var(--s1));padding:0 0 0 var(--s2)}
+.mpick{display:flex;align-items:center;justify-content:space-between;gap:var(--s3);text-align:left}
+/* MD10 the Effort select looks like the Model field: no native arrow, the same chevron (v2.7.1 §4.1 "Tài liệu ⌄", not a small ▾) */
+.mpick svg{flex:none;color:var(--fg-2)}
+.mpicks select.field{appearance:none;-webkit-appearance:none;padding-right:calc(var(--s6) + var(--s2))} /* room for the chevron */
+.mpicks label.sfield{position:relative}
+.mpicks label.sfield::after{content:'';position:absolute;right:14px;bottom:15px;width:6px;height:6px;border-right:1.5px solid var(--fg-2);border-bottom:1.5px solid var(--fg-2);
+  transform:rotate(45deg);pointer-events:none}
+.mpop{position:fixed;z-index:60;max-height:260px;padding:var(--s2)}

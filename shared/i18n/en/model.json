@@ -1,0 +1,14 @@
+{
+  "chipTip": "{name} model and effort · click to change",
+  "chipEnded": "Model and effort this session last ran with",
+  "chipMismatch": "Running model differs from your pick",
+  "chipMac": "Change the model on the Mac",
+  "waitTurn": "after this turn",
+  "byDefault": "Default",
+  "phPending": "Sends when this turn ends…",
+  "blockedClear": "/clear does not work here · use /new",
+  "blockedLogin": "Account login lives in the Account panel",
+  "slashModel": "change the {name} model",
+  "slashEffort": "change the {name} effort",
+  "offline": "Disconnected · data as of {hm} · reconnecting"
+}

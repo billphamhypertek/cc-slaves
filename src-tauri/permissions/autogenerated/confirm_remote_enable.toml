@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-confirm-remote-enable"
+description = "Enables the confirm_remote_enable command without any pre-configured scope."
+commands.allow = ["confirm_remote_enable"]
+
+[[permission]]
+identifier = "deny-confirm-remote-enable"
+description = "Denies the confirm_remote_enable command without any pre-configured scope."
+commands.deny = ["confirm_remote_enable"]

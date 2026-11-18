@@ -1,0 +1,37 @@
+[package]
+name = "cc-slaves"
+version = "0.3.0"
+license = "AGPL-3.0-only"
+description = "cc-slaves app shell (Tauri 2): window, LaunchAgents, native dialogs, notifications"
+edition = "2021"
+publish = false
+
+[lib]
+name = "cc_slaves_lib"
+crate-type = ["rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+ccs-core = { path = "core" }
+tauri = { version = "2", features = [] }
+tauri-plugin-notification = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tauri-plugin-updater = "2.14.1"
+
+[dev-dependencies]
+tempfile = "3"
+minisign-verify = "0.3"
+base64 = "0.23"
+
+[target.'cfg(target_os = "macos")'.dependencies]
+objc2 = "0.6"
+objc2-foundation = { version = "0.3", features = ["NSString", "NSGeometry", "NSURL", "NSUserDefaults"] }
+objc2-app-kit = { version = "0.3", features = ["NSAlert", "NSButton", "NSControl", "NSView", "NSResponder", "NSTextField", "NSApplication", "NSWindow", "NSRunningApplication", "NSOpenPanel", "NSSavePanel", "NSPanel", "NSAppearance"] }
+
+[profile.release]
+codegen-units = 1
+opt-level = "s"
+strip = "debuginfo"

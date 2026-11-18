@@ -1,0 +1,5 @@
+{
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": { "rootDir": ".", "outDir": "../.tsbuild/fake-mcp", "tsBuildInfoFile": "../.tsbuild/fake-mcp.tsbuildinfo" },
+  "include": ["src"]
+}

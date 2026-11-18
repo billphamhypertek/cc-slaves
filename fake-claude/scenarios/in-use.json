@@ -1,0 +1,1 @@
+{ "steps": [{ "stderr": "Error: Session ID ${session} is already in use.\n" }, { "exit": 1 }] }

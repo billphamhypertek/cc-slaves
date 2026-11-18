@@ -1,0 +1,35 @@
+/* spec v2.2 §14.5 "Dòng công cụ" (mockup S4, S4-narrow, S5, S11): mono 12 one-liners, v2.1 tokens. */
+.tr{min-width:0}
+.tr-row{display:grid;grid-template-columns:16px auto minmax(0,1fr) auto auto auto;gap:var(--s3);align-items:center;width:100%;min-height:26px;
+  margin:0;padding:0 var(--s2);border:0;border-radius:5px;background:none;text-align:left;font:400 var(--xs) var(--f-mono);color:var(--fg-2)}
+.tr-row .i{color:var(--fg-3)}
+.tr-row:hover,.tr-row:focus-visible,.tr-row.tr-open{background:var(--panel-2)}
+.tr-name{color:var(--fg);font-weight:600;white-space:nowrap}
+.tr-gp .tr-name{font:400 var(--xs) var(--f-body);color:var(--fg-2)}
+/* the parameter is cut with "…" on the left (S4-narrow); <bdi> keeps the text itself left-to-right */
+.tr-arg{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;direction:rtl;text-align:left;color:var(--fg-2)}
+.tr-df{color:var(--ok);white-space:nowrap}
+.tr-df b{color:var(--bad);font-weight:400}
+/* §14.5 S1 (F-M8) an MCP row's server: a small quiet label where an edit's diff would be */
+.tr-srv{padding:0 var(--s2);border:1px solid var(--line-2);border-radius:3px;color:var(--fg-3);font-size:var(--xxs)}
+.tr-st{display:flex;align-items:center;gap:var(--s2);white-space:nowrap}
+.tr-ok .i{color:var(--ok)}
+.tr-err,.tr-err .i{color:var(--bad)}
+.tr-run{color:var(--accent)}
+.tr-run i{display:block;width:6px;height:6px;border-radius:50%;background:var(--accent)}
+.tr-tm{color:var(--fg-3);white-space:nowrap}
+.tr-box{margin:var(--s1) 0 var(--s3) var(--s5);border:1px solid var(--line-2);background:var(--panel-2);border-radius:6px;overflow:hidden}
+.tr-in{padding:var(--s2) var(--s4);border-bottom:1px solid var(--line);font:400 var(--xs) var(--f-mono);color:var(--fg);white-space:pre-wrap;overflow-wrap:anywhere}
+.tr-out{margin:0;padding:var(--s3) var(--s4);font:400 var(--xs)/1.5 var(--f-mono);color:var(--fg-2);white-space:pre;overflow-x:auto}
+.tr-out.tr-bad{color:var(--fg)}
+.tr-more{display:flex;align-items:center;gap:var(--s2);height:28px;padding:0 var(--s4);border:0;background:none;color:var(--accent);font:600 var(--xs) var(--f-body)}
+.tr-foot{display:flex;align-items:center;min-height:28px;border-top:1px solid var(--line)}
+.tr-meta{margin-left:auto;padding:0 var(--s4);color:var(--fg-3);font-size:var(--xs)}
+.tr-cut{display:flex;align-items:center;gap:var(--s3);min-height:28px;padding-left:var(--s4);border-top:1px solid var(--line);color:var(--fg-3);font-size:var(--xs)}
+.tr-in-gp{padding-left:var(--s5)}
+.tr-count{display:flex;align-items:center;gap:var(--s2);margin:var(--s1) 0 var(--s2);font:400 var(--xs) var(--f-mono);color:var(--fg-3)}
+/* v2.7 §4.6 a cc-slaves tool reads as a Vietnamese label; a Skill the policy refused is grey ⊘ + why (IS12), never red */
+.tr-lbl .tr-name{font:500 var(--xs) var(--f-body)}
+.tr-blk,.tr-blk .tr-name,.tr-blk .i{color:var(--fg-3)}
+.tr-why{display:flex;flex-direction:column;gap:var(--s1);padding:0 var(--s2) var(--s2) calc(var(--s5) + var(--s1) + var(--s3) + var(--s2));font:400 var(--xs)/1.45 var(--f-body);color:var(--fg-3)}
+.tr-why b{font-weight:600;color:var(--fg-2)}

@@ -1,0 +1,22 @@
+{
+  "kind_ask": "Câu hỏi",
+  "kind_permission": "Xin quyền",
+  "kind_broken": "Lane hỏng",
+  "kind_orchestrator_down": "Điều phối ngừng",
+  "kind_logged_out": "Account đăng xuất",
+  "kind_cc_updated": "Claude Code cập nhật",
+  "kind_shared_cfg": "Cấu hình chung lỗi",
+  "kind_shared_cfg_new": "Mục mới trong ~/.claude",
+  "kind_account_orphan": "Account mồ côi",
+  "kind_cutover": "Chưa có account v2",
+  "wantsToRun": "{source} xin chạy {tool}",
+  "orchestrator": "Điều phối",
+  "laneDone": "{name} đã xong",
+  "switched": "{name} chuyển sang {account}",
+  "allFull": "Mọi account đã đầy — lane chờ quota",
+  "laneStoppedQueued": "{name} đã dừng — tin sẽ gửi khi Chạy lại",
+  "kind_mcp_login": "MCP cần đăng nhập",
+  "kind_issues_new": "Việc phát sinh",
+  "kind_superpowers_off": "Superpowers chưa bật",
+  "kind_revert_conflict": "Hoàn tác vướng"
+}

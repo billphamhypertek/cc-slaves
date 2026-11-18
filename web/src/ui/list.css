@@ -1,0 +1,26 @@
+/* F9 list mode (spec §4.8, N4-k): the canvas area becomes one opaque lane table under the deck header bar (HUD, v2.3 §4.1). */
+#listview{position:fixed;top:calc(var(--bn) + var(--h-bar) + var(--h-head));left:var(--deck-left,0px);right:0;bottom:0;display:block;padding:0;overflow:auto;
+  background:var(--dk-bg);z-index:5}
+#listview .lt{width:100%;border-collapse:collapse;font:var(--sm) var(--f-disp);color:var(--fg)}
+#listview .lt th{height:var(--h-ctl-sm);padding:0 var(--s4);text-align:left;white-space:nowrap;font:600 var(--xs) var(--f-mono,ui-monospace,monospace);letter-spacing:.08em;
+  text-transform:uppercase;color:var(--fg-3);border-bottom:1px solid var(--line)}
+#listview .lt td{height:var(--h-ctl);padding:0 var(--s4);border-bottom:1px solid var(--line);white-space:nowrap}
+#listview .lt-row{cursor:pointer}
+#listview .lt-row:hover{background:var(--panel-2)}
+#listview .lt-row.on{background:var(--sel)}
+#listview .lt td.nm{font-weight:700;font-family:var(--f-mono,ui-monospace,monospace)}
+#listview .lt td.wk{white-space:normal;color:var(--fg-2);width:100%}
+#listview .lt td.ac,#listview .lt td.co{font-family:var(--f-mono,ui-monospace,monospace);color:var(--fg-2)}
+#listview .lt td.co{color:var(--fg)}
+#listview .lt .ib{width:24px;height:24px}
+#listview .disc{display:block;width:14px;height:14px;border-radius:50%;border:2px solid var(--c,var(--fg-3));box-shadow:0 0 6px color-mix(in srgb,var(--c,transparent) 50%,transparent)}
+:root[data-theme=light] #listview .disc{box-shadow:none} /* v2.8 L5: no glow in the light deck */
+#listview .lt-row{--c:var(--fg-3)}
+#listview .lt-row:is([data-st=running],[data-st=starting]){--c:var(--ok)}
+#listview .lt-row:is([data-st=waiting_po],[data-st=switching],[data-st=draining]){--c:var(--warn)}
+#listview .lt-row[data-st=broken]{--c:var(--bad)}
+#listview .lt-row:is([data-st=running],[data-st=starting]) td.st{color:var(--ok)}
+#listview .lt-row[data-st=waiting_po] td.st{color:var(--warn)}
+#listview .lt-row[data-st=broken] td.st{color:var(--bad)}
+#listview .lt-none{padding:var(--s6) var(--s5);color:var(--fg-3);font-size:var(--sm)}
+.narrow #listview{left:0;display:block;overflow:auto}

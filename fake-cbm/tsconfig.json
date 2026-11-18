@@ -1,0 +1,5 @@
+{
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": { "rootDir": ".", "outDir": "../.tsbuild/fake-cbm", "tsBuildInfoFile": "../.tsbuild/fake-cbm.tsbuildinfo" },
+  "include": ["src"]
+}

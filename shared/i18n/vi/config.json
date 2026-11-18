@@ -1,0 +1,17 @@
+{
+  "notObject": "{file} phải là một object",
+  "int": "config.json sai: {field} phải là số nguyên {min}–{max}",
+  "bool": "config.json sai: {field} phải là true/false",
+  "object": "config.json sai: {field} phải là object",
+  "emailInt": "config.json sai: {field} phải là email → số nguyên {min}–{max}",
+  "emailBool": "config.json sai: {field} phải là email → true/false",
+  "uiLang": "config.json sai: ui phải là { lang: \"vi\" | \"en\" }",
+  "sharedExtra": "config.json sai: sharedExtra phải là danh sách tên mục lạ trong ~/.claude",
+  "capsNoDefault": "caps.json thiếu mục \"default\"",
+  "capsEntry": "caps.json: \"{name}\" phải là object",
+  "capsPct": "caps.json: \"{name}\".{field} phải là số 1–100",
+  "capsRole": "caps.json: \"{name}\".role phải là primary/backup/orchestrator",
+  "capsHard": "caps.json: \"{name}\".hard phải là true/false",
+  "idLists": "config.json sai: {field} phải là object chứa danh sách id (chuỗi)",
+  "modelDefaults": "config.json sai: modelDefaults phải là { orchestrator, lane } với model là chuỗi 1–100 ký tự hoặc null, effort là low/medium/high/xhigh/max hoặc null"
+}

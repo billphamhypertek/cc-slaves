@@ -1,0 +1,20 @@
+{
+  "left.d": "{d} ngày {h} g",
+  "left.h": "{h} g {m} p",
+  "left.m": "{m} p",
+  "chip.out": "đã đăng xuất",
+  "chip.full": "ĐẦY",
+  "chip.fullRest": "· reset còn {left}",
+  "chip.unknown": "chưa rõ",
+  "chip.left": "còn {pct} %",
+  "pct": "{n} %",
+  "secs": "{n} s",
+  "ago.now": "vừa xong",
+  "ago.m": "{n} ph",
+  "ago.h": "{n} giờ",
+  "ago.d": "{n} ngày",
+  "resetLeft": "{at} (còn {left})",
+  "leftR.d": "{n} ngày",
+  "leftR.h": "{n} giờ",
+  "leftR.m": "{n} phút"
+}

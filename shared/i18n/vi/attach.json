@@ -1,0 +1,13 @@
+{
+  "dropTo": "Thả để đính kèm cho {name}",
+  "lock.busy": "Đang tải lên…",
+  "lock.bad": "Bỏ file lỗi để gửi",
+  "lock.fail": "Bỏ hoặc tải lại file lỗi để gửi",
+  "lock.slash": "Bỏ file hoặc bỏ lệnh / để gửi",
+  "slashNo": "Lệnh {cmd} không nhận file đính kèm",
+  "tooMany": "Mỗi tin tối đa 20 file. Đã bỏ {n} file cuối.",
+  "locked": "{why} · chưa đính kèm được",
+  "lockOffline": "Mất kết nối",
+  "lockStarting": "Điều phối đang khởi động",
+  "pasteName": "ảnh-{t}.png"
+}

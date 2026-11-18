@@ -1,0 +1,68 @@
+{
+  "$schema": "https://unpkg.com/knip@6/schema.json",
+  "workspaces": {
+    ".": {
+      "entry": [
+        "scripts/*.ts",
+        "scripts/test/**/*.test.ts",
+        "e2e/engine-entry.ts",
+        "scripts/smoke/engine-entry.ts",
+        "scripts/perf/measure.ts",
+        "scripts/perf/storm-proxy.ts",
+        "e2e/specs/**/*.spec.ts"
+      ],
+      "project": [
+        "scripts/**/*.ts",
+        "e2e/**/*.ts",
+        "shared/**/*.ts!"
+      ]
+    },
+    "engine": {
+      "entry": [
+        "src/main.ts!",
+        "test/**/*.test.ts",
+        "it/**/*.test.ts",
+        "test/_fixtures/stdio-mcp.ts"
+      ],
+      "project": [
+        "src/**/*.ts!",
+        "test/**/*.ts",
+        "it/**/*.ts"
+      ]
+    },
+    "web": {
+      "entry": [
+        "src/main.tsx!",
+        "dev/run.ts",
+        "dev/mock-engine.ts",
+        "test/**/*.test.{ts,tsx}"
+      ],
+      "project": [
+        "src/**/*.{ts,tsx}!",
+        "dev/**/*.ts",
+        "test/**/*.{ts,tsx}"
+      ]
+    },
+    "fake-claude": {
+      "project": [
+        "src/**/*.ts"
+      ]
+    },
+    "fake-mcp": {
+      "entry": [
+        "src/index.ts"
+      ],
+      "project": [
+        "src/**/*.ts"
+      ]
+    },
+    "fake-cbm": {
+      "entry": [
+        "src/index.ts"
+      ],
+      "project": [
+        "src/**/*.ts"
+      ]
+    }
+  }
+}

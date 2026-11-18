@@ -1,0 +1,11 @@
+{
+  "failed": "Could not add the project.",
+  "title": "Add project",
+  "aria": "Adding a project",
+  "pick": "Choose the folder",
+  "picking": "The folder panel is open…",
+  "add": "Add project “{name}”",
+  "known": "Project “{name}” already exists",
+  "open": "Open the project",
+  "openSlow": "The project did not show up within 10 seconds — try again."
+}

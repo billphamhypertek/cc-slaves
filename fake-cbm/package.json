@@ -1,0 +1,6 @@
+{
+  "name": "@cc-slaves/fake-cbm",
+  "private": true,
+  "type": "module",
+  "bin": { "fake-cbm": "./src/index.ts" }
+}

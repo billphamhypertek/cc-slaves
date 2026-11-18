@@ -1,0 +1,33 @@
+[package]
+name = "cc-slaves-menubar"
+version = "0.3.0"
+license = "AGPL-3.0-only"
+description = "cc-slaves menu-bar extra (N8; v2.8 §4.11): icon + monitoring panel (engine, lanes, quota, remote access), open app, quit everything"
+edition = "2021"
+publish = false
+
+[dependencies]
+ccs-core = { path = "../src-tauri/core" }
+tray-icon = "0.25"
+tao = "0.37"
+libc = "0.2"
+serde_json = "1"
+
+# Vector template icon (NSImage drawing handler → NSBezierPath, icon.rs), the monitoring panel (NSPopover, panel/appkit.rs),
+# app terminate for "Thoát hẳn" (main.rs).
+[target.'cfg(target_os = "macos")'.dependencies]
+block2 = "0.6"
+objc2 = "0.6"
+objc2-app-kit = { version = "0.3.2", default-features = false, features = ["std", "block2", "NSAppearance", "NSAttributedString", "NSApplication", "NSBezierPath", "NSBox", "NSButton", "NSButtonCell", "NSCell", "NSClipView", "NSColor", "NSColorList", "NSControl", "NSEvent", "NSFont", "NSFontDescriptor", "NSGraphics", "NSGraphicsContext", "NSImage", "NSParagraphStyle", "NSPopover", "NSProgressIndicator", "NSResponder", "NSRunningApplication", "NSScreen", "NSScrollView", "NSStatusBarButton", "NSStatusItem", "NSText", "NSTextField", "NSView", "NSViewController", "NSWindow"] }
+objc2-foundation = { version = "0.3.2", default-features = false, features = ["std", "NSArray", "NSAttributedString", "NSDictionary", "NSGeometry", "NSNotification", "NSString"] }
+# Test only: render the real NSImage back to pixels (icon.rs `v28_appkit_drawing_matches_the_raster`).
+[target.'cfg(target_os = "macos")'.dev-dependencies]
+objc2-app-kit = { version = "0.3.2", default-features = false, features = ["NSBitmapImageRep", "NSImageRep"] }
+objc2-foundation = { version = "0.3.2", default-features = false, features = ["NSData"] }
+
+[profile.release]
+codegen-units = 1
+lto = true
+opt-level = "s"
+panic = "abort"
+strip = true

@@ -1,0 +1,21 @@
+/* v2.7.1 §4.1 SA0 / SA6 the split button: the main part keeps its v2.7 look; the ▾ is neutral (line-2 border, fg-2 chevron),
+   ≥ 22 px, separated by the main part's own edge; hover / open = the neutral --sel step only (no coloured border, no tint);
+   focus = the global §4.2 inset --fg-2 ring of styles.css (v2.8 LT15). */
+.split{display:inline-flex;align-items:stretch;flex:none}
+.split>:first-child{border-top-right-radius:0;border-bottom-right-radius:0}
+.split>.sdd{display:inline-flex;align-items:center;justify-content:center;min-width:22px;padding:0 var(--s1);border:1px solid var(--line-2);border-left:0;
+  border-radius:0 6px 6px 0;background:transparent;color:var(--fg-2);cursor:pointer}
+.split>.sdd:hover:not(:disabled),.split>.sdd[aria-expanded=true]{background:var(--sel);color:var(--fg)}
+.split>.sdd:disabled{opacity:.4;cursor:not-allowed}
+.srail .split>.sdd{border-radius:0 4px 4px 0;min-width:22px}
+/* IS8 (hf-empty) beside a filled tbtn the ▾ is its own 30 × 30 neutral square 4 px apart, not a strip glued to the accent part;
+   the rail's snew keeps the joined look above */
+.split>.tbtn:first-child{border-radius:6px}
+.split>.tbtn+.sdd{width:var(--h-ctl);margin-left:var(--s2);padding:0;border-left:1px solid var(--line-2);border-radius:6px;background:var(--panel-2)}
+.split>.tbtn+.sdd:hover:not(:disabled),.split>.tbtn+.sdd[aria-expanded=true]{background:var(--sel)}
+/* SA8 the narrow menu: the indented item under the main one is the ▾ path */
+[role=menu] .mpick2{padding-left:var(--s6);color:var(--fg-2);font-size:var(--xs)}
+.splitm{display:inline-flex;flex-direction:column;align-items:flex-start;gap:var(--s1);flex:none}
+.splitm .mpick2{border:0;background:transparent;padding:0 0 0 var(--s3);color:var(--fg-2);font:var(--xs) var(--f-body);cursor:pointer;white-space:nowrap}
+.splitm .mpick2:hover:not(:disabled){color:var(--fg);text-decoration:underline;text-underline-offset:3px}
+.splitm .mpick2:disabled{opacity:.4;cursor:not-allowed}

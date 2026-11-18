@@ -1,0 +1,64 @@
+# Release (spec v2.6 §7.3): a `v*.*.*` tag pushed to the public repo builds, signs and drafts the GitHub release.
+# The job only runs on the public repo: a tag on the private dev repo runs nothing (R26).
+# The signing key is visible to exactly one step (app-build.sh); install / test steps run third-party code without it.
+name: release
+on:
+  push:
+    tags: ['v*.*.*']
+permissions:
+  contents: write
+jobs:
+  release:
+    if: github.repository == 'billphamhypertek/cc-slaves'
+    strategy:
+      matrix:
+        # one element per platform; Windows / Linux = one more element (spec v3.1)
+        include:
+          - { runner: macos-15, target: aarch64-apple-darwin, key: darwin-aarch64 }
+    runs-on: ${{ matrix.runner }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.3.14
+      - uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: 1.97.0
+          targets: ${{ matrix.target }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.16.0
+      - name: tag = every version home, updater key is real (before the build)
+        run: bun scripts/release/bump.ts --check "${GITHUB_REF_NAME#v}"
+      - name: install
+        run: bun install --frozen-lockfile
+      - name: cheap tests
+        run: |
+          bun run typecheck
+          bun run test
+          bun run test:web
+      - name: build and sign
+        env:
+          CC_SLAVES_RELEASE: '1'
+          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
+        run: bash scripts/app-build.sh
+      - name: package
+        run: |
+          ver="${GITHUB_REF_NAME#v}"
+          b=src-tauri/target/release/bundle/macos
+          mkdir -p out
+          cp "$b/cc-slaves.app.tar.gz" "out/cc-slaves_${ver}_aarch64.app.tar.gz"
+          cp "$b/cc-slaves.app.tar.gz.sig" "out/cc-slaves_${ver}_aarch64.app.tar.gz.sig"
+          ditto -c -k --keepParent "$b/cc-slaves.app" "out/cc-slaves_${ver}_aarch64.zip"
+          bun scripts/release/latest-json.ts "$ver" out
+      - name: draft release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          ver="${GITHUB_REF_NAME#v}"
+          flags=(--draft --title "cc-slaves ${ver}" --notes-file "docs/releases/${ver}.md")
+          case "$ver" in *-*) flags+=(--prerelease) ;; esac
+          gh release create "v${ver}" "${flags[@]}" \
+            "out/cc-slaves_${ver}_aarch64.app.tar.gz" "out/cc-slaves_${ver}_aarch64.app.tar.gz.sig" \
+            "out/cc-slaves_${ver}_aarch64.zip" out/latest.json

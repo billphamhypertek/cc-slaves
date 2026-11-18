@@ -1,0 +1,115 @@
+/* v2.7 §4.3 / §4.4 / §4.8–§4.10 the spec card (IS14 IS15 IS17 IS18), the spec overview (IS22 IS22b), Tài liệu (IS20), the
+   Huỷ popover (IS4) and the Tiếp tục build popover (IS17). Colours only through var(--…) (D95); a picked / hovered row is a
+   neutral grey step (--sel), never an accent border or tint (D90). */
+
+/* the middle region holding the card, and the right pane holding the overview */
+.tsk .tmid{border-right:1px solid var(--line);overflow-y:auto;padding:calc(var(--s6) + var(--s4)) calc(var(--s6) + var(--s4)) calc(var(--s6) + var(--s4)) calc(var(--s6) * 2)}
+.tsk .tdet{overflow-y:auto}
+.tsk .tdet>.sov{margin:var(--s5)}
+
+/* the card */
+.tsk .scard{max-width:760px;border:1px solid var(--line);border-radius:10px;background:var(--panel-2)}
+.tsk .scard>header{padding:var(--s6) var(--s6) var(--s5);border-bottom:1px solid var(--line)}
+.tsk .scard h3{margin:0;font:600 var(--xl)/1.3 var(--f-disp);color:var(--fg)}
+.tsk .sov h3{font-size:var(--lg)}
+.tsk .scard h3 small{font:400 var(--sm) var(--f-body);color:var(--fg-2)}
+.tsk .ssub{margin:var(--s2) 0 0;font-size:var(--sm);color:var(--fg-2)}
+.tsk .ssub .warn{color:var(--warn)}
+.tsk .ssub .bad{color:var(--bad)}
+.tsk .spath{margin:var(--s2) 0 0;font:var(--xs) var(--f-mono);color:var(--fg-3);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tsk .stab{margin:0;padding:var(--s5) var(--s6);display:grid;gap:var(--s3);border-bottom:1px solid var(--line)}
+.tsk .stab>div{display:grid;grid-template-columns:146px minmax(0,1fr);align-items:baseline;gap:var(--s4)}
+.tsk .sov .stab>div{grid-template-columns:122px minmax(0,1fr)}
+.tsk .stab dt{font-size:var(--sm);color:var(--fg-2)}
+.tsk .stab dd{margin:0;display:flex;align-items:baseline;flex-wrap:wrap;gap:var(--s1) var(--s3);font-size:var(--sm);color:var(--fg)}
+.tsk .stab .sval{flex:1;display:flex;align-items:flex-start;justify-content:space-between;gap:var(--s4);min-width:0}
+.tsk .stab .sval .tbtn2{flex:none}
+.tsk .stab dd small{color:var(--fg-2);font-size:var(--sm)}
+.tsk .stab dd .bad{color:var(--bad)}
+.tsk .stab dd .warn{color:var(--warn)}
+.tsk .stab code,.tsk .cpop code{font:var(--xs) var(--f-mono);color:var(--fg)}
+.tsk .sprog{padding:var(--s5) var(--s6);border-bottom:1px solid var(--line);font-size:var(--sm);color:var(--fg-2)}
+.tsk .sprog p{margin:var(--s3) 0 0}
+.tsk .sbar{display:flex;align-items:center;gap:var(--s5)}
+.tsk .sbar .tpg{width:220px;height:4px}
+.tsk .sbar b{font:600 var(--xs) var(--f-mono);color:var(--fg)}
+.tsk .smiss{margin:0;padding:0 var(--s6) var(--s4);font-size:var(--sm);color:var(--fg-2)}
+.tsk .sact{position:relative;display:flex;align-items:center;flex-wrap:wrap;gap:var(--s4);padding:var(--s5) var(--s6) var(--s6)}
+.tsk .snote,.tsk .sedit{font-size:var(--sm);color:var(--fg-2)}
+.tsk .snote{flex:1 1 220px;min-width:0}
+.tsk .schip{display:inline-flex;align-items:center;height:var(--h-ctl);padding:0 var(--s4);border-radius:6px;border:1px solid var(--line);color:var(--fg-3);font-size:var(--sm)}
+.tsk .tbtn2{display:inline-flex;align-items:center;gap:var(--s2);height:var(--h-ctl);padding:0 var(--s4);border-radius:6px;border:1px solid var(--line-2);
+  background:var(--panel-2);color:var(--fg);font:600 var(--sm) var(--f-body);white-space:nowrap}
+.tsk .tbtn2:hover:not(:disabled){background:var(--sel)}
+.tsk .tbtn2:disabled{opacity:.45;cursor:not-allowed}
+.tsk .tbtn2.sm{height:24px;padding:0 var(--s3);font-size:var(--xs)}
+.tsk .tbtn2.ic{width:var(--h-ctl);justify-content:center;padding:0;letter-spacing:.1em}
+.tsk .smark{position:relative}
+.tsk .smenu{position:absolute;top:calc(100% + 4px);left:0;z-index:7;display:flex;flex-direction:column;width:230px;padding:var(--s2) 0 0;border-radius:8px;
+  border:1px solid var(--line-2);background:var(--solid);box-shadow:var(--shadow)}
+.tsk .smenu b{padding:var(--s2) var(--s4);font:600 var(--xxs) var(--f-body);color:var(--fg-3);text-transform:uppercase;letter-spacing:.08em}
+.tsk .smenu button{display:flex;align-items:center;height:30px;padding:0 var(--s4);border:0;background:transparent;color:var(--fg);font-size:var(--sm);text-align:left;cursor:pointer}
+.tsk .smenu button:hover{background:var(--sel)}
+.tsk .smenu button.on{background:var(--sel)}
+.tsk .smenu .ck{flex:none;width:20px;color:var(--fg-2)}
+.tsk .smenu small{margin-top:var(--s2);padding:var(--s3) var(--s4) var(--s4);border-top:1px solid var(--line);font-size:var(--xs);line-height:1.5;color:var(--fg-2)}
+
+/* Tài liệu: the block (card / overview) and the drop-down (list head) share the rows */
+.tsk .sdocs{padding:var(--s5) var(--s6) var(--s4)}
+.tsk .sdocs h4{margin:0 0 var(--s3);font:600 var(--xs) var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--fg-2)}
+.tsk .drow{display:grid;grid-template-columns:16px 140px minmax(0,1fr) auto;align-items:center;gap:var(--s4);width:100%;height:30px;padding:0 var(--s3);
+  margin:0 calc(-1 * var(--s3));border:0;border-radius:6px;background:transparent;color:var(--fg);font-size:var(--sm);text-align:left}
+.tsk .sov .drow{grid-template-columns:16px 116px minmax(0,1fr) auto}
+.tsk .drow:hover:not(:disabled){background:var(--sel)}
+.tsk .drow .i{color:var(--fg-2)}
+.tsk .drow .dp{direction:rtl;text-align:left;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font:var(--xs) var(--f-mono);color:var(--fg)}
+.tsk .drow .dw{font-size:var(--xs);color:var(--fg-2);white-space:nowrap}
+.tsk .drow.off{color:var(--fg-3)}.tsk .drow.off .dp,.tsk .drow.off .dw{color:var(--fg-3)}
+.tsk .drow.miss,.tsk .drow.miss .i,.tsk .drow.miss .dp,.tsk .drow.miss .dw{color:var(--bad);cursor:default}
+.tsk .dnote{margin:var(--s3) 0 0;font-size:var(--sm);color:var(--fg-2)}
+.tsk .dmenu{position:fixed;z-index:8;width:560px;max-width:calc(100vw - 16px);padding:var(--s3) var(--s5);border-radius:8px;border:1px solid var(--line-2);
+  background:var(--solid);box-shadow:var(--shadow)}
+.tsk .dmenu .drow{margin:0 calc(-1 * var(--s3));width:calc(100% + 2 * var(--s3))}
+
+/* IS4 the Huỷ popover: under the detail head (CancelPop places it), not modal */
+.tsk .cpop{position:fixed;z-index:8;width:372px;max-width:calc(100vw - 16px);padding:var(--s5) var(--s5) var(--s4);border-radius:10px;border:1px solid var(--line-2);
+  background:var(--solid);box-shadow:var(--shadow);font-size:var(--sm);color:var(--fg)}
+.tsk .cpop section+section{margin-top:var(--s5);padding-top:var(--s5);border-top:1px solid var(--line)}
+.tsk .cpop h4{margin:0 0 var(--s3);font:600 var(--md) var(--f-body)}
+.tsk .cpop ul{margin:0;padding-left:var(--s6);display:grid;gap:var(--s2)}
+.tsk .cpop .ck{padding:0 var(--s2);border-radius:4px;border:1px solid var(--line-2)}
+.tsk .cwarn{margin-top:var(--s4);padding-top:var(--s4);border-top:1px solid var(--line);display:grid;gap:var(--s2)}
+.tsk .cwarn p{margin:0;display:flex;gap:var(--s3);align-items:baseline}
+.tsk .cwarn .i{flex:none;color:var(--warn);transform:translateY(2px)}
+.tsk .cload{margin:0;color:var(--fg-2)}
+.tsk .creason{display:grid;gap:var(--s2);margin-top:var(--s5);color:var(--fg-2)}
+.tsk .creason input{height:var(--h-ctl);padding:0 var(--s4);border-radius:6px;border:1px solid var(--line-2);background:var(--fld-bg);color:var(--fg);font:inherit}
+.tsk .cfoot{display:flex;align-items:center;gap:var(--s4);margin-top:var(--s5)}
+.tsk .cfoot .kb{margin-right:auto;font:var(--xs) var(--f-mono);color:var(--fg-3)}
+.tsk .pfoot .kb{font:var(--xs) var(--f-mono);color:var(--fg-3)}
+.tsk .ckeep{height:var(--h-ctl);padding:0 var(--s5);border-radius:6px;border:1px solid var(--line-2);background:var(--panel-2);color:var(--fg);font:600 var(--sm) var(--f-body)}
+/* v2.8 §4.2 (LT15): Giữ takes focus when the popover opens, so it shows the inset ring on any focus; the filled Huỷ build
+   button carries the L10 outer ring (the inset one fails on the --bad fill) */
+.tsk .ckeep:focus-visible,.tsk .ckeep:focus{outline:none;box-shadow:inset 0 0 0 1px var(--fg-2)}
+.tsk .cgo{height:var(--h-ctl);padding:0 var(--s5);border-radius:6px;border:1px solid var(--bad);background:var(--bad);color:var(--ink);font:600 var(--sm) var(--f-body)}
+.tsk .cgo:focus-visible{outline:none;box-shadow:0 0 0 1px var(--solid),0 0 0 2px var(--fg-2)}
+.tsk .cgo:disabled{opacity:.5;cursor:not-allowed}
+
+/* IS17 the Tiếp tục build popover: under the button */
+.tsk .ppop{position:fixed;z-index:8;width:680px;max-width:calc(100vw - 16px);border-radius:10px;border:1px solid var(--line-2);background:var(--solid);box-shadow:var(--shadow);
+  font-size:var(--sm)}
+.tsk .ppop section{padding:var(--s4) var(--s5)}
+.tsk .ppop section+section{border-top:1px solid var(--line)}
+.tsk .ppop h5{margin:0 0 var(--s3);font:600 var(--xs) var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--fg-2)}
+.tsk .prow{display:flex;gap:var(--s4);align-items:flex-start;padding:var(--s3) var(--s5);margin:0 calc(-1 * var(--s5));cursor:pointer}
+.tsk .prow.on{background:var(--sel)}
+.tsk .prow.dim{opacity:.5;cursor:not-allowed}
+.tsk .prow input{margin-top:var(--s1)}
+.tsk .prow span{display:grid;gap:var(--s1);min-width:0}
+.tsk .prow b{font:500 var(--xs) var(--f-mono);color:var(--fg);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tsk .prow small{font-size:var(--xs);color:var(--fg-2)}
+.tsk .pact{display:flex;align-items:center;justify-content:flex-end;gap:var(--s4);margin-top:var(--s3)}
+.tsk .pact>span:not(.split){flex:1;color:var(--fg)}
+.tsk .pact>.pdef{color:var(--fg-3);font-size:var(--xs)}
+.tsk .pload{margin:0;color:var(--fg-2)}
+.tsk .pfoot{display:flex;gap:var(--s4);margin:var(--s4) 0 0;padding-top:var(--s3);border-top:1px solid var(--line);font-size:var(--xs);color:var(--fg-2)}

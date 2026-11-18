@@ -1,0 +1,17 @@
+{
+  "notObject": "{file} must be an object",
+  "int": "config.json invalid: {field} must be an integer {min}–{max}",
+  "bool": "config.json invalid: {field} must be true/false",
+  "object": "config.json invalid: {field} must be an object",
+  "emailInt": "config.json invalid: {field} must map email → integer {min}–{max}",
+  "emailBool": "config.json invalid: {field} must map email → true/false",
+  "uiLang": "config.json invalid: ui must be { lang: \"vi\" | \"en\" }",
+  "sharedExtra": "config.json invalid: sharedExtra must list unknown entry names in ~/.claude",
+  "capsNoDefault": "caps.json lacks the \"default\" entry",
+  "capsEntry": "caps.json: \"{name}\" must be an object",
+  "capsPct": "caps.json: \"{name}\".{field} must be a number 1–100",
+  "capsRole": "caps.json: \"{name}\".role must be primary/backup/orchestrator",
+  "capsHard": "caps.json: \"{name}\".hard must be true/false",
+  "idLists": "config.json invalid: {field} must be an object of id lists (strings)",
+  "modelDefaults": "config.json invalid: modelDefaults must be { orchestrator, lane } with model a 1–100 character string or null, effort low/medium/high/xhigh/max or null"
+}

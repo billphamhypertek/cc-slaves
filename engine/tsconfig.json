@@ -1,0 +1,6 @@
+{
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": { "rootDir": "..", "outDir": "../.tsbuild/engine", "tsBuildInfoFile": "../.tsbuild/engine.tsbuildinfo" },
+  "include": ["src", "test", "it", "../shared", "../shared/i18n/**/*.json", "../package.json"],
+  "references": [{ "path": "../fake-mcp" }]
+}

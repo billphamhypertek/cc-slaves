@@ -1,0 +1,13 @@
+{
+  "dropTo": "Drop to attach to {name}",
+  "lock.busy": "Uploading…",
+  "lock.bad": "Remove the bad files to send",
+  "lock.fail": "Remove or re-upload the bad files to send",
+  "lock.slash": "Remove the files or the / command to send",
+  "slashNo": "The {cmd} command takes no attachments",
+  "tooMany": "Up to 20 files per message. Dropped the last {n} {n:file|files}.",
+  "locked": "{why} · can't attach yet",
+  "lockOffline": "Offline",
+  "lockStarting": "The orchestrator is starting",
+  "pasteName": "image-{t}.png"
+}

@@ -1,0 +1,69 @@
+/* v2.1 §4.14 session dialogs + "Lịch sử phiên" popover (lazy chunk; font sizes from the scale only) */
+.sdlg{overflow:hidden}
+/* m8 a short window: the body scrolls above the buttons; the edge past which content hides fades (lib/fade.ts) */
+.sdlg .sdb{flex:1 1 auto;min-height:0;overflow-y:auto;display:flex;flex-direction:column;gap:var(--s5);margin:calc(-1 * var(--s2));padding:var(--s2)}
+.sdlg .sdb>*{flex-shrink:0}
+.sdlg .lead{margin:0;color:var(--fg-2);font-size:var(--sm)}
+.sdlg .note{margin:0;color:var(--fg-3);font-size:var(--xs);display:flex;gap:var(--s2);align-items:flex-start}
+.sdlg .note.warn{color:var(--warn)}
+.sdlg .sfield{display:flex;flex-direction:column;gap:var(--s2);font-size:var(--sm);color:var(--fg-2)}
+.sdlg .sfield .field{width:100%;height:var(--h-ctl)}
+.sdlg textarea.field{height:auto;padding:var(--s2) var(--s3);resize:vertical;font:var(--sm)/1.4 var(--f-body)}
+.sdlg .kv{display:grid;grid-template-columns:auto 1fr;gap:var(--s2) var(--s5);margin:0;font-size:var(--sm)}
+.sdlg .kv dt{color:var(--fg-3)}.sdlg .kv dd{margin:0}.sdlg .kv dd.warn{color:var(--warn)}
+.sdlg .schoice{display:flex;flex-direction:column;gap:var(--s3)}
+.sdlg .schoice .choice b{display:flex;align-items:center;gap:var(--s3)}
+/* MD11 N2 "Thay phiên #2 ▾": the same small ▾ as Account / Model / Effort, no native chevron */
+.sdlg .schoice .rsel{position:relative;display:inline-flex}
+.sdlg .schoice .rsel select.field{height:var(--h-ctl-sm);appearance:none;-webkit-appearance:none;padding:0 var(--s6) 0 var(--s3)}
+.sdlg .schoice .rsel::after{content:'▾';position:absolute;right:8px;top:50%;transform:translateY(-50%);font:normal var(--xxs)/1 system-ui,sans-serif;pointer-events:none}
+.sdlg .preview{display:flex;gap:var(--s3);align-items:flex-start;font-size:var(--sm);padding:var(--s3) var(--s4);border-radius:8px;border:1px solid var(--bad);background:var(--bad-2)}
+.btn.pri.bad{background:var(--bad);border-color:var(--bad);color:var(--ink)}
+.slist-back{position:fixed;inset:0;z-index:60}
+.slist{position:fixed;overflow:auto;padding:var(--s2);display:flex;flex-direction:column;gap:var(--s1);background:var(--solid)}
+.slist .sh{margin:var(--s3) var(--s3) var(--s2);font:600 var(--xs)/1.2 var(--f-body);color:var(--fg-3);text-transform:uppercase;letter-spacing:.06em}
+.slist .sempty{margin:var(--s2) var(--s3) var(--s3);font-size:var(--xs);color:var(--fg-3)}
+.slist .srow{display:grid;grid-template-columns:1fr auto;gap:var(--s1) var(--s4);text-align:left;padding:var(--s3);border-radius:7px;border:1px solid transparent;background:transparent}
+.slist .srow:hover,.slist .srow:focus-visible,.slist .srow.on{background:var(--sel)}
+.slist .srow.on b{font-weight:700}
+.slist .srow b{font-size:var(--sm)}.slist .srow span{grid-column:1;font-size:var(--xs);color:var(--fg-3)}
+.slist .srow em{grid-row:1/4;grid-column:2;align-self:center;font-style:normal;font-size:var(--xs);color:var(--accent)}
+.slist .srow em.dim{color:var(--fg-3)}
+.slist .lnk{margin:var(--s2) var(--s3)}
+body.offline .slist .srow{opacity:.75}
+/* v2.7 §5.0 the session kind of a running row ("Build · v2.5", "Thiết kế", "Chung") */
+.slist .srow b .skind{display:inline-flex;align-items:center;height:18px;margin-left:var(--s3);padding:0 var(--s2);border-radius:4px;border:1px solid var(--line-2);font:600 var(--xxs) var(--f-body);color:var(--fg-2);vertical-align:1px}
+/* v2.7.1 §4.1 the start dialog (SA1–SA5b, SA9, SA9b): 500 px, Account on its own row, the foot's key hint / reason on the left */
+.sdlg.sstart{width:min(500px,calc(100vw - 32px))}
+.sdlg.sstart .mf{align-items:center}
+.sdlg .mf .fl{margin-right:auto;font-size:var(--xs);color:var(--fg-2)}
+.sdlg .mf .fl kbd{font:var(--xxs)/1 var(--f-mono);padding:var(--s1) var(--s2);border:1px solid var(--line-2);border-radius:4px;color:var(--fg-2)}
+.sdlg .sfield.acc .lrow{display:flex;justify-content:space-between;gap:var(--s3)}
+.sdlg .sfield.acc .hint{color:var(--fg-2);font-size:var(--xs)}
+.apick{display:flex;align-items:center;justify-content:space-between;gap:var(--s3);padding:0 var(--s3);text-align:left;color:var(--fg)}
+.apick .v{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.apick svg{flex:none;color:var(--fg-2)}
+.sdlg .note.alert{color:var(--fg-2);font-size:var(--xs)}.sdlg .note.alert svg{flex:none;color:var(--warn)}
+.sdlg .note svg{flex:none;margin-top:var(--s1)}
+/* SA2 the account list: a neutral grey step marks hover / focus (no coloured border, no tinted fill) */
+.apop{display:flex;flex-direction:column;gap:var(--s1);max-height:min(420px,70vh);overflow:auto;background:var(--solid)}
+.apop .arow{display:grid;grid-template-columns:16px minmax(0,1fr) auto;align-items:center;gap:var(--s1) var(--s3);padding:var(--s2) var(--s3);border:0;border-radius:6px;background:transparent;color:var(--fg);text-align:left;font:400 var(--sm)/1.3 var(--f-body)}
+.apop .arow:hover,.apop .arow:focus-visible{background:var(--sel)}
+.apop .arow b{font-weight:500;overflow-wrap:anywhere}
+.apop .arow em{font-style:normal;font-size:var(--xs);color:var(--fg-2);white-space:nowrap}
+.apop .arow small{grid-column:2/4;font-size:var(--xs);color:var(--fg-3)}
+.apop .arow .mk{display:grid;place-items:center;color:var(--fg)}
+.apop .arow.off{cursor:default}.apop .arow.off b{color:var(--fg-3);font-weight:400}
+.apop .arow.off:hover{background:transparent}
+/* SA3 / SA4 the steps: spinner → ✓ + time, ✗ + the reason in red */
+.ssteps{display:flex;flex-direction:column;gap:var(--s4)}
+.sst{display:grid;grid-template-columns:20px minmax(0,1fr) auto;gap:var(--s1) var(--s3);align-items:center}
+.sst .ic{width:16px;height:16px;border-radius:50%;display:grid;place-items:center;border:1.5px solid var(--fg-3)}
+.sst.st-wait .ic{border-style:dashed;border-color:var(--fg-3)}
+.sst.st-run .ic{border:0}.sst.st-run .ic .spin{width:14px;height:14px;border-width:1.5px;border-color:var(--fg-2);border-right-color:transparent}
+.sst.st-ok .ic{border-color:var(--ok);color:var(--ok)}
+.sst.st-bad .ic{border-color:var(--bad);color:var(--bad)}
+.sst b{font-weight:500;font-size:var(--sm)}.sst.st-wait b{color:var(--fg-2);font-weight:400}
+.sst .t{font-size:var(--xs);color:var(--fg-2)}
+.sst small{grid-column:2/4;font-size:var(--xs);color:var(--fg-2)}
+.sst.st-bad small{color:var(--bad)}

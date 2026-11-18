@@ -1,0 +1,22 @@
+{
+  "kind_ask": "Question",
+  "kind_permission": "Permission",
+  "kind_broken": "Lane broken",
+  "kind_orchestrator_down": "Orchestrator stopped",
+  "kind_logged_out": "Account signed out",
+  "kind_cc_updated": "Claude Code updated",
+  "kind_shared_cfg": "Shared config broken",
+  "kind_shared_cfg_new": "New entry in ~/.claude",
+  "kind_account_orphan": "Orphan account",
+  "kind_cutover": "No v2 account",
+  "wantsToRun": "{source} wants to run {tool}",
+  "orchestrator": "Orchestrator",
+  "laneDone": "{name} is done",
+  "switched": "{name} switched to {account}",
+  "allFull": "Every account is full — lanes wait for quota",
+  "laneStoppedQueued": "{name} is stopped — the message is sent on Resume",
+  "kind_mcp_login": "MCP needs a sign-in",
+  "kind_issues_new": "New side issues",
+  "kind_superpowers_off": "Superpowers is off",
+  "kind_revert_conflict": "Revert conflict"
+}

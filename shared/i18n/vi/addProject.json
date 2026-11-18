@@ -1,0 +1,11 @@
+{
+  "failed": "Không thêm được project.",
+  "title": "Thêm project",
+  "aria": "Đang thêm project",
+  "pick": "Chọn thư mục",
+  "picking": "Bảng chọn thư mục đang mở…",
+  "add": "Thêm project “{name}”",
+  "known": "Project “{name}” đã có sẵn",
+  "open": "Mở project",
+  "openSlow": "Project chưa hiện ra sau 10 giây — thử lại."
+}

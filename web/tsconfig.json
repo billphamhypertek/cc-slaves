@@ -1,0 +1,12 @@
+{
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": {
+    "rootDir": "..",
+    "outDir": "../.tsbuild/web",
+    "tsBuildInfoFile": "../.tsbuild/web.tsbuildinfo",
+    "lib": ["ES2023", "DOM", "DOM.Iterable"],
+    "jsx": "react-jsx",
+    "types": ["bun"]
+  },
+  "include": ["src", "test", "dev", "vite.config.ts", "../shared/protocol.ts", "../shared/accounts.ts", "../shared/issues.ts", "../shared/workflows.ts", "../shared/toolkit.ts", "../shared/graph.ts", "../shared/update.ts", "../shared/json.ts", "../shared/slash.ts", "../shared/git-identity.ts", "../shared/notify-prefs.ts", "../shared/i18n/*.ts", "../shared/i18n/**/*.json"]
+}

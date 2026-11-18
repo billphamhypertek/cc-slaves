@@ -1,0 +1,29 @@
+{
+  "files": [],
+  "references": [
+    {
+      "path": "engine"
+    },
+    {
+      "path": "fake-cbm"
+    },
+    {
+      "path": "fake-claude"
+    },
+    {
+      "path": "fake-mcp"
+    },
+    {
+      "path": "web"
+    },
+    {
+      "path": "e2e"
+    },
+    {
+      "path": "scripts"
+    },
+    {
+      "path": "scripts/perf"
+    }
+  ]
+}

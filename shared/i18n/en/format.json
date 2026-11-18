@@ -1,0 +1,20 @@
+{
+  "left.d": "{d} d {h} h",
+  "left.h": "{h} h {m} min",
+  "left.m": "{m} min",
+  "chip.out": "signed out",
+  "chip.full": "FULL",
+  "chip.fullRest": "· resets in {left}",
+  "chip.unknown": "unknown",
+  "chip.left": "{pct}% left",
+  "pct": "{n}%",
+  "secs": "{n} s",
+  "ago.now": "now",
+  "ago.m": "{n} min",
+  "ago.h": "{n} h",
+  "ago.d": "{n} d",
+  "resetLeft": "{at} ({left} left)",
+  "leftR.d": "{n} d",
+  "leftR.h": "{n} h",
+  "leftR.m": "{n} min"
+}

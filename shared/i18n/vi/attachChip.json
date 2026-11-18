@@ -1,0 +1,15 @@
+{
+  "remove": "{name}, bỏ",
+  "copy": "bản sao",
+  "copyTip": "Đây là bản sao tạm. Claude đọc được nhưng không sửa vào file gốc. Muốn gửi file gốc thì kéo nó từ Finder trong app.",
+  "retry": "Thử lại",
+  "reattach": "đính lại",
+  "why.tooBig": "Quá 20 MB",
+  "why.imagesTotal": "Tổng ảnh quá 40 MB",
+  "why.copyTooBig": "Quá 50 MB",
+  "why.unreadable": "Không đọc được",
+  "why.dir": "Không nhận thư mục",
+  "why.blocked": "Nằm trong vùng cc-slaves bảo vệ",
+  "why.fail": "Không tải lên được",
+  "why.expired": "Đã hết hạn ·"
+}

@@ -1,0 +1,31 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "main",
+  "description": "The engine-served UI in window `main`. IPC only from the app origin http://127.0.0.1:47800 (§7.2).",
+  "windows": ["main"],
+  "remote": { "urls": ["http://127.0.0.1:47800/*"] },
+  "permissions": [
+    "core:event:allow-listen",
+    "core:event:allow-unlisten",
+    "core:window:allow-set-focus",
+    "core:window:allow-set-theme",
+    "allow-engine-token",
+    "allow-engine-status",
+    "allow-engine-stop",
+    "allow-engine-uninstall",
+    "allow-engine-restart",
+    "allow-open-path",
+    "allow-open-terminal",
+    "allow-open-url",
+    "allow-open-doc",
+    "allow-confirm-remote-enable",
+    "allow-pairing-code-entry",
+    "allow-pick-folder",
+    "allow-notify",
+    "allow-update-state",
+    "allow-update-check",
+    "allow-update-start",
+    "allow-update-cancel",
+    "allow-update-dismiss"
+  ]
+}

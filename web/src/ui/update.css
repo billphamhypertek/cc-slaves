@@ -1,0 +1,61 @@
+/* v2.6 §4.1–§4.6 the update chip (UP1, UP1n) and its frame (UP2–UP4d, UP6), UP5 veil. Mockup:
+   docs/specs/assets/2026-11-16-cc-slaves-v2.6-updater.html (.upc / .upop / .inst). Open = a neutral grey step, no accent
+   outline or tint (PO 16/11 BANNED look); status colour lives in the text and the resting border only. */
+.upc{position:relative;height:var(--h-ctl);display:flex;align-items:center;gap:var(--s3);padding:0 var(--s4);border-radius:8px;border:1px solid var(--line-2);background:var(--panel-2);color:var(--fg);font:600 var(--xs)/1 var(--f-body);white-space:nowrap;font-variant-numeric:tabular-nums;flex:none;overflow:hidden}
+.upc:hover:not([disabled]),.upc.on{background:var(--sel)}
+.upc.acc{color:var(--accent);border-color:color-mix(in srgb,var(--accent) 50%,transparent)}
+.upc.wait svg{color:var(--warn)}
+.upc.ins{color:var(--fg-3);border-color:var(--line);cursor:default}
+.upc.bad{color:var(--bad);border-color:color-mix(in srgb,var(--bad) 50%,transparent)}
+.upc .bar{position:absolute;left:0;bottom:0;height:2px;background:var(--accent)}
+.upc-w,.upc-s{display:flex;align-items:center;gap:var(--s3)}
+.upc-s{display:none;position:relative}
+.upc .rdot{position:absolute;top:calc(-1 * var(--s2));right:calc(-1 * var(--s2));width:6px;height:6px;border-radius:50%;background:var(--bad)}
+/* §6 UP1n ≤ 1100 px: icon + number only, the full line stays in the title */
+@media (max-width:1100px){.upc .upc-t{display:none}.upc .upc-w{display:none}.upc .upc-s{display:flex}.upc{padding:0 var(--s3)}}
+
+.upop{position:fixed;z-index:58;width:384px;max-width:calc(100vw - 16px);padding:var(--s5) var(--s5);border-radius:10px;background:var(--solid);border:1px solid var(--line-2);box-shadow:var(--shadow);font:400 var(--sm)/1.5 var(--f-body);color:var(--fg);outline:none}
+.upop .uh{display:flex;align-items:baseline;gap:var(--s4)}
+.upop .uh b{font-size:var(--md);font-weight:600}
+.upop .uh .cur{margin-left:auto;font:400 var(--xs) var(--f-mono);color:var(--fg-3)}
+.upop ul{margin:var(--s4) 0 0;padding:0 0 0 var(--s6);color:var(--fg);font-size:var(--xs);line-height:1.6}
+.upop li::marker{color:var(--fg-3)}
+.upop .gh{display:inline-flex;align-items:center;gap:var(--s2);margin-top:var(--s3);font-size:var(--xs);font-weight:600}
+.upop .imp{display:flex;gap:var(--s3);align-items:flex-start;margin-top:var(--s5);padding-top:var(--s4);border-top:1px solid var(--line);color:var(--fg-2);font-size:var(--xs)}
+.upop .imp svg{margin-top:var(--s1);color:var(--fg-3)}
+.upop .ft{display:flex;justify-content:flex-end;align-items:center;gap:var(--s3);margin-top:var(--s5)}
+.upop .ftc{margin-top:var(--s3);text-align:right;font-size:var(--xs);color:var(--fg-3)}
+.upop .ftl{flex:1;font-size:var(--xs);line-height:1.45;color:var(--fg-2)}
+.upop .pb{height:6px;border-radius:3px;background:var(--line);margin-top:var(--s5);overflow:hidden}
+.upop .pb i{display:block;height:100%;background:var(--accent);border-radius:3px}
+.upop .pl{display:flex;align-items:center;justify-content:space-between;gap:var(--s3);margin-top:var(--s3);font-size:var(--xs);color:var(--fg-2);font-variant-numeric:tabular-nums}
+.upop .wl{margin-top:var(--s4);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.upop .wr{display:grid;grid-template-columns:7px minmax(0,96px) minmax(0,1fr) auto;align-items:center;gap:var(--s4);height:34px;padding:0 var(--s5);font-size:var(--xs)}
+.upop .wr+.wr{border-top:1px solid var(--line)}
+.upop .wr i{width:7px;height:7px;border-radius:50%;background:var(--ok);display:block}
+.upop .wr .p{color:var(--fg-2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.upop .wr .n{font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.upop .wr .n.m{font-family:var(--f-mono)}
+.upop .wr .t{color:var(--fg-3);font-variant-numeric:tabular-nums}
+.upop .held{display:flex;gap:var(--s3);align-items:center;margin-top:var(--s4);font-size:var(--xs)}
+.upop .held svg{color:var(--warn)}
+.upop .er{display:flex;gap:var(--s4);align-items:flex-start;line-height:1.55}
+.upop .er svg{color:var(--bad);margin-top:var(--s1);flex:none}
+.upop .er .lnk{font-size:inherit;font-weight:600;white-space:nowrap}
+
+/* UP5 the one frame that covers the whole window: seconds before the app exits and reopens */
+.upinst{position:fixed;inset:0;z-index:90;background:var(--scrim);display:flex;align-items:center;justify-content:center}
+.upinst .box{display:flex;align-items:center;gap:var(--s5);padding:var(--s5) var(--s6);border-radius:10px;background:var(--solid);border:1px solid var(--line-2);box-shadow:var(--shadow);font-size:var(--md);color:var(--fg)}
+.upinst .box svg{color:var(--accent)}
+.upinst .box span{color:var(--fg-2)}
+/* the frame takes the focus on open (Esc, Tab into its buttons): no ring around the whole frame */
+.upop[tabindex]:focus-visible{box-shadow:var(--shadow)}
+/* §4.7 UP7 / UP7r the "Cập nhật" row of Settings → Engine (mockup .uprow): status colour in the text only */
+.uprow{display:flex;align-items:center;gap:var(--s4);min-height:var(--h-ctl);flex-wrap:wrap}
+.uprow .upr-t{display:inline-flex;align-items:center;gap:var(--s3)}
+.uprow .upr-t.acc{color:var(--accent);font-weight:600}
+.uprow .upr-t.ok{color:var(--ok)}
+.uprow .upr-t.bad{color:var(--bad)}
+.uprow .upr-t.wait svg{color:var(--warn)}
+.uprow .upr-t.run svg{color:var(--accent);animation:sp .8s linear infinite} /* UP7b the check runs */
+/* v26-fw M1–M3 no one-word last line in the frame's notes and errors ("…chưa cập / nhật.", "→ Engine", "gì.") */
+.upop .ftl,.upop .ftc,.upop .er{text-wrap:pretty}

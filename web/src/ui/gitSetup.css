@@ -1,0 +1,10 @@
+/* hotfix 2026-11-16 (b) the optional Git block: the wizard's `.dep` rows under a small head */
+.gsetup{display:flex;flex-direction:column}
+.gs-head{display:flex;flex-direction:column;gap:var(--s1);padding:var(--s4) 0 var(--s2)}
+.dep+.gsetup .gs-head{border-top:1px solid var(--line)}
+.gs-head b{font-size:var(--md)}
+.gs-row{border-top:0;padding:var(--s3) 0}
+.gs-form{display:flex;gap:var(--s2);align-items:center;flex-wrap:wrap}
+.gs-form .field{flex:1 1 160px;min-width:0}.gs-form .gs-email{flex-basis:220px}
+.gs-cmd{display:flex;gap:var(--s3);align-items:center;flex-wrap:wrap}
+.gs-code{font:600 var(--lg) var(--f-mono);letter-spacing:.12em;user-select:all}

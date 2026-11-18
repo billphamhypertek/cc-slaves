@@ -1,0 +1,2 @@
+/* v2.9 §4.7 the effective-config line: one quiet line, ellipsis, the full text + rules in its title */
+.wfl{display:block;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:var(--xs);color:var(--fg-3)}

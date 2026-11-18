@@ -1,0 +1,34 @@
+/* v2.7 §4.3 the spec rail (IS2, IS16) and the narrow spec menu (IS10b). Selected = neutral --sel only (D90, no accent). */
+.srail{display:flex;flex-direction:column;height:100%;min-height:0}
+.srail .shead{flex:none;display:flex;align-items:center;justify-content:space-between;gap:var(--s3);height:44px;padding:0 var(--s4) 0 var(--s5);border-bottom:1px solid var(--line)}
+.srail .shead b{font-size:var(--md);font-weight:600;color:var(--fg);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.srail .snew{display:inline-flex;align-items:center;gap:var(--s2);height:var(--h-ctl-sm);padding:0 var(--s4);border-radius:6px;border:1px solid var(--line-2);
+  background:transparent;color:var(--fg);font:600 var(--xs) var(--f-body);cursor:pointer;flex:none}
+.srail .snew:hover:not(:disabled){background:var(--sel)}
+.srail .snew:disabled{opacity:.4;cursor:not-allowed}
+.srail .sbody{flex:1;min-height:0;overflow:auto;padding-bottom:var(--s5)}
+.srail .simp{display:flex;gap:.3em;margin:var(--s5) var(--s4) 0 var(--s5);font-size:var(--xxs);color:var(--fg-3);white-space:nowrap}
+.srail .simp span{min-width:0;overflow:hidden;text-overflow:ellipsis}
+.srail .simp .lnk{flex:none}
+.srail .sgrp h4{margin:var(--s5) var(--s5) var(--s3);font:600 var(--xxs) var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--fg-3)}
+.srail .srow{display:flex;align-items:center;gap:var(--s3);min-height:30px;padding:0 var(--s4) 0 0}
+.srail .srow:hover{background:var(--sel)}
+.srail .srow.on{background:var(--sel)}
+.srail .srow.on .t{font-weight:600;color:var(--fg)}
+.srail .sname{flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;align-self:stretch;padding:var(--s2) 0 var(--s2) var(--s5);border:0;background:transparent;
+  color:var(--fg);font:var(--sm) var(--f-body);text-align:left;cursor:pointer}
+.srail .sname .t{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.srail .sname small{font-size:var(--xs)}
+.srail .sname small.warn{color:var(--warn)}
+.srail .sname small.bad{color:var(--bad)}
+.srail .sx{flex:none;font-size:var(--xs);color:var(--fg-3)}
+.srail .sx.n{font-family:var(--f-mono)}
+.srail .sbtn{flex:none;display:inline-flex;align-items:center;height:20px;padding:0 var(--s3);border-radius:4px;border:1px solid var(--accent);background:transparent;
+  color:var(--accent);font:var(--xs) var(--f-body);cursor:pointer;white-space:nowrap}
+.srail .sbtn:disabled,.srail .sbtn.off{border-color:var(--line-2);color:var(--fg-3);cursor:not-allowed}
+.srail .lnk,.tsk .lnk{border:0;background:transparent;padding:0;color:var(--fg-2);font:inherit;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.srail .lnk:disabled{cursor:not-allowed;opacity:.5}
+.srail .smore{margin:var(--s3) var(--s5) 0;font-size:var(--sm)}
+/* IS10b the same rail as a drop-down in the list head */
+.srail.menu{height:auto;max-height:calc(100vh - 160px)}
+.srail.menu .shead{height:40px}

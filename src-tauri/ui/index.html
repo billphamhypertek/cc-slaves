@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<title>cc-slaves</title>
+<style>
+  html,body{margin:0;height:100%;background:#05080f;color:#c9d6ea;font:14px/1.5 -apple-system,BlinkMacSystemFont,sans-serif}
+  main{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center;padding:0 32px}
+  .spin{width:28px;height:28px;border-radius:50%;border:3px solid #1d3352;border-top-color:#4fc3f7;animation:s 1s linear infinite}
+  @keyframes s{to{transform:rotate(360deg)}}
+  h1{font-size:17px;font-weight:600;margin:0;color:#e8f0fb}
+  #detail{color:#7f93b0;font-size:12.5px;min-height:1.5em}
+  .err .spin{display:none}
+  .err h1{color:#ff8a80}
+  @media (prefers-reduced-motion: reduce){.spin{animation:none}}
+</style>
+</head>
+<body>
+<main id="m">
+  <div class="spin" aria-hidden="true"></div>
+  <h1 id="title">Đang khởi động engine…</h1>
+  <div id="detail">Lần đầu có thể mất vài giây.</div>
+</main>
+<script>
+  // Rust drives this page with window.__setBoot(title, detail, isError) until the engine answers /healthz (F13/F10).
+  window.__setBoot = function (title, detail, isError) {
+    document.getElementById('title').textContent = title;
+    document.getElementById('detail').textContent = detail || '';
+    document.getElementById('m').className = isError ? 'err' : '';
+  };
+</script>
+</body>
+</html>

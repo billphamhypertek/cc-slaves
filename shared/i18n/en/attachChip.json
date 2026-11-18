@@ -1,0 +1,15 @@
+{
+  "remove": "{name}, remove",
+  "copy": "copy",
+  "copyTip": "This is a temporary copy. Claude can read it but won't edit the original file. To send the original, drag it from Finder into the app.",
+  "retry": "Retry",
+  "reattach": "attach again",
+  "why.tooBig": "Over 20 MB",
+  "why.imagesTotal": "Images over 40 MB in total",
+  "why.copyTooBig": "Over 50 MB",
+  "why.unreadable": "Can't read it",
+  "why.dir": "Folders aren't accepted",
+  "why.blocked": "Inside an area cc-slaves protects",
+  "why.fail": "Upload failed",
+  "why.expired": "Expired ·"
+}

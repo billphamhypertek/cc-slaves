@@ -1,0 +1,9 @@
+{
+  "bundle": {
+    "resources": {
+      "../dist/cc-slaves": "cc-slaves",
+      "../dist/cc-slaves-menubar": "cc-slaves-menubar",
+      "../web/dist/": "web/"
+    }
+  }
+}

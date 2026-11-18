@@ -1,0 +1,11 @@
+{
+  "web/src/ui/VirtualHist.tsx": {
+    "react-hooks/exhaustive-deps": 1
+  },
+  "web/test/i18n-deck.test.tsx": {
+    "@typescript-eslint/no-base-to-string": 4
+  },
+  "web/test/ws.test.ts": {
+    "@typescript-eslint/await-thenable": 2
+  }
+}

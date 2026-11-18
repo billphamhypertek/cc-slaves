@@ -1,0 +1,28 @@
+{
+  "steps": [
+    { "waitUser": true },
+    { "emit": [
+      { "type": "assistant", "parent_tool_use_id": null, "message": { "id": "msg_u1", "role": "assistant", "model": "claude-fake",
+        "content": [{ "type": "text", "text": "Đang" }],
+        "usage": { "input_tokens": 100, "output_tokens": 5, "cache_creation_input_tokens": 50, "cache_read_input_tokens": 1000 } } },
+      { "type": "assistant", "parent_tool_use_id": null, "message": { "id": "msg_u1", "role": "assistant", "model": "claude-fake",
+        "content": [{ "type": "text", "text": "Đang làm." }],
+        "usage": { "input_tokens": 100, "output_tokens": 20, "cache_creation_input_tokens": 50, "cache_read_input_tokens": 1000 } } }
+    ] },
+    { "sleep": 800 },
+    { "emit": { "type": "result", "subtype": "success", "is_error": false, "result": "Xong 1.", "num_turns": 1,
+      "total_cost_usd": 0.01, "model_usage_since_last_result": { "claude-fake": { "costUSD": 0.01 } },
+      "usage": { "input_tokens": 110, "output_tokens": 25, "cache_creation_input_tokens": 50, "cache_read_input_tokens": 1000 },
+      "permission_denials": [] } },
+    { "waitUser": true },
+    { "emit": [
+      { "type": "assistant", "parent_tool_use_id": null, "message": { "id": "msg_u2", "role": "assistant", "model": "claude-fake",
+        "content": [{ "type": "text", "text": "Xong 2." }],
+        "usage": { "input_tokens": 1, "output_tokens": 1, "cache_creation_input_tokens": 1, "cache_read_input_tokens": 1 } } },
+      { "type": "result", "subtype": "success", "is_error": false, "result": "Xong 2.", "num_turns": 1,
+        "total_cost_usd": 0.03, "model_usage_since_last_result": { "claude-fake": { "costUSD": 0.02 } },
+        "usage": { "input_tokens": 2, "output_tokens": 2, "cache_creation_input_tokens": 2, "cache_read_input_tokens": 2 },
+        "permission_denials": [] }
+    ] }
+  ]
+}

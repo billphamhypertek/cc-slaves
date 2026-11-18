@@ -1,0 +1,153 @@
+/* spec v2.3 §4.1 / §10.1 the Code and Git roots: the deck area under the header bar (1016 × 810 at 1440 × 900); v2.8 the
+   page's two token sets (styles.css), no theme of its own. §5.1 tree column, §5.2 viewer, ⌘P (mockup C1–C24). */
+.ccg{position:fixed;top:calc(var(--bn) + var(--h-bar) + var(--h-head));left:var(--deck-left,0px);right:0;bottom:0;z-index:4;display:flex;background:var(--cd-bg);font:var(--sm) var(--f-body)}
+.ccg .cside{width:280px;flex:none;display:flex;flex-direction:column;border-right:1px solid var(--line);background:var(--panel);min-height:0}
+.ccg .cskel{display:flex;flex-direction:column;gap:var(--s4);padding:var(--s2) var(--s4)}
+.ccg .cskel i{display:block;height:8px;width:62%;border-radius:4px;background:var(--line-2);opacity:.5}
+.ccg .cskel i:nth-child(3n){width:48%}.ccg .cskel i:nth-child(4n){width:70%}
+.ccg .cview{flex:1;min-width:0;display:flex;flex-direction:column;min-height:0}
+.ccg .cbar{height:2px;flex:none;background:linear-gradient(90deg,transparent,var(--accent) 40%,transparent 60%);opacity:.6}
+.ccg .cnote{display:flex;align-items:center;gap:var(--s3);height:30px;flex:none;padding:0 var(--s5);border-bottom:1px solid color-mix(in srgb,var(--warn) 35%,transparent);
+  background:var(--warn-2);color:var(--warn);font-size:var(--xs)}
+
+/* §5.1 source chip + "Hiện file bị bỏ qua" + "Tìm file ⌘P" */
+.ccg .csh{display:flex;align-items:center;gap:var(--s3);padding:var(--s4) var(--s4) var(--s3)}
+.ccg .csrcw{position:relative;min-width:0}
+.ccg .csrc{display:inline-flex;align-items:center;gap:var(--s2);max-width:100%;height:var(--h-ctl);padding:0 var(--s4);border-radius:7px;border:1px solid var(--ctl-line);
+  background:var(--bg-2);font:600 var(--xs) var(--f-mono);white-space:nowrap;color:var(--fg-2)}
+.ccg .csrc span{overflow:hidden;text-overflow:ellipsis}
+.ccg .csrc:hover{border-color:var(--line-2)}
+.ccg :is(.csrc,.csrco).acc{color:var(--accent)}.ccg :is(.csrc,.csrco).ok{color:var(--ok)}.ccg :is(.csrc,.csrco).warn{color:var(--warn)}
+.ccg :is(.csrc,.csrco).bad{color:var(--bad)}.ccg :is(.csrc,.csrco).mut{color:var(--fg-2)}
+.ccg .csrcl{position:absolute;top:calc(var(--h-ctl) + var(--s2));left:0;z-index:20;width:300px;max-height:360px;overflow:auto;padding:var(--s2);border-radius:9px;
+  border:1px solid var(--line-2);background:var(--solid);box-shadow:var(--shadow)}
+.ccg .csrcf{width:100%;height:var(--h-ctl);margin-bottom:var(--s2);padding:0 var(--s3);border-radius:6px;border:1px solid var(--line);background:var(--bg);color:var(--fg);font-size:var(--xs)}
+.ccg .csrco{display:flex;align-items:center;gap:var(--s3);width:100%;height:30px;padding:0 var(--s3);border:0;border-radius:6px;background:transparent;
+  font:600 var(--xs) var(--f-mono);text-align:left;white-space:nowrap}
+.ccg .csrco:hover,.ccg .csrco.on{background:var(--sel)}
+.ccg .csrco .st{font:400 var(--xs) var(--f-body);color:var(--fg-3)}
+.ccg .csrco .pth{display:none;margin-left:auto;font-weight:400;color:var(--fg-3);overflow:hidden;text-overflow:ellipsis}
+.ccg .csrco:hover .pth{display:inline}
+.ccg .csrcn{padding:var(--s2) var(--s3);color:var(--fg-3);font-size:var(--xs)}
+.ccg .cign{margin-left:auto;width:var(--h-ctl);height:var(--h-ctl);flex:none;display:flex;align-items:center;justify-content:center;border-radius:7px;
+  border:1px solid var(--sel);background:transparent;color:var(--fg-3)}
+.ccg .cign.on{color:var(--accent);border-color:color-mix(in srgb,var(--accent) 35%,transparent);background:var(--accent-2)}
+.ccg .cfz{display:flex;align-items:center;gap:var(--s3);margin:0 var(--s4) var(--s3);height:var(--h-ctl);flex:none;padding:0 var(--s4);border-radius:7px;border:1px solid var(--sel);
+  background:transparent;color:var(--fg-3);font-size:var(--xs);text-align:left}
+.ccg .cfz:hover{border-color:var(--line-2)}
+.ccg .cfz kbd{margin-left:auto;font:500 var(--xxs) var(--f-mono);color:var(--fg-3)}
+.ccg .cqi kbd{font:var(--sm) var(--f-body);color:var(--fg-2)}
+
+/* §5.1 tree rows (24 px, mono) */
+.ccg .ctree{flex:1;min-height:0;overflow:auto;padding-bottom:var(--s4)}
+.ccg .tr{display:flex;align-items:center;gap:var(--s2);width:100%;height:26px;padding:0 var(--s4) 0 0;border:0;background:transparent;color:var(--fg-2);
+  font:var(--xs) var(--f-mono);white-space:nowrap;text-align:left;cursor:pointer}
+.ccg .tr:hover{background:var(--sel)}
+.ccg .tr:focus-visible{outline:1px solid var(--fg-2);outline-offset:-1px}
+.ccg .tr .i{color:var(--fg-3);flex:none}
+.ccg .tr .ics{display:inline-flex;align-items:center;flex:none}
+.ccg .tr .chv{width:13px;flex:none;display:inline-flex;justify-content:center;color:var(--fg-3)}
+.ccg .tr .chv.on{transform:rotate(90deg)}
+.ccg .tr.sel{background:var(--sel);color:var(--fg)}
+.ccg .tr.ign{color:var(--fg-3)}.ccg .tr.ign.sel{color:var(--fg-2)}
+.ccg .tr .fnm{overflow:hidden}
+.ccg .tr.more,.ccg .tr.err{font:var(--xs) var(--f-body);color:var(--fg-3)}
+.ccg .tr.more:hover,.ccg .tr.err:hover{color:var(--accent)}
+.ccg .tr.skl{cursor:default}.ccg .tr.skl:hover{background:transparent}
+.ccg .tr.skl i{display:block;height:8px;width:40%;margin-left:var(--s6);border-radius:4px;background:var(--line-2);opacity:.5}
+
+/* §5.2 viewer */
+.ccg .cvw{flex:1;min-height:0;display:flex;flex-direction:column;position:relative}
+.ccg .coff{position:absolute;left:0;right:0;top:0;z-index:2;display:flex;align-items:center;gap:var(--s3);height:var(--h-ctl);padding:0 var(--s5);color:var(--bad);
+  font-size:var(--xs);background:var(--bad-2);border-bottom:1px solid var(--line)}
+.ccg .coff~.cside,.ccg .coff~.cview{margin-top:var(--h-ctl)}
+.ccg .cband{display:flex;align-items:center;gap:var(--s3);height:30px;flex:none;padding:0 var(--s5);font-size:var(--xs);border-bottom:1px solid var(--line)}
+.ccg .cband.warn{color:var(--warn);background:var(--warn-2);border-bottom-color:color-mix(in srgb,var(--warn) 35%,transparent)}
+.ccg .cband.acc{background:var(--accent-2);color:var(--accent)}
+.ccg .cband .btn{margin-left:auto;height:var(--h-ctl-sm);color:var(--fg);border-color:var(--line-2);font-weight:600}
+.ccg .cvh{height:44px;flex:none;display:flex;align-items:center;gap:var(--s4);padding:0 var(--s5);border-bottom:1px solid var(--line);white-space:nowrap;font-size:var(--sm)}
+.ccg .cvh .pth{font-family:var(--f-mono);color:var(--fg);min-width:0;overflow:hidden}
+.ccg .cvh .meta{color:var(--fg-2);font-size:var(--xs);flex:none}
+.ccg .cvh .sp{flex:1}
+.ccg .seg2{display:flex;flex:none;border:1px solid var(--ctl-line);border-radius:7px;overflow:hidden}
+.ccg .seg2 button{height:var(--h-ctl-sm);padding:0 var(--s4);border:0;background:transparent;color:var(--fg-2);font-size:var(--xs)}
+.ccg .seg2 button.on{background:var(--accent-2);color:var(--fg)}
+.ccg .hb{display:inline-flex;align-items:center;gap:var(--s2);height:var(--h-ctl);padding:0 var(--s3);border:0;border-radius:6px;background:transparent;color:var(--fg);font-weight:600;font-size:var(--sm)}
+.ccg .hb:hover{background:var(--sel)}
+.ccg .hb.dis{opacity:.45;cursor:not-allowed}.ccg .hb.dis:hover{background:transparent}
+.ccg .hb .i{color:var(--fg-2)}
+.ccg .cbody{flex:1;min-height:0;display:flex;flex-direction:column;overflow:hidden}
+.ccg .ccm{flex:1;min-height:0;display:flex;flex-direction:column}
+.ccg .cemp{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--s4);color:var(--fg-2);font-size:var(--md);text-align:center;padding:0 var(--s6)}
+.ccg .cemp>.i{color:var(--fg-3)}
+.ccg .cemp b{font-weight:400;color:var(--fg);word-break:break-all}
+.ccg .cemp .mut{font-size:var(--sm);color:var(--fg-2)}
+.ccg .cemp .btn{color:var(--fg);font-weight:600}
+.ccg .cimg{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;overflow:auto;padding:var(--s6);background-color:var(--bg-2);
+  background-image:linear-gradient(45deg,var(--cd-chk) 25%,transparent 25%,transparent 75%,var(--cd-chk) 75%),linear-gradient(45deg,var(--cd-chk) 25%,transparent 25%,transparent 75%,var(--cd-chk) 75%);
+  background-size:20px 20px;background-position:0 0,10px 10px}
+.ccg .cimg img{max-width:100%;max-height:100%;object-fit:contain}
+/* an svg has no pixel size worth showing 1:1 (a 86 × 56 icon reads as a speck): draw it at a readable width */
+.ccg .cimg img.vec{width:min(100%,240px);height:auto}
+
+/* §5.1 ⌘P over the Code pane (C5) */
+.ccg .cqscrim{position:absolute;inset:0;z-index:30;background:var(--cd-scrim)}
+.ccg .cqo{position:absolute;left:50%;top:40px;transform:translateX(-50%);width:min(600px,calc(100% - 32px));z-index:31;background:var(--cd-pop);
+  border:1px solid var(--line-2);border-radius:12px;box-shadow:var(--shadow);overflow:hidden}
+.ccg .cqi{display:flex;align-items:center;gap:var(--s3);padding:0 var(--s5);height:44px;border-bottom:1px solid var(--line);color:var(--fg-2)}
+.ccg .cqi input{flex:1;min-width:0;height:100%;padding:0;border:0;border-radius:0;background:transparent;color:var(--fg);font-size:var(--md);outline:none;box-shadow:none}
+.ccg .cqr{max-height:50vh;overflow:auto}
+.ccg .qr{display:flex;align-items:center;gap:var(--s3);width:100%;padding:var(--s3) var(--s5);border:0;background:transparent;color:var(--fg-2);font:var(--sm) var(--f-mono);text-align:left;white-space:nowrap}
+.ccg .qr b{color:var(--accent);font-weight:600}
+.ccg .qr.on{background:var(--sel);color:var(--fg)}
+.ccg .qr .nm{color:var(--fg)}.ccg .qr .dir{color:var(--fg-3)}
+.ccg .cqn{padding:var(--s4) var(--s5);color:var(--fg-3);font-size:var(--xs)}
+.ccg .cqf{padding:var(--s3) var(--s5);border-top:1px solid var(--line);font-size:var(--xs);color:var(--fg-3)}
+
+/* §5.4 tab bar (C25, C26): --h-ctl 28 (D53 M8), scrolls sideways (the D54 bar, styles.css; tabs fill 100 % so the 6 px gutter never clips them); the open tab joins the pane, bold text, no colour line (v2.8 §7.1) */
+.ccg .ctabs{height:var(--h-ctl);flex:none;display:flex;overflow-x:auto;overflow-y:hidden;background:var(--cd-tabs);border-bottom:1px solid var(--line)}
+.ccg .ctabs.fl{mask-image:linear-gradient(90deg,transparent,black 28px)}.ccg .ctabs.fr{mask-image:linear-gradient(90deg,black calc(100% - 28px),transparent)}
+.ccg .ctabs.fl.fr{mask-image:linear-gradient(90deg,transparent,black 28px,black calc(100% - 28px),transparent)}
+.ccg .ftb{display:flex;align-items:center;gap:var(--s2);height:100%;flex:none;padding:0 var(--s2) 0 var(--s4);border-right:1px solid var(--line);color:var(--fg-2);
+  font:var(--xs) var(--f-mono);white-space:nowrap;cursor:pointer;user-select:none}
+.ccg .ftb>.i{color:var(--fg-3)}
+.ccg .ftb .pd{color:var(--fg-3);font-size:var(--xxs)}
+.ccg .ftb:hover{background:var(--sel)}
+.ccg .ftb.on{background:var(--cd-bg);color:var(--fg);font-weight:600}
+.ccg .ftb.pv .nm{font-style:italic}
+.ccg .ftb .x{width:var(--h-ctl-sm);height:var(--h-ctl-sm);display:flex;align-items:center;justify-content:center;padding:0;border:0;border-radius:4px;background:transparent;color:var(--fg-2);visibility:hidden}
+.ccg .ftb.on .x,.ccg .ftb:hover .x,.ccg .ftb .x.dt{visibility:visible}
+.ccg .ftb .x:hover{background:var(--sel)}
+.ccg .ftb .x.dt i{width:8px;height:8px;border-radius:50%;background:var(--fg-2)}.ccg .ftb.on .x.dt i{background:var(--fg)}
+
+/* §5.3 editing (C6): "Đang sửa" chip, a yellow cursor-line number (editor.ts; no accent frame, v2.8 §7.1), "Huỷ" · "Lưu ⌘S", one footer line */
+.ccg .edp{display:inline-flex;align-items:center;gap:var(--s2);flex:none;font-size:var(--xs);padding:var(--s1) var(--s3);border-radius:99px;color:var(--accent);
+  border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);background:var(--accent-2)}
+.ccg .hb.gh{color:var(--fg-2)}
+.ccg .cvh .btn.pri kbd,.cdlg .btn.pri kbd{font:500 var(--xxs) var(--f-mono);opacity:.8;margin-left:var(--s1)}
+.ccg .cvh .btn.pri[aria-disabled]{opacity:.45;cursor:not-allowed}
+.ccg .vf{flex:none;display:flex;align-items:center;gap:var(--s3);min-height:40px;padding:var(--s2) var(--s5);border-top:1px solid var(--line);color:var(--fg-2);font-size:var(--xs)}
+.ccg .vf.wv{color:var(--warn)}.ccg .vf.bv{color:var(--bad)}
+.ccg .vf .btn{margin-left:auto;color:var(--fg);font-weight:600}
+
+/* §5.3 dialogs (C7 conflict 960 px, C22 gone, C23 / C27 unsaved) over the whole window */
+.cdlgw{position:fixed;inset:0;z-index:60}
+.cdlgw .cscrim{position:absolute;inset:0;background:var(--cd-dlg-scrim)}
+.cdlg{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);max-width:calc(100vw - 48px);max-height:calc(100vh - 48px);overflow:auto;padding:var(--s5) var(--s6);
+  font:var(--sm) var(--f-body);color:var(--fg);background:var(--cd-pop);border:1px solid var(--cd-pop-line);border-radius:12px;box-shadow:var(--cd-pop-sh)}
+.cdlg h3{margin:0 0 var(--s2);font-size:var(--lg);display:flex;align-items:center;gap:var(--s3)}
+.cdlg .sb{color:var(--fg-2);font-size:var(--xs)}
+.cdlg .bd{margin-top:var(--s4);color:var(--fg-2);line-height:1.55}
+.cdlg .ft{display:flex;justify-content:flex-end;align-items:center;gap:var(--s3);margin-top:var(--s5)}
+.cdlg .ft .ml{margin-right:auto;color:var(--fg-3);font-size:var(--xs)}
+.cdlg .ft .btn{color:var(--fg);font-weight:600}.cdlg .ft .btn.bad{color:var(--bad)}.cdlg .ft .btn.pri{color:var(--ink)}
+.cdlg .cf2{display:grid;grid-template-columns:1fr 1fr;gap:var(--s4);margin-top:var(--s4)}
+.cdlg .cfc{border:1px solid var(--line);border-radius:8px;overflow:hidden;min-width:0}
+.cdlg .sh3{padding:var(--s3) var(--s4) var(--s1);font-size:var(--xxs);font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--fg-2)}
+.cdlg .cfl{padding:var(--s2) 0 var(--s3);font:var(--xs)/1.6 var(--f-mono);max-height:50vh;overflow:auto}
+.cdlg .cfr{display:flex;white-space:pre-wrap;word-break:break-word;color:var(--fg-2)}
+.cdlg .cfr .no{width:30px;flex:none;padding-right:var(--s3);text-align:right;color:var(--fg-3)}
+.cdlg .cfr .tx{flex:1;min-width:0;padding-left:var(--s2)}
+.cdlg .cfr.chg{background:color-mix(in srgb,var(--warn) 8%,transparent)}.cdlg .cfr.chg .no{color:var(--warn);box-shadow:inset -2px 0 0 var(--warn)}
+.cdlg .cfr u{text-decoration:none;background:color-mix(in srgb,var(--warn) 14%,transparent);color:var(--fg);box-shadow:inset 0 -1px 0 var(--warn)}
+.cdlg .cfg{padding-left:calc(var(--s6) + var(--s6) + var(--s2));color:var(--fg-3)}

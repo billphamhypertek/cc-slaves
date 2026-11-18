@@ -1,0 +1,14 @@
+{
+  "deps": "Checking dependencies",
+  "connTry": "connecting to the engine… try {n}",
+  "conn": "connecting to the engine…",
+  "accounts": "Reading accounts & quota",
+  "nAcc": "{n} accounts",
+  "resume": "Reconnecting orchestrator and lanes",
+  "nLanes": "{n} lanes…",
+  "late": "Could not reach the engine after 30 s",
+  "lateAt": "· data from {at}.",
+  "restart": "Restart engine",
+  "lost": "Lost the engine — reconnecting (try {n})…",
+  "lostNote": "Data from {at} · lanes keep running."
+}

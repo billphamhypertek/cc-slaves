@@ -1,0 +1,33 @@
+/* v2.4 §6.2 chip strip (DK1 DK2 DK2b DK4 DK5 DK5b DK6 DK8 DK13); lazy with AttachChips. The composer-level rules (drop
+   overlay, send lock tip, notice line, tooltip) are first paint, in styles.css. */
+.tray{position:relative;display:flex;flex-wrap:wrap;gap:var(--s2);max-height:calc(2 * 40px + var(--s2) + var(--s1));flex:none;padding:0 0 var(--s1)}
+.tray.sc{overflow-y:auto}
+.tray.one{max-height:calc(40px + var(--s1))}
+.ich{position:relative;width:40px;height:40px;flex:none;border-radius:6px;border:1px solid var(--thumb-line);background:var(--bg-2);overflow:hidden;display:block}
+.ich .th{width:100%;height:100%;display:grid;place-items:center;object-fit:cover;color:var(--fg-3)}
+.ich .sp{position:absolute;inset:0;background:color-mix(in srgb,var(--veil) 62%,transparent);display:grid;place-items:center}
+.ich .sp .spin{width:14px;height:14px;border-color:var(--fg);border-right-color:transparent}
+/* "×" of every chip: one shape, a 24 × 24 hit area (§6.7 M2); the -s1 margin keeps the chip row height */
+.ax{position:relative;width:var(--h-ctl-sm);height:var(--h-ctl-sm);margin:calc(-1 * var(--s1));flex:none;display:grid;place-items:center;border:0;padding:0;background:none;color:var(--fg-2);border-radius:50%}
+.ax:hover{color:var(--fg)}
+.ich .ax{position:absolute;right:0;top:0;color:var(--fg)}
+.ich .ax::before{content:"";position:absolute;inset:2px;border-radius:50%;background:color-mix(in srgb,var(--veil) 86%,transparent)}
+.ich .ax svg{position:relative}
+.fch{display:flex;align-items:center;gap:var(--s3);height:40px;flex:none;max-width:200px;padding:0 var(--s2) 0 var(--s3);border-radius:6px;border:1px solid var(--line-2);background:var(--solid);color:var(--fg-2);box-sizing:border-box}
+.fch .tx{display:flex;flex-direction:column;gap:var(--s1);min-width:0;flex:1}
+.fch .n{display:flex;align-items:center;gap:var(--s2);font:var(--xs)/1.3 var(--f-mono);color:var(--fg);white-space:nowrap}
+.fch .nm{overflow:hidden;text-overflow:clip}
+.fch .s{display:flex;align-items:center;gap:var(--s2);font-size:var(--xs);line-height:1.3;color:var(--fg-3);white-space:nowrap}
+.fch.pic{padding-left:0}
+.fch.pic .ich{border:0;border-right:1px solid color-mix(in srgb,var(--bad) 40%,transparent);border-radius:5px 0 0 5px;height:38px;width:38px}
+.fch.bad{max-width:100%;border-color:color-mix(in srgb,var(--bad) 70%,transparent);padding:0 var(--s1) 0 var(--s3)} /* m1 the reason is the point: the chip grows to the strip */
+.fch.bad.pic{padding-left:0}
+.fch.bad .tx{gap:0}
+.fch.bad .n .ax{margin-left:auto}
+.fch.bad .n>svg{color:var(--bad);flex:none}
+.fch.bad .s{padding-right:var(--s2);color:var(--bad-txt)}
+.fch .s .lnk{display:inline-flex;align-items:center;height:var(--h-ctl-sm);margin:calc(-1 * var(--s2)) 0;padding:0 var(--s2);border-radius:4px;font-size:var(--xs)} /* DK5b a 24 px target, the line keeps its height */
+.tag.q{flex:none;font:var(--xxs)/1.4 var(--f-body);color:var(--tag-fg);border:1px solid var(--tag-line);border-radius:3px;padding:0 var(--s2);letter-spacing:0}
+/* DK8 the copy note hangs above the strip from its left edge (the chip itself is not positioned) */
+.tray .fch[data-tip]:is(:hover,:focus-within)::after{left:0;bottom:calc(100% + 6px);width:316px}
+.tray .fch[data-tip]:focus-within::after{content:attr(data-tip);position:absolute;z-index:20;white-space:normal;padding:var(--s3) var(--s4);border-radius:8px;background:var(--solid);border:1px solid var(--line-2);box-shadow:var(--shadow);font:var(--xs)/1.5 var(--f-body);color:var(--fg)}

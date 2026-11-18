@@ -1,0 +1,83 @@
+/* v2.7 §4.3 the issue list (IS2, IS6, IS9, IS10, IS10b, IS10c). Rows 34 px; selected = neutral --sel only (D90). */
+.tsk .lhead{flex:none;display:flex;align-items:center;gap:var(--s3);height:44px;padding:0 var(--s5);border-bottom:1px solid var(--line);min-width:0}
+.tsk .lname{flex:0 1 auto;min-width:0;max-width:40%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;border:0;background:transparent;padding:0;
+  color:var(--fg);font:600 var(--md) var(--f-body);text-align:left}
+.tsk button.lname{cursor:pointer}
+.tsk button.lname:hover{text-decoration:underline;text-underline-offset:3px}
+.tsk .lnum{flex:none;font:600 var(--xs) var(--f-mono);color:var(--fg)}
+.tsk .lsub{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:var(--xs);color:var(--fg-3)}
+/* I10 IS19 wide: the grey line stays whole, the spec name gives way (ellipsis) */
+.tsk .tlist:not(.nw) .lsub{flex:none}
+/* I4 the head bar: 140 wide (90 narrow) so the §4.2-2 scope stripes read; the rail keeps 36 */
+.tsk .lhead > .tpg{width:140px;height:4px}
+.tsk .tlist.nw .lhead > .tpg{width:90px} /* UX N3: the head's own bar, not the narrow menu's rail bars */
+.tsk .lgap{flex:1}
+.tsk .lbtn{flex:none;display:inline-flex;align-items:center;gap:var(--s2);height:var(--h-ctl-sm);padding:0 var(--s3);border-radius:5px;border:1px solid var(--line-2);
+  background:transparent;color:var(--fg);font:var(--xs) var(--f-body);cursor:pointer;white-space:nowrap}
+.tsk .lbtn:hover:not(:disabled){background:var(--sel)}
+.tsk .lbtn:disabled{opacity:.4;cursor:not-allowed}
+.tsk .lbtn.icon{width:30px;justify-content:center;padding:0;font-size:var(--md);line-height:1}
+.tsk .lamend{flex:none;font-size:var(--xs);color:var(--fg-2);white-space:nowrap}
+.tsk .lseg{flex:none;display:inline-flex;border:1px solid var(--line-2);border-radius:5px;overflow:hidden}
+.tsk .lseg button{height:22px;padding:0 var(--s3);border:0;background:transparent;color:var(--fg-2);font:var(--xs) var(--f-body);cursor:pointer}
+.tsk .lseg button+button{border-left:1px solid var(--line-2)}
+.tsk .lseg button.on{background:var(--sel);color:var(--fg);font-weight:600}
+.tsk .lchip{flex:none;display:inline-flex;align-items:center;gap:var(--s2);height:var(--h-ctl-sm);padding:0 var(--s3);border-radius:5px;border:1px solid var(--line-2);
+  background:var(--sel);color:var(--amber);font:600 var(--xs) var(--f-body);cursor:pointer}
+.tsk .lfsel{display:inline-flex;align-items:center;gap:var(--s2);height:var(--h-ctl-sm);padding:0 var(--s3);border-radius:5px;border:1px solid var(--line-2);
+  background:transparent;color:var(--fg);font:var(--xs) var(--f-body);cursor:pointer;white-space:nowrap}
+.tsk .lfsel:hover{background:var(--sel)}
+.tsk .lpop.r>button.on{background:var(--sel);font-weight:600}
+.tsk .lpop.r.lpf{min-width:120px}
+.tsk .lbody{flex:1;min-height:0;overflow:auto;padding-bottom:var(--s6)}
+.tsk .lblk{display:flex;flex-direction:column}
+.tsk .lbh{display:flex;align-items:center;gap:var(--s3);height:32px;margin-top:var(--s2);padding:0 var(--s5);border:0;background:transparent;cursor:pointer;
+  font:600 var(--xxs) var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--fg-3);text-align:left}
+.tsk .lbh span{margin-left:var(--s2);font-weight:400}
+.tsk .lrow{display:flex;align-items:center;gap:var(--s4);height:34px;padding:0 var(--s5);border:0;background:transparent;color:var(--fg);
+  font:var(--sm) var(--f-body);text-align:left;cursor:pointer;min-width:0}
+.tsk .lrow:hover,.tsk .lrow.on{background:var(--sel)}
+.tsk .lrow.on .t{font-weight:600}
+.tsk .lrow .k{flex:none;width:42px;font:var(--xs) var(--f-mono);color:var(--fg-3)}
+.tsk .lrow .t{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tsk .lrow.cx .t{text-decoration:line-through;color:var(--fg-3)}
+.tsk .lrow .up{flex:none;color:var(--fg-2);font-size:var(--xs)}
+.tsk .lrow .cl{flex:none;font:var(--xs) var(--f-mono);color:var(--fg-3);white-space:nowrap}
+.tsk .lrow .cl.warn{color:var(--warn)}
+.tsk .lrow .cl.bad{color:var(--bad)}
+.tsk .lrow .cl.new{color:var(--amber)}
+.tsk .lmrow{display:flex;align-items:center;gap:var(--s4);height:28px;padding:0 var(--s5)}
+.tsk .lmrow i{flex:none;width:14px}
+.tsk .lmrow i+i{width:42px}
+.tsk .lmrow .lnk{font-size:var(--sm)}
+.tsk .lempty{margin:var(--s6) var(--s5);color:var(--fg-3);font-size:var(--sm)}
+/* §4.3 status icons: empty / dashed / half / full / struck; orange half = arose, not seen */
+.tsk .tsi{flex:none;color:var(--fg-2)}
+.tsk .tsi circle{fill:none;stroke:currentColor;stroke-width:1.4}
+.tsk .tsi path{fill:none;stroke:currentColor;stroke-width:1.4}
+.tsk .tsi.blocked circle{stroke-dasharray:2 2;color:var(--fg-3)}
+.tsk .tsi .half{fill:currentColor;stroke:none}
+.tsk .tsi.new{color:var(--amber)}
+.tsk .tsi.done{color:var(--fg-3)}
+.tsk .tsi.done .fill{fill:currentColor;stroke:none}
+.tsk .tsi.done .tick{stroke:var(--tk-bg);stroke-width:1.6}
+.tsk .tsi.cancelled{color:var(--fg-3)}
+/* IS10 narrow: the cluster under the title, the spec menu + "⋯" menu */
+.tsk .tlist.nw .lrow{height:auto;min-height:34px;padding-top:var(--s3);padding-bottom:var(--s3);display:grid;grid-template-columns:14px 42px minmax(0,1fr) auto;
+  column-gap:var(--s4);align-items:start}
+.tsk .tlist.nw .lrow .tsi{margin-top:var(--s1)}
+.tsk .tlist.nw .lrow .cl{grid-column:3;grid-row:2}
+.tsk .tlist.nw .lrow{line-height:1.3;row-gap:var(--s1)}
+.tsk .tlist.nw .lrow .up{grid-column:4;grid-row:1}
+.tsk .lmenu{position:relative;flex:none}
+.tsk .lspec{display:inline-flex;align-items:center;gap:var(--s3);height:var(--h-ctl);padding:0 var(--s4);border-radius:6px;border:1px solid var(--line-2);
+  background:transparent;color:var(--fg);font:600 var(--sm) var(--f-body);cursor:pointer}
+.tsk .lpop{position:absolute;top:calc(100% + var(--s2));left:0;z-index:20;min-width:290px;border:1px solid var(--line-2);border-radius:8px;background:var(--solid);box-shadow:var(--shadow);overflow:hidden}
+.tsk .lpop.r{left:auto;right:0;min-width:220px;padding:var(--s2) 0}
+.tsk .lpop.r>button,.tsk .lpop.r>.ltip>button{display:flex;align-items:center;gap:var(--s4);width:100%;height:30px;padding:0 var(--s5);border:0;background:transparent;color:var(--fg);font:var(--sm) var(--f-body);cursor:pointer;text-align:left}
+.tsk .lpop.r>button:hover:not(:disabled){background:var(--sel)}
+.tsk .lpop.r>button:disabled,.tsk .lpop.r>.ltip>button:disabled{opacity:.4;cursor:not-allowed}
+.tsk .lpop.r>.ltip{display:flex} /* R-B20 the locked "Bổ sung yêu cầu" row keeps the menu row look */
+/* IS10c the Tài liệu row of the "⋯" menu: doc icon, label, › (its rows open to the left) */
+.tsk .lpop.r>.dmi .dmc{margin-left:auto;display:inline-flex;color:var(--fg-2)}
+.tsk .lpop.r>button .i,.tsk .lpop.r>.ltip>button .i{color:var(--fg-2)}

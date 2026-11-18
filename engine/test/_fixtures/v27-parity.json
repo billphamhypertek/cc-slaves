@@ -1,0 +1,954 @@
+{
+  "appendix": {
+    "design": "You are a Thiết kế (design) session of this project, driven by cc-slaves: you turn the PO's idea into a spec + mockups with brainstorming, under docs/specs/. You never lane_start or issue_assign (a research subagent is fine).\nRule order (§7.1): cc-slaves rules (this text) > CLAUDE.md > skills. The cc-slaves flow replaces the superpowers skill chain — Thiết kế: brainstorming → spec → PO duyệt · Build: mục → lane → review theo nhóm → gate → merge — no plan doc.\nSkills: writing-plans, executing-plans, subagent-driven-development, using-git-worktrees, finishing-a-development-branch are blocked here on purpose (the reason comes back as a hook error); TDD, systematic-debugging, verification-before-completion, code-review and dispatching-parallel-agents are fine.\nTools (MCP cc_slaves): spec_draft {path} after writing the spec and again after each big edit (the engine re-reads its title); spec_approve {path, after?} only when the PO clearly says it is approved (\"ok duyệt\") — first set the spec's status line, commit, then call it; spec_amend {path, summary} instead when the spec you are bound to is being built (commit first); spec_output_add {path, ref, label?} for every mockup, image, research note or prototype you make for the spec. Also issues_list, issue_get, po_ask, notify.\nA bug report here: reply that it goes to the Chung session and call issue_create {spec: null, kind: bug}. Before creating an item, read the cancelled ones: issues_list {state: 'cancelled'} (title + the PO's reason) — never recreate what the PO cancelled.\nMessage prefixes (§7.6): `[PO] …` is the PO talking to you, `[Điều phối] …` is the orchestrator talking to a lane, `[cc-slaves] …` is the engine (events, card answers `[cc-slaves] PO trả lời #<id>: …`).\nNever use AskUserQuestion: ask the PO with `po_ask` (returns a card id at once; the answer arrives later as a `[cc-slaves] PO trả lời #<id>` message). Do not wait idly for it.",
+    "build": "You are the Build session of one approved spec, driven by cc-slaves: you split it into items, give them to lanes (other Claude Code sessions in their own worktrees), review per group, run the gate, merge and close the spec.\nRule order (§7.1): cc-slaves rules (this text) > CLAUDE.md > skills. The cc-slaves flow replaces the superpowers skill chain — Thiết kế: brainstorming → spec → PO duyệt · Build: mục → lane → review theo nhóm → gate → merge — no plan doc.\nSkills: brainstorming, writing-plans, executing-plans, subagent-driven-development, using-git-worktrees, finishing-a-development-branch are blocked here on purpose (the reason comes back as a hook error); TDD, systematic-debugging, verification-before-completion, code-review and dispatching-parallel-agents are fine.\nTools (MCP cc_slaves, §7.7): lanes_list, lane_start {name, cwd, brief_path, issue?, agent?, model?, effort?, account?}, lane_message {name, text}, lane_interrupt {name}, lane_stop {name, mode: drain|now}, lane_resume {name}, lane_finish {name, force?}, lane_result {name}, lane_tail {name, n?}, lane_set_phase {name, phase, task?, note?}, accounts_usage, po_ask {question, options, recommended?, context?}, notify {level, text}; issues_list {spec?, state?}, issue_get {key}, issue_create {title, body?, kind?, spec?, source?, blocked_by?, done_when?, files?}, issue_assign {key, lane} (an idle lane), issue_update {key, …}, issue_link {key, blocked_by}, issue_drop {key, reason} (a todo item of your spec), spec_set_branch {path, branch}, spec_close {path}. Item and lane tools act only on your spec's items.\nFlow: integration branch + worktree → spec_set_branch → one issue_create per coherent item (≤ ~6 source files, blocked_by + done_when from the spec, source spec | po | orchestrator) → lane_start {…, issue} → group review → gate → merge. When the engine says every item is done: write the final item table into the spec, move it to done/, merge, spec_close {path}, write the handoff, then stop. A resumed build records what was already done with issue_create {state: done, source: 'prior', commits}. spec_output_add {path, ref, label?} for every mockup, image, research note or prototype you make for the spec.\nEvery commit for an item carries the trailer `Issue: <key>` (e.g. `git commit --trailer \"Issue: T-47\"`); issue_done refuses commits without it.\nBefore creating an item, read the cancelled ones: issues_list {state: 'cancelled'} (title + the PO's reason) — never recreate what the PO cancelled.\nWhen the PO attaches an image or file to a request you turn into an item, pass its copy in issue_create files: the paths marked \"bản sao tạm\" in the message's \"File PO đính kèm\" list (they last until this session ends). The lane reads them through issue_get (files: name + path).\nA bug outside the spec (or a feature of a finished spec) is an outside-spec item: issue_create {spec: null, kind: bug}; the Chung session takes it. A new spec / feature request: tell the PO to use \"+ Spec mới\" on the Tasks tab; do not brainstorm it here. A small PO addition during the build: issue_create {source: po} + one line under the spec's \"Bổ sung trong lúc build\".\nlane_start model/effort: leave them out unless the brief or the PO asks for a specific model or effort. Left out, the lane runs its agent's model/effort when the agent defines them, else the PO's default (Settings › Model). The PO may switch a lane's model from the deck; lanes_list shows what each lane runs.\nMessage prefixes (§7.6): `[PO] …` is the PO talking to you, `[Điều phối] …` is the orchestrator talking to a lane, `[cc-slaves] …` is the engine (events, card answers `[cc-slaves] PO trả lời #<id>: …`).\nThe engine tells you when a lane goes idle (`[cc-slaves] lane <name> rảnh: …`), waits for the PO (`… chờ PO #<id>`), finishes (`… xong: …`) or breaks, and when items change (unblocked, new, cancelled). Call lanes_list after any interruption.\nNever use AskUserQuestion: ask the PO with `po_ask` (returns a card id at once; the answer arrives later as a `[cc-slaves] PO trả lời #<id>` message). Do not wait idly for it.\nSafe stop (§8.2): on a `[cc-slaves] Dừng an toàn` message take no new task, finish the current one, commit, write the handoff `.local-check/handoff-<date>/orchestrator.md`, then report done with `lane_set_phase` and note 'đã dừng an toàn'.",
+    "general": "You are the Chung (general) orchestrator of this project, driven by cc-slaves: outside-spec bugs, hot fixes, small jobs and questions. You plan the work and command lanes (other Claude Code sessions in their own worktrees). You may do work yourself (small or urgent tasks, or when no lane can start) or delegate it to lanes; prefer lanes for parallel or long work.\nRule order (§7.1): cc-slaves rules (this text) > CLAUDE.md > skills. The cc-slaves flow replaces the superpowers skill chain — Thiết kế: brainstorming → spec → PO duyệt · Build: mục → lane → review theo nhóm → gate → merge — no plan doc.\nSkills: brainstorming, writing-plans, executing-plans, subagent-driven-development, using-git-worktrees, finishing-a-development-branch are blocked here on purpose (the reason comes back as a hook error); TDD, systematic-debugging, verification-before-completion, code-review and dispatching-parallel-agents are fine.\nTools (MCP cc_slaves, §7.7): lanes_list, lane_start {name, cwd, brief_path, issue?, agent?, model?, effort?, account?}, lane_message {name, text}, lane_interrupt {name}, lane_stop {name, mode: drain|now}, lane_resume {name}, lane_finish {name, force?}, lane_result {name}, lane_tail {name, n?}, lane_set_phase {name, phase, task?, note?}, accounts_usage, po_ask {question, options, recommended?, context?}, notify {level, text}; issues_list {spec?, state?}, issue_get {key}, issue_create {title, body?, kind?, spec?, source?, blocked_by?, done_when?, files?}, issue_assign {key, lane} (an idle lane), issue_update {key, …}, issue_link {key, blocked_by}. Item tools act only on outside-spec items.\nA bug outside the spec (or a feature of a finished spec) is an outside-spec item: issue_create {spec: null, kind: bug}; the Chung session takes it. Each outside-spec item gets a new lane at once: lane_start {…, issue}, worktree on branch fix-<key> from `main`, a hot-fix brief (investigate → fix → test → review → commit → issue_done), merged into `main` (merge, never rebase).\nWhen the PO attaches an image or file to a request you turn into an item, pass its copy in issue_create files: the paths marked \"bản sao tạm\" in the message's \"File PO đính kèm\" list (they last until this session ends). The lane reads them through issue_get (files: name + path).\nEvery commit for an item carries the trailer `Issue: <key>` (e.g. `git commit --trailer \"Issue: T-47\"`); issue_done refuses commits without it.\nBefore creating an item, read the cancelled ones: issues_list {state: 'cancelled'} (title + the PO's reason) — never recreate what the PO cancelled.\nA new spec / feature request: tell the PO to use \"+ Spec mới\" on the Tasks tab; do not brainstorm it here.\nlane_start model/effort: leave them out unless the brief or the PO asks for a specific model or effort. Left out, the lane runs its agent's model/effort when the agent defines them, else the PO's default (Settings › Model). The PO may switch a lane's model from the deck; lanes_list shows what each lane runs.\nMessage prefixes (§7.6): `[PO] …` is the PO talking to you, `[Điều phối] …` is the orchestrator talking to a lane, `[cc-slaves] …` is the engine (events, card answers `[cc-slaves] PO trả lời #<id>: …`).\nThe engine tells you when a lane goes idle (`[cc-slaves] lane <name> rảnh: …`), waits for the PO (`… chờ PO #<id>`), finishes (`… xong: …`) or breaks, and when items change (unblocked, new, cancelled). Call lanes_list after any interruption.\nIf the project folder is not a git repo (PO 2026-11-15: allowed), there are no worktrees: start a lane with cwd = the project folder (one live lane per folder), or po_ask before running `git init`.\nNever use AskUserQuestion: ask the PO with `po_ask` (returns a card id at once; the answer arrives later as a `[cc-slaves] PO trả lời #<id>` message). Do not wait idly for it.\nSafe stop (§8.2): on a `[cc-slaves] Dừng an toàn` message take no new task, finish the current one, commit, write the handoff `.local-check/handoff-<date>/orchestrator.md`, then report done with `lane_set_phase` and note 'đã dừng an toàn'.",
+    "lane": "You are a lane driven by cc-slaves: one Claude Code session working one brief in its own worktree.\nTools (MCP cc_slaves, §7.7): lane_set_phase {phase, task?, note?} with phase in queue/spec/code/review/gate/merge/done — call lane_set_phase whenever your phase changes and with phase 'done' when the brief is finished; po_ask {question, options, recommended?, context?}; issue_get {key} (your item); issue_done {key, summary} when your item is finished; issue_create {title, body?, kind?} for work you find outside your item; issue_revert_conflict {key, detail} when a revert item conflicts (after `git revert --abort`).\nEvery commit for an item carries the trailer `Issue: <key>` (e.g. `git commit --trailer \"Issue: T-47\"`); issue_done refuses commits without it.\nBefore creating an item, read the cancelled ones: issues_list {state: 'cancelled'} (title + the PO's reason) — never recreate what the PO cancelled.\nSkills: brainstorming, writing-plans, executing-plans, subagent-driven-development, using-git-worktrees and finishing-a-development-branch are blocked; use TDD, systematic-debugging, verification-before-completion and code review.\nMessage prefixes (§7.6): `[PO] …` is the PO talking to you, `[Điều phối] …` is the orchestrator talking to a lane, `[cc-slaves] …` is the engine (events, card answers `[cc-slaves] PO trả lời #<id>: …`).\nNever use AskUserQuestion: ask the PO with `po_ask` (returns a card id at once; the answer arrives later as a `[cc-slaves] PO trả lời #<id>` message). Do not wait idly for it.\nSafe stop (§8.2): on a `[cc-slaves] Dừng an toàn` message take no new task, finish the current one, commit, write the handoff `.local-check/handoff-<date>/<lane>.md`, then report done with `lane_set_phase` and note 'đã dừng an toàn'."
+  },
+  "deny": {
+    "design": [
+      "Skill(superpowers:writing-plans)",
+      "Skill(superpowers:executing-plans)",
+      "Skill(superpowers:finishing-a-development-branch)",
+      "Skill(superpowers:using-git-worktrees)",
+      "Skill(superpowers:subagent-driven-development)"
+    ],
+    "build": [
+      "Skill(superpowers:brainstorming)",
+      "Skill(superpowers:writing-plans)",
+      "Skill(superpowers:executing-plans)",
+      "Skill(superpowers:finishing-a-development-branch)",
+      "Skill(superpowers:using-git-worktrees)",
+      "Skill(superpowers:subagent-driven-development)"
+    ],
+    "general": [
+      "Skill(superpowers:brainstorming)",
+      "Skill(superpowers:writing-plans)",
+      "Skill(superpowers:executing-plans)",
+      "Skill(superpowers:finishing-a-development-branch)",
+      "Skill(superpowers:using-git-worktrees)",
+      "Skill(superpowers:subagent-driven-development)"
+    ],
+    "lane": [
+      "Skill(superpowers:brainstorming)",
+      "Skill(superpowers:writing-plans)",
+      "Skill(superpowers:executing-plans)",
+      "Skill(superpowers:finishing-a-development-branch)",
+      "Skill(superpowers:using-git-worktrees)",
+      "Skill(superpowers:subagent-driven-development)"
+    ]
+  },
+  "reason": {
+    "design": "Bị chặn có chủ ý — phiên Thiết kế chỉ viết spec + mockup (brainstorming được); plan, worktree, subagent, merge là việc của phiên Build trong cc-slaves.",
+    "build": "Bị chặn có chủ ý — phiên Build: spec đã duyệt là thiết kế; làm theo mục (issue_*) và lane, không plan doc, thiếu gì hỏi po_ask.",
+    "general": "Bị chặn có chủ ý — phiên Chung không brainstorm / viết plan: spec mới thì nói PO dùng + Spec mới; bug ngoài spec thì issue_create rồi giao lane.",
+    "lane": "Bị chặn có chủ ý — lane làm đúng brief và mục được giao: không brainstorm / plan / worktree / merge; cần đổi hướng thì hỏi Điều phối hoặc po_ask."
+  },
+  "firstText": {
+    "design": "Phiên Thiết kế mới cho project cc-slaves: chờ anh viết ý tưởng.",
+    "edit": "Sửa spec docs/specs/v25.md: đọc spec, hỏi anh cần sửa gì.",
+    "build": "Build spec docs/specs/v25.md. Tạo nhánh tích hợp + worktree, gọi spec_set_branch, tách mục bằng issue_create (source spec) theo §\"Nhóm việc\", rồi giao lane.",
+    "buildOutside": "Build spec docs/specs/v25.md. Tạo nhánh tích hợp + worktree, gọi spec_set_branch, tách mục bằng issue_create (source spec) theo §\"Nhóm việc\", rồi giao lane. Spec đã build một phần ngoài cc-slaves: dựng lại phần đã xong từ git log, HANDOFF, báo cáo trong `.local/` rồi ghi bằng issue_create {state: done, source: prior}.",
+    "resume": "Phiên này giờ là phiên Build của spec docs/specs/v25.md trong cc-slaves (đọc luật ở system prompt). 1) Ghi phần đã xong: issue_create {state: done, source: prior, commits}. 2) Tạo mục cho phần còn lại. 3) Subagent cũ không còn chạy: kiểm worktree / nhánh của chúng, giao lại cho lane."
+  },
+  "settled": "[cc-slaves] spec docs/specs/v25.md xong hết mục. Ghi bảng mục cuối vào spec §\"Nhóm việc\", chuyển file sang docs/specs/done/, merge, rồi spec_close {path: \"docs/specs/v25.md\"}.",
+  "mcp": {
+    "orchestrator": [
+      {
+        "name": "lanes_list",
+        "description": "Lane của project: trạng thái, phase, account, thẻ đang mở, số lỗi, lỗi cuối, worktree còn/không.",
+        "schema": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        }
+      },
+      {
+        "name": "lane_start",
+        "description": "Mở lane mới. Tên duy nhất trong project; account sai vai trò / đầy / đăng xuất / quá số lane → lỗi kèm lý do. model / effort: bỏ trống trừ khi brief hoặc PO yêu cầu; bỏ trống thì lane chạy model / effort của agent, không có thì mặc định của PO (Cài đặt › Model).",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "cwd": {
+              "type": "string",
+              "description": "worktree tuyệt đối"
+            },
+            "brief_path": {
+              "type": "string"
+            },
+            "agent": {
+              "type": "string"
+            },
+            "model": {
+              "type": "string"
+            },
+            "effort": {
+              "type": "string"
+            },
+            "account": {
+              "type": "string"
+            },
+            "issue": {
+              "type": "string",
+              "description": "mã mục lane nhận, vd T-47 (v2.7 §5.3)"
+            }
+          },
+          "required": [
+            "name",
+            "cwd",
+            "brief_path"
+          ]
+        }
+      },
+      {
+        "name": "lane_message",
+        "description": "Gửi tin cho lane qua hộp thư đi.",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "text": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "name",
+            "text"
+          ]
+        }
+      },
+      {
+        "name": "lane_interrupt",
+        "description": "Ngắt lượt đang chạy của lane.",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "tên lane"
+            }
+          },
+          "required": [
+            "name"
+          ]
+        }
+      },
+      {
+        "name": "lane_stop",
+        "description": "Dừng lane: drain = dừng an toàn, now = dừng ngay.",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "mode": {
+              "type": "string",
+              "enum": [
+                "drain",
+                "now"
+              ]
+            }
+          },
+          "required": [
+            "name",
+            "mode"
+          ]
+        }
+      },
+      {
+        "name": "lane_resume",
+        "description": "Chạy lại lane Đã dừng / Hỏng, giữ ngữ cảnh.",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "tên lane"
+            }
+          },
+          "required": [
+            "name"
+          ]
+        }
+      },
+      {
+        "name": "lane_finish",
+        "description": "Kết thúc lane (Xong), giải phóng worktree.",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "force": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "name"
+          ]
+        }
+      },
+      {
+        "name": "lane_result",
+        "description": "Toàn văn `result` cuối của lane.",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "tên lane"
+            }
+          },
+          "required": [
+            "name"
+          ]
+        }
+      },
+      {
+        "name": "lane_tail",
+        "description": "n tin / công cụ cuối của lane.",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "n": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 200
+            }
+          },
+          "required": [
+            "name"
+          ]
+        }
+      },
+      {
+        "name": "lane_set_phase",
+        "description": "Đặt phase (queue/spec/code/review/gate/merge/done), task, note = dòng tóm tắt. Lane chỉ đặt cho chính nó.",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "phase": {
+              "type": "string",
+              "enum": [
+                "queue",
+                "spec",
+                "code",
+                "review",
+                "gate",
+                "merge",
+                "done"
+              ]
+            },
+            "task": {
+              "type": "string"
+            },
+            "note": {
+              "type": "string",
+              "description": "dòng tóm tắt"
+            }
+          },
+          "required": [
+            "name",
+            "phase"
+          ]
+        }
+      },
+      {
+        "name": "accounts_usage",
+        "description": "Quota từng account (5 giờ / tuần, giờ reset).",
+        "schema": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        }
+      },
+      {
+        "name": "po_ask",
+        "description": "Hỏi PO. Trả id thẻ ngay; câu trả lời đến sau qua hộp thư đi dạng \"[cc-slaves] PO trả lời #<id>: …\".",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "question": {
+              "type": "string"
+            },
+            "options": {
+              "type": "array",
+              "maxItems": 4,
+              "items": {
+                "type": "object",
+                "properties": {
+                  "label": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "label"
+                ]
+              }
+            },
+            "recommended": {
+              "type": "string",
+              "description": "nhãn phương án Đề xuất"
+            },
+            "context": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "question"
+          ]
+        }
+      },
+      {
+        "name": "notify",
+        "description": "Báo PO (macOS / Google Chat).",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "level": {
+              "type": "string",
+              "enum": [
+                "info",
+                "warn",
+                "error"
+              ]
+            },
+            "text": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "level",
+            "text"
+          ]
+        }
+      },
+      {
+        "name": "issue_create",
+        "description": "Tạo mục (T task / B bug). Lane: mục phát sinh, tự vào spec của mục đang giữ. Đọc issues_list {state: \"cancelled\"} trước: trùng mục PO đã huỷ bị từ chối.",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "title": {
+              "type": "string"
+            },
+            "kind": {
+              "type": "string",
+              "enum": [
+                "task",
+                "bug"
+              ]
+            },
+            "body": {
+              "type": "string",
+              "description": "markdown"
+            },
+            "done_when": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "điều kiện xong"
+            },
+            "blocked_by": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "mã mục phải xong trước"
+            },
+            "spec": {
+              "type": "string",
+              "nullable": true,
+              "description": "đường dẫn spec; null = ngoài spec"
+            },
+            "source": {
+              "type": "string",
+              "enum": [
+                "spec",
+                "amend",
+                "po",
+                "orchestrator",
+                "prior"
+              ]
+            },
+            "state": {
+              "type": "string",
+              "enum": [
+                "todo",
+                "done"
+              ]
+            },
+            "commits": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "mã commit (chỉ source prior)"
+            },
+            "files": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "ảnh / file PO đính kèm: đường dẫn bản sao trong dòng \"File PO đính kèm\" của tin nhắn"
+            }
+          },
+          "required": [
+            "title"
+          ]
+        }
+      },
+      {
+        "name": "issue_get",
+        "description": "Đọc một mục: tiêu đề, nội dung, done_when, phụ thuộc, sự kiện gần nhất.",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "key": {
+              "type": "string",
+              "description": "mã mục, vd T-47"
+            }
+          },
+          "required": [
+            "key"
+          ]
+        }
+      },
+      {
+        "name": "issues_list",
+        "description": "Danh sách mục (mặc định: spec của phiên / lane; state cancelled = cả project, kèm lý do huỷ).",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "spec": {
+              "type": "string",
+              "nullable": true,
+              "description": "đường dẫn spec; null = ngoài spec"
+            },
+            "state": {
+              "type": "string",
+              "enum": [
+                "todo",
+                "doing",
+                "done",
+                "cancelled"
+              ]
+            }
+          },
+          "required": []
+        }
+      },
+      {
+        "name": "issue_link",
+        "description": "key chờ blocked_by xong trước; remove: true gỡ liên kết. Vòng / khác project bị từ chối.",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "key": {
+              "type": "string"
+            },
+            "blocked_by": {
+              "type": "string"
+            },
+            "remove": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "key",
+            "blocked_by"
+          ]
+        }
+      },
+      {
+        "name": "issue_assign",
+        "description": "Giao mục cho lane đang rảnh của spec (mục ngoài spec: lane_start {issue}).",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "key": {
+              "type": "string"
+            },
+            "lane": {
+              "type": "string",
+              "description": "tên lane"
+            }
+          },
+          "required": [
+            "key",
+            "lane"
+          ]
+        }
+      },
+      {
+        "name": "issue_update",
+        "description": "Sửa tiêu đề / nội dung / done_when của mục chưa xong.",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "key": {
+              "type": "string"
+            },
+            "title": {
+              "type": "string"
+            },
+            "body": {
+              "type": "string"
+            },
+            "done_when": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "key"
+          ]
+        }
+      },
+      {
+        "name": "issue_drop",
+        "description": "Phiên Build bỏ mục todo không còn cần của spec, kèm lý do.",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "key": {
+              "type": "string"
+            },
+            "reason": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "key",
+            "reason"
+          ]
+        }
+      },
+      {
+        "name": "spec_draft",
+        "description": "Phiên Thiết kế: ghi spec vừa viết / sửa là bản nháp (draft). Gọi lại sau mỗi lần sửa lớn; tên phiên theo dòng # đầu.",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string",
+              "description": "đường dẫn spec trong project, vd docs/specs/2026-11-16-x.md"
+            }
+          },
+          "required": [
+            "path"
+          ]
+        }
+      },
+      {
+        "name": "spec_approve",
+        "description": "Chỉ khi PO nói rõ là duyệt: sửa dòng trạng thái, commit, rồi gọi. after = spec phải xong trước.",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string",
+              "description": "đường dẫn spec trong project, vd docs/specs/2026-11-16-x.md"
+            },
+            "after": {
+              "type": "string",
+              "description": "đường dẫn spec phải xong trước"
+            }
+          },
+          "required": [
+            "path"
+          ]
+        }
+      },
+      {
+        "name": "spec_amend",
+        "description": "Phiên Thiết kế đang bổ sung spec đang build: PO duyệt → commit phần sửa → gọi; phiên Build nhận tin.",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string",
+              "description": "đường dẫn spec trong project, vd docs/specs/2026-11-16-x.md"
+            },
+            "summary": {
+              "type": "string",
+              "description": "một dòng phần bổ sung"
+            }
+          },
+          "required": [
+            "path",
+            "summary"
+          ]
+        }
+      },
+      {
+        "name": "spec_set_branch",
+        "description": "Phiên Build: nhánh tích hợp của spec (vd v25).",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string",
+              "description": "đường dẫn spec trong project, vd docs/specs/2026-11-16-x.md"
+            },
+            "branch": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "branch"
+          ]
+        }
+      },
+      {
+        "name": "spec_close",
+        "description": "Phiên Build: đóng spec khi mọi mục xong / huỷ (bảng mục cuối đã ghi, file đã chuyển done/, đã merge).",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string",
+              "description": "đường dẫn spec trong project, vd docs/specs/2026-11-16-x.md"
+            }
+          },
+          "required": [
+            "path"
+          ]
+        }
+      },
+      {
+        "name": "spec_output_add",
+        "description": "Ghi tài liệu của spec (mockup, ảnh, nghiên cứu, link prototype) mỗi khi tạo: file trong project hoặc link http(s).",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string",
+              "description": "đường dẫn spec trong project, vd docs/specs/2026-11-16-x.md"
+            },
+            "ref": {
+              "type": "string",
+              "description": "đường dẫn trong project hoặc URL http(s)"
+            },
+            "label": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "path",
+            "ref"
+          ]
+        }
+      }
+    ],
+    "lane": [
+      {
+        "name": "lane_set_phase",
+        "description": "Đặt phase (queue/spec/code/review/gate/merge/done), task, note = dòng tóm tắt. Lane chỉ đặt cho chính nó.",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "phase": {
+              "type": "string",
+              "enum": [
+                "queue",
+                "spec",
+                "code",
+                "review",
+                "gate",
+                "merge",
+                "done"
+              ]
+            },
+            "task": {
+              "type": "string"
+            },
+            "note": {
+              "type": "string",
+              "description": "dòng tóm tắt"
+            }
+          },
+          "required": [
+            "phase"
+          ]
+        }
+      },
+      {
+        "name": "po_ask",
+        "description": "Hỏi PO. Trả id thẻ ngay; câu trả lời đến sau qua hộp thư đi dạng \"[cc-slaves] PO trả lời #<id>: …\".",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "question": {
+              "type": "string"
+            },
+            "options": {
+              "type": "array",
+              "maxItems": 4,
+              "items": {
+                "type": "object",
+                "properties": {
+                  "label": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "label"
+                ]
+              }
+            },
+            "recommended": {
+              "type": "string",
+              "description": "nhãn phương án Đề xuất"
+            },
+            "context": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "question"
+          ]
+        }
+      },
+      {
+        "name": "issue_create",
+        "description": "Tạo mục (T task / B bug). Lane: mục phát sinh, tự vào spec của mục đang giữ. Đọc issues_list {state: \"cancelled\"} trước: trùng mục PO đã huỷ bị từ chối.",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "title": {
+              "type": "string"
+            },
+            "kind": {
+              "type": "string",
+              "enum": [
+                "task",
+                "bug"
+              ]
+            },
+            "body": {
+              "type": "string",
+              "description": "markdown"
+            },
+            "done_when": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "điều kiện xong"
+            },
+            "blocked_by": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "mã mục phải xong trước"
+            }
+          },
+          "required": [
+            "title"
+          ]
+        }
+      },
+      {
+        "name": "issue_get",
+        "description": "Đọc một mục: tiêu đề, nội dung, done_when, phụ thuộc, sự kiện gần nhất.",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "key": {
+              "type": "string",
+              "description": "mã mục, vd T-47"
+            }
+          },
+          "required": [
+            "key"
+          ]
+        }
+      },
+      {
+        "name": "issues_list",
+        "description": "Danh sách mục (mặc định: spec của phiên / lane; state cancelled = cả project, kèm lý do huỷ).",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "spec": {
+              "type": "string",
+              "nullable": true,
+              "description": "đường dẫn spec; null = ngoài spec"
+            },
+            "state": {
+              "type": "string",
+              "enum": [
+                "todo",
+                "doing",
+                "done",
+                "cancelled"
+              ]
+            }
+          },
+          "required": []
+        }
+      },
+      {
+        "name": "issue_link",
+        "description": "key chờ blocked_by xong trước; remove: true gỡ liên kết. Vòng / khác project bị từ chối.",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "key": {
+              "type": "string"
+            },
+            "blocked_by": {
+              "type": "string"
+            },
+            "remove": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "key",
+            "blocked_by"
+          ]
+        }
+      },
+      {
+        "name": "issue_done",
+        "description": "Báo xong mục lane đang giữ. Mọi commit từ lúc nhận phải có trailer \"Issue: <mã>\".",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "key": {
+              "type": "string"
+            },
+            "summary": {
+              "type": "string",
+              "description": "một dòng tóm tắt"
+            }
+          },
+          "required": [
+            "key",
+            "summary"
+          ]
+        }
+      },
+      {
+        "name": "issue_revert_conflict",
+        "description": "Lane giữ mục hoàn tác: git revert vướng xung đột → git revert --abort trước, rồi gọi công cụ này (engine hỏi PO).",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "key": {
+              "type": "string",
+              "description": "mã mục hoàn tác"
+            },
+            "detail": {
+              "type": "string",
+              "description": "xung đột ở đâu, vướng mục nào"
+            }
+          },
+          "required": [
+            "key",
+            "detail"
+          ]
+        }
+      }
+    ]
+  },
+  "refusals": {
+    "draft.kind": "spec_draft chỉ dành cho phiên Thiết kế",
+    "draft.foreign": "spec docs/specs/v25.md thuộc phiên Thiết kế khác: PO mở \"Sửa spec\" trên tab Tasks để sửa nó",
+    "draft.active": "spec docs/specs/v25.md đang build: ghi phần sửa rồi gọi spec_amend {path, summary} khi PO duyệt",
+    "draft.done": "spec docs/specs/v25.md đã xong: yêu cầu mới là spec mới (+ Spec mới)",
+    "approve.kind": "spec_approve chỉ dành cho phiên Thiết kế",
+    "approve.foreign": "spec_approve docs/specs/v25.md: chỉ phiên Thiết kế đã viết / đang sửa spec này được gọi",
+    "approve.state": "spec docs/specs/v25.md đã duyệt, không phải bản nháp: gọi spec_draft sau khi sửa, rồi spec_approve khi PO nói duyệt",
+    "amend.kind": "spec_amend chỉ dành cho phiên Thiết kế",
+    "amend.foreign": "spec_amend docs/specs/v25.md: chỉ phiên Thiết kế đang bổ sung spec này được gọi",
+    "amend.state": "spec docs/specs/v25.md chưa build (đã duyệt): sửa rồi gọi spec_draft / spec_approve",
+    "close.kind": "spec_close chỉ dành cho phiên Build",
+    "close.foreign": "spec_close docs/specs/v25.md: chỉ phiên Build của spec này được đóng nó",
+    "close.state": "spec docs/specs/v25.md không ở trạng thái build (đã duyệt)",
+    "close.open": "spec docs/specs/v25.md còn mục mở: T-1 — làm xong hoặc issue_drop (todo) trước",
+    "close.revert": "spec docs/specs/v25.md còn hoàn tác đang chạy: T-1 — chờ mục hoàn tác xong",
+    "build.state": "spec docs/specs/v25.md chưa duyệt (bản nháp): PO duyệt trong phiên Thiết kế trước",
+    "build.edit": "spec docs/specs/v25.md đang sửa: đóng phiên Thiết kế đang sửa trước",
+    "build.after": "spec docs/specs/v25.md chờ spec docs/specs/v24.md xong trước",
+    "build.resume": "spec docs/specs/v25.md chưa build ngoài cc-slaves: dùng Bắt đầu build",
+    "mark.origin": "spec docs/specs/v25.md: chỉ đổi tay spec nhập vào chưa từng build",
+    "mark.move": "spec docs/specs/v25.md: không đổi đang build → bản nháp được",
+    "assign.state": "T-1 đang làm: chỉ giao được mục chưa làm — xem issues_list",
+    "assign.lane": "T-1 đã có lane: giao mục sẵn sàng khác",
+    "assign.blocked": "T-1 chờ T-2: giao mục sẵn sàng khác, hoặc gỡ phụ thuộc nếu không còn cần",
+    "assign.spec": "T-1 thuộc spec docs/specs/v25.md chưa vào build (đã duyệt): PO bấm Bắt đầu build trước",
+    "createInto": "spec docs/specs/v25.md đã xong: bug ở tính năng của spec đã xong là mục ngoài spec — issue_create {spec: null}",
+    "priority": "giao T-2↑ trước: mục ưu tiên sẵn sàng đi trước T-1",
+    "takes.outside": "T-1 ngoài spec: chỉ giao bằng lane_start (lane mới riêng)",
+    "takes.doing": "lane D2 đang giữ T-3: một lane giữ tối đa một mục — giao cho lane rảnh khác hoặc lane_start",
+    "takes.outsideLane": "lane D2 đã làm mục ngoài spec T-3: không nhận mục khác — dùng lane_start",
+    "linkScope.lane": "lane chỉ liên kết mục nó giữ / nó tạo (T-1 không phải) — báo Điều phối",
+    "linkScope.spec": "T-1 và T-2 khác spec: phụ thuộc chỉ trong cùng spec; việc của spec khác → báo PO",
+    "link.project": "T-1 và T-2 ở hai project khác nhau: chỉ liên kết mục cùng project",
+    "link.self": "T-1 không chờ chính nó được",
+    "link.cycle": "T-1 chờ T-2 tạo vòng: T-1 → T-2 → T-1 — bỏ một liên kết trước",
+    "done.role": "issue_done chỉ dành cho lane đang giữ mục",
+    "done.held": "T-1 không phải mục lane D2 đang giữ (lane giữ T-3)",
+    "done.trailer": "thiếu trailer",
+    "laneCreate": "lane chỉ tạo mục trong project của nó",
+    "dup.cancelled": "trùng T-4 PO đã huỷ — lý do: không cần. Không tạo lại; hỏi PO (po_ask) nếu thật sự cần",
+    "create.prior": "source prior chỉ dùng với state done (phần làm trước khi nhập)",
+    "create.state": "issue_create không nhận state doing: tạo mục todo",
+    "create.resumed": "issue_create {state: done} chỉ dành cho phiên Build của spec vào bằng Tiếp tục build",
+    "create.source": "issue_create {state: done} cần source: prior",
+    "drop.kind": "issue_drop chỉ dành cho phiên Build",
+    "drop.foreign": "T-1 không thuộc spec của phiên này",
+    "drop.state": "T-1 đang làm: chỉ bỏ được mục chưa làm; huỷ mục đang làm / đã xong là việc của PO",
+    "drop.prior": "T-1 là phần làm trước khi nhập: không bỏ được",
+    "drop.reason": "issue_drop cần reason",
+    "revert.held": "issue_revert_conflict: chỉ lane đang giữ T-1 được gọi",
+    "revert.kind": "T-1 không phải mục hoàn tác",
+    "tool.createBuild": "phiên Build chỉ tạo mục cho spec của nó, hoặc ngoài spec ({spec: null})",
+    "tool.createOther": "phiên Chung chỉ tạo mục ngoài spec: issue_create {spec: null}",
+    "tool.design": "phiên Thiết kế không gọi lane_start: thiết kế xong để PO bấm Bắt đầu build; việc ngoài spec là của phiên Chung",
+    "tool.designOutput": "spec_output_add chỉ cho spec phiên này gắn",
+    "tool.buildSpec": "phiên Build chỉ gọi spec_set_branch / spec_close / spec_output_add cho spec của nó",
+    "tool.generalSpec": "phiên Chung không gọi spec_draft: spec mới dùng \"+ Spec mới\" trên tab Tasks",
+    "tool.buildIssue": "T-1 không thuộc spec của phiên Build này: mục ngoài spec là việc của phiên Chung",
+    "tool.buildOther": "T-1 không thuộc spec của phiên Build này: việc của phiên Build spec đó",
+    "tool.generalIssue": "T-1 thuộc một spec: việc của phiên Build spec đó; phiên Chung chỉ làm mục ngoài spec"
+  },
+  "labels": {
+    "kind": {
+      "design": "Thiết kế",
+      "build": "Build",
+      "general": "Chung"
+    },
+    "group": "Đang thiết kế",
+    "building": "Đang build",
+    "waiting": "Chờ build",
+    "start": "Bắt đầu build"
+  }
+}

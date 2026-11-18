@@ -1,0 +1,7 @@
+{
+  "aria": "Command palette",
+  "ph": "Search actions, lanes, projects…",
+  "phAria": "Search actions, lanes, projects",
+  "none": "Nothing matches “{q}”.",
+  "foot": "↑↓ select · Enter run · Esc close · search actions, lanes, projects"
+}

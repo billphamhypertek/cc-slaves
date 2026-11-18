@@ -1,0 +1,613 @@
+/* Ported verbatim from docs/specs/assets/2026-11-14-cc-slaves-v1-mockup.html (<style>, lines 11-483). Do not redesign. */
+/* Vendored Google Fonts (latin, latin-ext, vietnamese; web/public/fonts) — offline app, strict CSP, no network font loads. */
+@font-face{font-family:'Be Vietnam Pro';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/be-vietnam-pro-400-vietnamese.woff2) format('woff2');unicode-range:U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB}
+@font-face{font-family:'Be Vietnam Pro';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/be-vietnam-pro-400-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF}
+@font-face{font-family:'Be Vietnam Pro';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/be-vietnam-pro-400-latin.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:'Be Vietnam Pro';font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/be-vietnam-pro-500-vietnamese.woff2) format('woff2');unicode-range:U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB}
+@font-face{font-family:'Be Vietnam Pro';font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/be-vietnam-pro-500-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF}
+@font-face{font-family:'Be Vietnam Pro';font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/be-vietnam-pro-500-latin.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:'Be Vietnam Pro';font-style:normal;font-weight:600;font-display:swap;src:url(/fonts/be-vietnam-pro-600-vietnamese.woff2) format('woff2');unicode-range:U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB}
+@font-face{font-family:'Be Vietnam Pro';font-style:normal;font-weight:600;font-display:swap;src:url(/fonts/be-vietnam-pro-600-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF}
+@font-face{font-family:'Be Vietnam Pro';font-style:normal;font-weight:600;font-display:swap;src:url(/fonts/be-vietnam-pro-600-latin.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:'Chakra Petch';font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/chakra-petch-500-vietnamese.woff2) format('woff2');unicode-range:U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB}
+@font-face{font-family:'Chakra Petch';font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/chakra-petch-500-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF}
+@font-face{font-family:'Chakra Petch';font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/chakra-petch-500-latin.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:'Chakra Petch';font-style:normal;font-weight:600;font-display:swap;src:url(/fonts/chakra-petch-600-vietnamese.woff2) format('woff2');unicode-range:U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB}
+@font-face{font-family:'Chakra Petch';font-style:normal;font-weight:600;font-display:swap;src:url(/fonts/chakra-petch-600-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF}
+@font-face{font-family:'Chakra Petch';font-style:normal;font-weight:600;font-display:swap;src:url(/fonts/chakra-petch-600-latin.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:'Chakra Petch';font-style:normal;font-weight:700;font-display:swap;src:url(/fonts/chakra-petch-700-vietnamese.woff2) format('woff2');unicode-range:U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB}
+@font-face{font-family:'Chakra Petch';font-style:normal;font-weight:700;font-display:swap;src:url(/fonts/chakra-petch-700-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF}
+@font-face{font-family:'Chakra Petch';font-style:normal;font-weight:700;font-display:swap;src:url(/fonts/chakra-petch-700-latin.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/jetbrains-mono-400-vietnamese.woff2) format('woff2');unicode-range:U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/jetbrains-mono-400-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/jetbrains-mono-400-latin.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/jetbrains-mono-400-vietnamese.woff2) format('woff2');unicode-range:U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/jetbrains-mono-400-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/jetbrains-mono-400-latin.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:700;font-display:swap;src:url(/fonts/jetbrains-mono-700-vietnamese.woff2) format('woff2');unicode-range:U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:700;font-display:swap;src:url(/fonts/jetbrains-mono-700-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:700;font-display:swap;src:url(/fonts/jetbrains-mono-700-latin.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+/* Layout: full-bleed isometric 3D deck; HUD frames it — top bar, right inbox, bottom console, left unit panel (§6).
+   Phone (§6B): one column, bottom tab bar. Ambient pulses live in CSS only; 3D renders on change (§5). */
+:root{
+  --bg:#05080f;--bg-2:#0b1424;--panel:rgba(10,17,30,.86);--panel-2:rgba(19,30,51,.92);--solid:#0c1424;
+  --line:rgba(125,170,235,.14);--line-2:rgba(125,170,235,.3);--fg:#d3dce8;--fg-2:#a2b0c4;--fg-3:#7f8fa6;
+  --accent:#5ad1ff;--accent-2:rgba(90,209,255,.13);--sel:rgba(160,180,210,.11);--ink:#02111a;--ok:#4ade80;--warn:#fbbf24;--bad:#f87171;--amber:#fb923c;
+  --warn-2:rgba(251,191,36,.14);--bad-2:rgba(248,113,113,.14);--ok-2:rgba(74,222,128,.13);
+  --orch:var(--accent);--backup:var(--warn);--shadow:0 14px 40px rgba(0,0,0,.5);--shadow-panel:-14px 0 30px rgba(0,0,0,.45);
+  /* v2.7 §10.2 Tasks tab: its ground, skeleton bars and the §4.2-2 progress bar (track, done, done spec, scope stripes) */
+  --tk-bg:#070b13;--sk:#0f1c2b;--pg-tr:rgba(125,170,235,.16);--pg-f:#58b8de;--pg-dn:var(--fg-2);--pg-s1:rgba(162,176,196,.75);--pg-s2:rgba(162,176,196,.15);
+  /* v2.7 §4.2 / §4.5 an issue key chip (lane node, chat) */
+  --ich-bg:rgba(125,170,235,.08);--ich-fg:#cfd9e6;
+  /* v2.8 §4.2 every other colour of web/src: dark = the value it was written with before v2.8 (the dark theme does not move).
+     Badge / warn banner text, its control lines; dialog scrims; the attach drop scrim; error text; field borders (≥ 3:1) */
+  --bdg-fg:#1a1200;--bdg-line:rgba(0,0,0,.3);--bdg-on:rgba(0,0,0,.14);--scrim:rgba(2,6,14,.55);--scrim-2:rgba(2,6,14,.45);
+  --drop-scrim:rgba(0,0,0,.5);--bad-txt:#ff9d9d;--fld-line:rgba(125,170,235,.3);--fld-bg:var(--panel-2);
+  /* the deck header bar (.dhead) and the terminal block */
+  --dh-bg:rgba(6,12,17,.94);--dh-line:#12303d;--dh-fg:#8fa9b8;--dh-hi:#eaf6ff;--dh-mid:#cfe3ee;--dh-sep:#3d5868;
+  --term-bg:#03070d;--term-fg:#b9c7da;--term-mut:#7f8fa6;
+  /* G1b: row hover; attach thumbnail border, the veil over an image, queued tag; text on a solid danger button */
+  --hov:var(--sel);--thumb-line:rgba(125,170,235,.62);--veil:#05080c;--tag-fg:#9fb6c3;--tag-line:#2a4452;--bad-ink:#fff;
+  /* the Deck ground, nodes, status rings and wires (flow.css, model.ts — G2) */
+  --dk-nd-sh:none;--dk-bg:#05080c;--dk-grid:rgba(54,214,255,.05);--dk-nd:rgba(8,14,20,.95);--dk-nd-line:#173444;--dk-nd-off:#122833;--dk-nd-on:#1a2230;--dk-div:#10252f;
+  --dk-id:#eaf6ff;--dk-fg:#cfe3ee;--dk-task:#9fb6c3;--dk-mut:#6f8a99;--dk-tok:#86a0ae;--dk-ring:#1c3a48;--dk-hov:rgba(255,255,255,.06);--dk-dot:#fff;
+  --dk-run:#3ff2a0;--dk-wait:#ffc94d;--dk-err:#ff5a5a;--dk-acc:#36d6ff;--dk-amb:#ffa94d;--dk-gry:#5d7280;--dk-wire:#1a4152;
+  --dk-chip-line:#24495a;--dk-chip-bg:#0b1820;--dk-chip-warn:#6b5a22;--dk-chip-err:#6b2a2a;--dk-tg-line:#1d3d4c;--dk-tg-bg:#0a151c;
+  --dk-fold-line:#1d3c4a;--dk-fold-fg:#c3d3dc;--dk-zm-div:#12303d;
+  --dk-band-bg:rgba(58,18,22,.9);--dk-band-line:#5a2228;--dk-band-fg:#ffb3b3;--dk-tip-bg:#081018;--dk-tip-sh:0 8px 24px rgba(0,0,0,.5);
+  --dk-mini-bg:rgba(8,14,20,.92);--dk-mini-mask:rgba(5,8,12,.55);
+  /* Code / Git: ground, tab strip, cursor line, syntax, search match, diff (code.css, git.css, editor.ts — G3) */
+  --cd-bg:#05080c;--cd-tabs:#0c1424;--cd-line:rgba(160,180,210,.06);--cd-kw:var(--accent);--cd-str:var(--ok);--cd-ty:var(--warn);--cd-cm:var(--fg-3);
+  --cd-match:rgba(251,191,36,.22);--cd-match-on:rgba(251,191,36,.45);--cd-add:var(--ok-2);--cd-del:var(--bad-2);
+  /* G3: ⌘F match outline, image checker, ⌘P / dialog card + scrims, graph dot, chip / segment border (mockup --ctl-line) */
+  --cd-match-line:rgba(251,191,36,.45);--cd-chk:#101b2c;--cd-pop:#0d1726;--cd-pop-line:rgba(125,170,235,.28);--cd-pop-sh:0 20px 60px rgba(0,0,0,.6);
+  --cd-scrim:rgba(2,6,12,.5);--cd-dlg-scrim:rgba(2,6,12,.55);--cd-dot:#05080f;--ctl-line:rgba(125,170,235,.25);
+  /* account / label colours (labels.ts accountColor) */
+  --pal-1:#a78bfa;--pal-2:#38bdf8;--pal-3:#4ade80;--pal-4:#fb923c;--pal-5:#f472b6;--pal-6:#facc15;--pal-7:#2dd4bf;--pal-8:#f87171;
+  /* v2.7.1 §4.3 / §17 the account panel's 14 colours (names of the v2.8 mockup; v2.8 adds the light values) */
+  --ap-bg:rgba(7,11,16,.97);--ap-line:#17303e;--ap-div:#12303d;--ap-fg:#cfe0ea;--ap-hi:#eaf6ff;--ap-mut:#8fa9b8;--ap-mut2:#7b8d96;--ap-ctl:#23485a;--ap-track:#12232d;
+  --ap-ok:#36d6ff;--ap-use:#3fa6ff;--ap-warn:#ffc94d;--ap-bad:#ff5a5a;--ap-unk:#5d7280;
+  --f-disp:"Chakra Petch",ui-sans-serif,system-ui,sans-serif;
+  --f-body:"Be Vietnam Pro",ui-sans-serif,system-ui,-apple-system,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  /* v2.4 §6.7 D53 density: spacing only --s1…--s6, control heights --h-*. Hot fix 2026-11-16 (PO: text glares, cramped):
+     the type scale +1 px, --s3…--s6 and --h-ctl / --h-row one step roomier, --fg at ≈ 87 % emphasis (Material dark) */
+  --xxs:11px;--xs:12px;--sm:13px;--md:14px;--lg:16px;--xl:19px;--xxl:25px;
+  --s1:2px;--s2:4px;--s3:7px;--s4:10px;--s5:14px;--s6:18px;
+  --h-bar:44px;--h-head:28px;--h-ctl:30px;--h-ctl-sm:24px;--h-row:32px;
+  --r:10px;--bn:0px;
+  color-scheme:dark;
+}
+:root[data-theme=light]{
+  /* v2.8 §4.2 LT12: text and status ≥ 4.5:1 on every ground incl. a selected row; selection = a black step, never a tint;
+     status colours ≥ 15 CIEDE2000 apart; every alias redeclared here (an alias on :root keeps its dark value) */
+  --bg:#dfe6ef;--bg-2:#f3f6fa;--panel:rgba(255,255,255,.9);--panel-2:rgba(240,244,250,.96);--solid:#fff;
+  --line:rgba(30,60,110,.13);--line-2:rgba(30,60,110,.28);--fg:#0d1828;--fg-2:#3f5069;--fg-3:#4f5d72;
+  --accent:#07638f;--accent-2:rgba(7,99,143,.11);--sel:rgba(0,0,0,.10);--ink:#fff;--ok:#136a32;--warn:#765c00;--bad:#bc1240;--amber:#a34100;
+  --warn-2:rgba(118,92,0,.12);--bad-2:rgba(188,18,64,.09);--ok-2:rgba(19,106,50,.1);
+  --orch:var(--accent);--backup:var(--warn);--shadow:0 12px 32px rgba(20,40,80,.16);--shadow-panel:-14px 0 30px rgba(20,40,80,.16);
+  --tk-bg:#f3f6fa;--sk:#e1e7ef;--pg-tr:rgba(30,60,110,.12);--pg-f:#2f7fb0;--pg-dn:var(--fg-2);--pg-s1:rgba(63,80,105,.6);--pg-s2:rgba(63,80,105,.12);
+  --ich-bg:rgba(30,60,110,.06);--ich-fg:#26354b;
+  --bdg-fg:#fff;--bdg-line:rgba(255,255,255,.4);--bdg-on:rgba(255,255,255,.18);--scrim:rgba(20,30,48,.32);--scrim-2:rgba(20,30,48,.26);
+  --drop-scrim:rgba(20,30,48,.32);--bad-txt:var(--bad);--fld-line:#7a8699;--fld-bg:#fff;
+  --dh-bg:#eef2f7;--dh-line:#d5dde7;--dh-fg:#4f5d72;--dh-hi:#0d1828;--dh-mid:#26354b;--dh-sep:#9aa8b8;
+  --term-bg:#f1f4f8;--term-fg:#26354b;--term-mut:#4f5d72;
+  --hov:rgba(0,0,0,.05);--thumb-line:rgba(30,60,110,.45);--veil:#fff;--tag-fg:var(--fg-2);--tag-line:var(--line-2);--bad-ink:#fff;
+  --dk-nd-sh:0 1px 2px rgba(15,25,40,.10),0 2px 8px rgba(15,25,40,.06);--dk-bg:#eaedf2;--dk-grid:rgba(30,60,110,.07);--dk-nd:#fff;--dk-nd-line:#7a8597;
+  --dk-nd-off:#7a8597;--dk-nd-on:#dcdfe4;--dk-div:#d5dbe3;--dk-id:#0d1828;--dk-fg:#0d1828;--dk-task:#0d1828;--dk-mut:#3f5069;--dk-tok:#3f5069;--dk-ring:#c3cbd6;
+  --dk-hov:rgba(0,0,0,.05);--dk-dot:#fff;
+  --dk-run:#136a32;--dk-wait:#765c00;--dk-err:#bc1240;--dk-acc:#07638f;--dk-amb:#a34100;--dk-gry:#6b7a8f;--dk-wire:#6b7a8f;
+  --dk-chip-line:#7a8597;--dk-chip-bg:#f3f6fa;--dk-chip-warn:#765c00;--dk-chip-err:#bc1240;--dk-tg-line:#7a8597;--dk-tg-bg:#f3f6fa;
+  --dk-fold-line:#7a8597;--dk-fold-fg:#0d1828;--dk-zm-div:#d5dbe3;
+  --dk-band-bg:#fbe3e8;--dk-band-line:#e7a3b2;--dk-band-fg:#bc1240;--dk-tip-bg:#fff;--dk-tip-sh:0 8px 24px rgba(20,40,80,.16);
+  --dk-mini-bg:rgba(255,255,255,.94);--dk-mini-mask:rgba(20,30,48,.12);
+  /* the Account panel: light values only here; the dark ones land with v2.7.1 §17 */
+  --ap-bg:#fff;--ap-line:#d5dde7;--ap-div:#e3e8ef;--ap-fg:#26354b;--ap-hi:#0d1828;--ap-mut:#4f5d72;--ap-mut2:#4f5d72;--ap-ctl:#c3cdd9;--ap-track:#e3e8ef;
+  --ap-ok:#07638f;--ap-use:#2a5db0;--ap-warn:#765c00;--ap-bad:#bc1240;--ap-unk:#6b7a8f;
+  --cd-bg:#fbfcfd;--cd-tabs:#eef2f6;--cd-line:rgba(0,0,0,.05);--cd-kw:var(--accent);--cd-str:var(--ok);--cd-ty:var(--warn);--cd-cm:var(--fg-3);
+  --cd-match:rgba(234,179,8,.16);--cd-match-on:rgba(234,179,8,.32);--cd-add:var(--ok-2);--cd-del:var(--bad-2);
+  --cd-match-line:var(--warn);--cd-chk:#e3e8ef;--cd-pop:#fff;--cd-pop-line:rgba(30,60,110,.28);--cd-pop-sh:0 20px 60px rgba(20,40,80,.2);
+  --cd-scrim:rgba(20,30,48,.26);--cd-dlg-scrim:rgba(20,30,48,.32);--cd-dot:#fbfcfd;--ctl-line:rgba(30,60,110,.22);
+  --pal-1:#6d3fd6;--pal-2:#0369a1;--pal-3:#136a32;--pal-4:#a34100;--pal-5:#be185d;--pal-6:#765c00;--pal-7:#0f766e;--pal-8:#bc1240;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{height:100%;margin:0;overflow:hidden}
+body{background:radial-gradient(120% 90% at 45% 40%,var(--bg-2),var(--bg) 70%);color:var(--fg);font:400 var(--md)/1.45 var(--f-body)}
+button{font:inherit;color:inherit;cursor:pointer}
+.i{flex:none;vertical-align:-3px}
+#hud{position:fixed;inset:0;pointer-events:none}
+#hud>*{pointer-events:auto}
+.mono{font-family:var(--f-mono)}
+.num{font-variant-numeric:tabular-nums}
+.glass{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);backdrop-filter:blur(14px)}
+.btn{display:inline-flex;align-items:center;gap:var(--s2);height:var(--h-ctl);padding:0 var(--s4);border-radius:8px;border:1px solid var(--line-2);background:var(--panel-2);font-size:var(--sm);font-weight:500;white-space:nowrap}
+.btn.pri{background:var(--accent);border-color:var(--accent);color:var(--ink);font-weight:600}
+.btn.bad{border-color:color-mix(in srgb,var(--bad) 50%,transparent);color:var(--bad)}
+.btn.sm{height:var(--h-ctl-sm);padding:0 var(--s4);font-size:var(--xs)}
+.btn.ghost{background:transparent}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.pill{display:inline-flex;align-items:center;gap:var(--s2);font-size:var(--xs);padding:var(--s1) var(--s3);border-radius:99px;border:1px solid var(--line-2);color:var(--fg-2);white-space:nowrap}
+.pill.ok{color:var(--ok);border-color:color-mix(in srgb,var(--ok) 40%,transparent);background:var(--ok-2)}
+.pill.warn{color:var(--warn);border-color:color-mix(in srgb,var(--warn) 45%,transparent);background:var(--warn-2)}
+.pill.bad{color:var(--bad);border-color:color-mix(in srgb,var(--bad) 45%,transparent);background:var(--bad-2)}
+.pill.acc{color:var(--accent);border-color:color-mix(in srgb,var(--accent) 45%,transparent);background:var(--accent-2)}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--c);box-shadow:0 0 8px var(--c);flex:none}
+/* top bar */
+#top{position:fixed;top:var(--bn);left:0;right:0;height:var(--h-bar);display:flex;align-items:center;gap:var(--s4);padding:0 var(--s5);background:linear-gradient(var(--panel),color-mix(in srgb,var(--panel) 70%,transparent));border-bottom:1px solid var(--line);backdrop-filter:blur(14px)}
+.brand{display:flex;align-items:center;gap:var(--s3);font:700 var(--lg)/1 var(--f-disp);letter-spacing:.04em;white-space:nowrap}
+/* logo D0 (spec v2.2 D34): the same glyph as the favicon */
+.logo{width:22px;height:22px;background:url(/favicon.svg) center/contain no-repeat;flex:none}
+/* v2.8 PO 17/11: the light theme gets its own brand logo — same glyph, deeper cyan / amber (≥ 3:1 on --bg and --bg-2) */
+:root[data-theme=light] .logo{background-image:url(/logo-light.svg)}
+.tabw{display:flex;gap:var(--s2);align-items:center;min-width:220px;flex:1 1 auto}
+/* hot fix 2026-11-16 many projects: readable tabs (96–200 px) in a strip that scrolls; a fade marks each clipped edge */
+.tabs{display:flex;gap:var(--s2);align-items:center;min-width:0;flex:0 1 auto;overflow:auto hidden;overscroll-behavior-x:contain;scroll-padding-inline:calc(var(--s6) + var(--s4))}
+.tabs.fr{mask-image:linear-gradient(to right,black calc(100% - 28px),transparent)}
+.tabs.fl{mask-image:linear-gradient(to right,transparent,black 28px)}
+.tabs.fl.fr{mask-image:linear-gradient(to right,transparent,black 28px,black calc(100% - 28px),transparent)}
+.tab{white-space:nowrap;min-width:0;flex:none;overflow:hidden;text-overflow:ellipsis;display:flex;align-items:center;gap:var(--s3);height:var(--h-ctl);padding:0 var(--s4);border-radius:8px;border:1px solid transparent;background:transparent;font:600 var(--sm)/1 var(--f-disp);letter-spacing:.03em;color:var(--fg-2)}
+.tab.on{background:var(--sel);color:var(--fg)}
+.bdg{min-width:20px;height:20px;padding:0 var(--s2);border-radius:99px;background:var(--warn);color:var(--bdg-fg);font:700 var(--xs)/20px var(--f-body);text-align:center}
+.tab .unread{width:7px;height:7px;border-radius:50%;background:var(--accent);flex:none}
+.tab .pnm{min-width:0;overflow:hidden;text-overflow:ellipsis}.tab .bdg{flex:none}
+.tabs .tab{min-width:96px;max-width:200px}
+.tab.add,.tab.all{padding:0 var(--s3);color:var(--fg-3)}
+.tab.all{gap:var(--s1);font:600 var(--xs)/1 var(--f-body);border-color:var(--line)}.tab.all:hover,.tab.all.on{color:var(--fg);border-color:var(--line-2)}
+.plist{position:fixed;z-index:55;width:300px;max-height:min(60vh,520px);display:flex;flex-direction:column;background:var(--solid);border-color:var(--line-2)}
+.plist input{flex:none;margin:var(--s3);height:var(--h-ctl);padding:0 var(--s4);border-radius:6px;border:1px solid var(--fld-line);background:var(--fld-bg);color:var(--fg);font:inherit;font-size:var(--sm)}
+.plist input:focus{outline:none;border-color:var(--fg-2)}
+.plist ul{list-style:none;margin:0;padding:0 var(--s2) var(--s2);overflow-y:auto}
+.plist li{display:flex;align-items:center;gap:var(--s3);height:var(--h-row);padding:0 var(--s4);border-radius:6px;cursor:pointer;font-size:var(--sm);color:var(--fg-2)}
+.plist li.act{background:var(--sel);color:var(--fg)}.plist li.cur .pnm{font-weight:600;color:var(--fg)}
+.plist .pnm{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.plist .pill.held{color:var(--fg-3);flex:none}.plist .bdg{flex:none}.plist .unread{width:7px;height:7px;border-radius:50%;background:var(--accent);flex:none}
+.plist .none{margin:0;padding:var(--s3) var(--s5) var(--s5);font-size:var(--sm);color:var(--fg-3)}
+/* v2.1 §4.8: no account chips / cost on the top bar any more → the list button starts the right-hand group */
+#top>.tabw+.ib{margin-left:auto}
+/* v2.6 §8 UP9 the remote hold line (a remote browser never loads update.css): it shrinks before the buttons do — ellipsis,
+   then ≤ 900 px only the hourglass and its title */
+.uphold span{min-width:0;overflow:hidden;text-overflow:ellipsis}
+@media (max-width:900px){.uphold span{display:none}}
+/* v26-fw I1 a phone-width remote browser (390 px): the tab strip may shrink to nothing (it scrolls) and "từ xa" keeps its
+   globe + title, so the buttons, Cài đặt last, stay on screen */
+@media (max-width:520px){#top .tabw{min-width:0}.rmt span{display:none}}
+.ib{display:flex;align-items:center;gap:var(--s2);height:var(--h-ctl);padding:0 var(--s3);border-radius:8px;border:1px solid var(--line);background:var(--panel-2);font-size:var(--sm);white-space:nowrap}
+.ib.on{border-color:var(--accent);color:var(--accent);background:var(--accent-2)}
+.ib.muted{color:var(--fg-3)}
+/* v2.2 §6 K0 Skills & MCP: label + two separate numbers, each its own click area (label hidden below 1280 px) */
+.smk{display:flex;align-items:stretch;height:var(--h-ctl);border-radius:8px;border:1px solid var(--line-2);background:var(--panel-2);overflow:hidden;flex:none}
+.smk button{display:flex;align-items:center;gap:var(--s2);border:0;background:transparent;padding:0 var(--s4);font:600 var(--sm)/1 var(--f-body);white-space:nowrap}
+.smk button:hover{background:var(--sel)}
+.smk-n{border-left:1px solid var(--line)!important;font-variant-numeric:tabular-nums}.smk-n.red{color:var(--bad)}.smk-n.yellow{color:var(--warn)}
+.narrow .smk-t{display:none}
+.ib .rd{width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 6px var(--ok)}
+#banner{position:fixed;top:0;left:0;right:0;height:36px;display:flex;align-items:center;justify-content:center;gap:var(--s4);background:var(--warn);color:var(--bdg-fg);font-weight:600;font-size:var(--sm);z-index:30;padding:0 var(--s5)}
+#banner .spin{border-color:var(--bdg-fg) transparent var(--bdg-fg) var(--bdg-fg)}
+#banner .btn{color:var(--bdg-fg);border-color:var(--bdg-fg);background:transparent}
+#banner .seg{border-color:var(--bdg-line)}#banner .seg button{color:var(--bdg-fg)}#banner .seg button.on{background:var(--bdg-on)}
+/* v2.6 R17 the siblings of the update chip, never #top itself (a parent's opacity cannot be undone): UP6d stays usable */
+.offline #top>:not(.upc){opacity:.55;filter:saturate(.4)}
+.offline .ib .rd{background:var(--fg-3)!important;box-shadow:none!important;animation:none!important}
+.offline #top button:not(.upc){pointer-events:none}
+/* v2.1 §4 layout C: left column 400 px at x 12, under the top bar + the head bar (R24; D53 --h-bar + --h-head + --s4); fixed (out of flow) so the deck area
+   (.dframe, left = --deck-left) never moves when anything is selected or opened. Below 1280 px: one 424 px drawer. */
+#left{position:fixed;left:12px;top:calc(var(--bn) + var(--h-bar) + var(--h-head) + var(--s4));bottom:var(--s4);width:400px;display:flex;flex-direction:column;gap:var(--s4);z-index:12}
+body.narrow #left{left:0;top:calc(var(--bn) + var(--h-bar));bottom:0;width:424px;padding:var(--s4);background:color-mix(in srgb,var(--bg) 92%,transparent);border-right:1px solid var(--line);box-shadow:var(--shadow);transform:translateX(-100%);visibility:hidden;transition:transform 180ms var(--ease),visibility 0s 180ms}
+body.narrow.drawer #left{transform:none;visibility:visible;transition:transform 180ms var(--ease)}
+.cnt{font:600 var(--xs)/20px var(--f-body);min-width:22px;height:20px;text-align:center;border-radius:99px;background:var(--warn);color:var(--bdg-fg);padding:0 var(--s2)}
+.cnt.zero{background:var(--line-2);color:var(--fg-2)}
+.x{margin-left:auto;width:var(--h-ctl);height:var(--h-ctl);display:grid;place-items:center;border-radius:7px;border:1px solid transparent;background:transparent;color:var(--fg-2)}
+.x:hover{border-color:var(--line-2)}
+.code,.modal code,.wiz code{font:400 var(--xs)/1.5 var(--f-mono);background:var(--accent-2);border:1px solid var(--line);border-radius:6px;padding:var(--s1) var(--s2)}
+.code{display:block;padding:var(--s3) var(--s3);white-space:pre-wrap;word-break:break-all}
+.row{display:flex;gap:var(--s2);flex-wrap:wrap;align-items:center}
+.lnk{background:none;border:0;padding:0;color:var(--accent);font-size:var(--xs);font-weight:500}
+.ctx{font-size:var(--xs);color:var(--fg-2);background:var(--accent-2);border-radius:6px;padding:var(--s3) var(--s4);line-height:1.5}
+.foot{font-size:var(--xs);color:var(--fg-3)}
+.empty{margin:auto;text-align:center;color:var(--fg-3);font-size:var(--sm);padding:var(--s6);max-width:260px;display:flex;flex-direction:column;align-items:center;gap:var(--s3)}
+.empty b{color:var(--fg-2);font-size:var(--md)}
+/* §4.10 narrow: "Chờ PO n" at the right end of the deck header bar (replaces the v1 floating button) */
+#inboxBtn{position:fixed;top:calc(var(--bn) + var(--h-bar) + var(--s3) / 2);right:12px;z-index:13;display:flex;align-items:center;gap:var(--s2);height:calc(var(--h-head) - var(--s3));padding:0 var(--s3);border-radius:6px;border:1px solid color-mix(in srgb,var(--warn) 55%,transparent);background:var(--warn-2);color:var(--fg);font:600 var(--xs)/1 var(--f-disp);letter-spacing:.03em}
+#inboxBtn .cnt{min-width:18px;height:18px;line-height:18px}
+/* §4.11b Đang xem (Inspector): crumb + ×, body by selection, composer at the bottom; takes the rest of the column */
+#inspector{flex:1 1 0;min-height:0;display:flex;flex-direction:column;overflow:hidden}
+#inspector .ih{display:flex;align-items:center;gap:var(--s3);min-height:40px;padding:0 var(--s4) 0 var(--s5);border-bottom:1px solid var(--line);font-size:var(--sm);color:var(--fg-2)}
+#inspector .crumb{display:flex;align-items:center;gap:var(--s2);min-width:0;flex:0 1 auto;white-space:nowrap;overflow:hidden}
+#inspector .crumb .cr-w{display:inline-flex;align-items:center;gap:var(--s2)}
+#inspector .crumb .cr{border:0;background:none;padding:0;color:var(--fg-2);font:inherit;cursor:pointer}
+#inspector .crumb .cr:hover{color:var(--fg)}
+#inspector .crumb i{font-style:normal;color:var(--fg-3)}
+#inspector .crumb b{color:var(--fg);font-weight:600;overflow:hidden;text-overflow:ellipsis}
+#inspector.k-orch .ih{display:none}
+#inspector .esc{flex:1 1 0;min-width:0;font-size:var(--xs);color:var(--fg-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:right} /* basis 0: the hint only takes what the crumb leaves */
+#inspector .x{margin-left:0;width:26px;height:26px}
+/* UX-I6: the info block takes its height first and scrolls only past what is left; the conversation (basis 0) is the only
+   part that gives way, down to its floor. A selected lane drops the floor (mockup N2-a / N4-j): its info before its talk. */
+#inspector .iinfo{flex:0 1 auto;min-height:0;overflow-y:auto;border-bottom:1px solid var(--line)}
+#inspector .iinfo.full{flex:1 1 auto;border-bottom:0}
+#inspector .hist{flex:1 1 0;min-height:min(96px,22%)}
+body.narrow #inspector .hist,#inspector.k-lane .hist{min-height:0;container-type:size}
+/* m-2 N2-a a selected lane's info wins at every width: no floor, and the 8 px pads move inside the scroll so a 0-height talk is 0 */
+#inspector.k-lane .hist{padding-block:0}#inspector.k-lane .hist>:first-child{margin-top:var(--s3)}#inspector.k-lane .hist>:last-child{margin-bottom:var(--s3)}
+@container (height < 48px){#inspector .hist [data-vk]{visibility:hidden}}
+#inspector .iinfo .row{display:flex;align-items:center;gap:var(--s3);flex-wrap:nowrap;padding:var(--s4) var(--s5) var(--s2)}
+#inspector .iinfo .row .sp{flex:1}
+#inspector .iinfo h2{margin:0;font:700 var(--xl)/1.1 var(--f-disp);letter-spacing:.01em;display:inline-flex;align-items:center;gap:var(--s3)}
+#inspector .iinfo h2.subn{color:var(--accent);font-family:var(--f-mono)}
+#inspector .ohead .row .btn{margin-left:auto}
+/* v2.1 §4.14 "Điều phối #n ▾" opens Lịch sử phiên; the short session name; a lane's owner line; history boundary dividers */
+/* F-I7 S1 the title never shrinks; a long session title (otitle) is what ellipsises */
+#inspector .oname{display:inline-flex;align-items:center;gap:var(--s2);height:var(--h-ctl-sm);margin-block:calc(-1 * var(--s1));border:0;background:none;padding:0;color:var(--fg);min-width:0;max-width:65%;flex:none;overflow:hidden;cursor:pointer}
+#inspector .oname h2{white-space:nowrap;flex:none}
+#inspector .oname:hover h2{color:var(--accent)}
+#inspector .otitle{font:500 var(--sm)/1 var(--f-mono);color:var(--fg-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#inspector .okind{flex:none;display:inline-flex;align-items:center;height:19px;padding:0 var(--s2);border-radius:4px;border:1px solid var(--line-2);font:600 var(--xxs) var(--f-body);color:var(--fg-2);white-space:nowrap} /* v2.7 §5.0 session kind */
+#inspector .meta.owner{color:var(--fg-3)}
+#inspector .ohead.ended .acts{display:flex;flex-wrap:wrap;gap:var(--s3);padding:0 var(--s5) var(--s4)}
+.m-div{display:flex;align-items:center;gap:var(--s4);margin:var(--s4) 0;font-size:var(--xs);color:var(--fg-3)}
+.m-div::before,.m-div::after{content:"";flex:1;border-top:1px dashed var(--line-2)}
+#inspector .st{display:inline-flex;align-items:center;gap:var(--s2);font-size:var(--sm);color:var(--fg-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#inspector .st::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--fg-3);flex:none}
+#inspector .st.ok::before{background:var(--accent)}#inspector .st.bad{color:var(--bad)}#inspector .st.bad::before{background:var(--bad)}
+#inspector .st.mute::before{background:var(--fg-3)}
+#inspector .meta .st{display:inline;font:inherit}#inspector .meta .st::before{display:inline-block;margin-right:var(--s2);vertical-align:1px}
+#inspector .ohead .row .st{flex:1 1 0;min-width:64px;display:block}#inspector .ohead .row .st::before{display:inline-block;margin-right:var(--s2);vertical-align:1px}
+#inspector .meta{padding:var(--s1) var(--s5);font-size:var(--xs);color:var(--fg-2);line-height:1.5}
+#inspector .meta:last-child,#inspector .ohead .meta{padding-bottom:var(--s4)}
+/* R43 I1 / M4 the stat lines stay one line (full text in their title); "Ẩn công cụ" sits at the chip row's right end */
+#inspector .ohead .meta,#inspector .lhead .meta.acc{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#inspector .ohead .crow{display:flex;align-items:center;min-height:var(--h-ctl-sm);padding-right:var(--s5);margin-bottom:var(--s1)}
+#inspector .ohead .crow .mchip{margin-bottom:0;min-width:0}#inspector .ohead .crow .sp{flex:1}
+#inspector .more{width:30px;height:var(--h-ctl);border-radius:7px;border:1px solid var(--line-2);background:transparent;color:var(--fg-2);font:600 var(--md)/1 var(--f-body)}
+#inspector .down{margin:0 var(--s5) var(--s4);padding:var(--s3) var(--s4);border-radius:8px;background:var(--bad-2);border:1px solid color-mix(in srgb,var(--bad) 40%,transparent);display:flex;flex-wrap:wrap;gap:var(--s3);align-items:center;font-size:var(--sm)}
+#inspector .down>span{flex:1;min-width:200px}#inspector .down .acts{padding:0}
+#inspector .kv{border-top:1px solid var(--line);margin-top:var(--s3)}
+#inspector .accl{display:inline-flex;gap:var(--s2);align-items:center;flex-wrap:wrap}
+/* UX-I6: the Subagent head sticks to the bottom of the scrolling info block, so it is on screen however tall the lane head is */
+#inspector .lhead .kv{scroll-margin-bottom:36px} /* opened facts stop above the sticky Subagent head */
+#inspector .subsec{display:contents}
+#inspector .subsec .log-h{position:sticky;bottom:0;z-index:1;background:var(--solid);border-top:1px solid var(--line);padding-top:var(--s2);text-transform:uppercase;letter-spacing:.08em;color:var(--fg-3)}
+#inspector .subsec.first .log-h{margin-top:var(--s3);color:var(--accent)}
+#inspector .sub{display:flex;flex-direction:column;align-items:stretch;gap:var(--s1)}
+#inspector .sub .sl{font-size:var(--sm);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#inspector .sub .sl b{font:500 var(--sm) var(--f-mono);color:var(--accent)}
+#inspector .sub.failed{border-color:color-mix(in srgb,var(--bad) 55%,transparent)}
+#inspector .sub.failed .sl b{color:var(--bad)}
+#inspector .sub .m{grid-column:auto}
+#inspector .preview{margin:0 var(--s5) var(--s3)}
+#inspector .stale{color:var(--fg-3);display:inline-flex;gap:var(--s2);align-items:center}
+#inspector .gnone{padding:0 var(--s5) var(--s3)}
+#inspector .skel{display:flex;flex-direction:column;gap:var(--s3);padding:var(--s3) var(--s5) var(--s5)}
+#inspector .skel i{display:block;height:10px;border-radius:5px;background:var(--line-2);opacity:.6}
+#inspector .skel i:nth-child(2){width:70%}#inspector .skel i:nth-child(3){width:45%}
+/* v2.7 §4.7 UX-I11 a new Thiết kế session's empty state, centred in the conversation (IS13) */
+#inspector .c-empty{margin:auto;padding:var(--s6);text-align:center;color:var(--fg-3);font:var(--sm)/1.7 var(--f-body)}
+#inspector .c-empty p{margin:0}
+#inspector .res{border:1px solid color-mix(in srgb,var(--ok) 40%,transparent);background:var(--ok-2);border-radius:8px;padding:var(--s3) var(--s4);font-size:var(--sm)}
+/* v2.4 §4.1 MD1 the model chip, its own line under the session name; MD9 amber dot; MD13 dimmed; MD12 / remote plain text */
+.mchip{align-self:flex-start;display:inline-flex;align-items:center;gap:var(--s2);max-width:100%;height:var(--h-ctl-sm);margin:0 var(--s5) var(--s1);padding:0 var(--s2);border-radius:5px;border:1px solid var(--line-2);background:none;color:var(--fg);font:500 var(--xs)/1 var(--f-body);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mchip[aria-expanded=true]{border-color:var(--accent);background:var(--bg-2)}
+/* the mockup's ▾ / ▸ glyph (chip, older group): system font, the body font draws it as a chevron */
+.car{font:normal var(--xxs)/1 system-ui,sans-serif}
+.mchip.off{opacity:.5}
+.mchip.ro{border:0;background:none;padding:0;color:var(--fg-2);font-weight:500}
+.adot{display:inline-block;width:7px;height:7px;flex:none;border-radius:50%;background:var(--amber)}
+#inspector .note{padding:var(--s3) var(--s5);border-top:1px solid var(--line);display:flex;gap:var(--s3);align-items:flex-start;font-size:var(--xs);color:var(--fg-3)}
+#inspector .inrow{margin-top:auto}
+#inspector .send{width:30px;height:28px;flex:none;border-radius:7px;border:0;background:var(--accent);color:var(--ink);display:grid;place-items:center}
+#inspector .send:disabled,#cmd:disabled{opacity:.5;cursor:not-allowed}
+.hist{flex:1;min-height:0;overflow:auto;padding:var(--s3) var(--s5);display:flex;flex-direction:column;gap:var(--s4);font-size:var(--md)}
+/* hot fix 2026-11-16 long reading: the conversation body one step up, looser lines (headings keep their weight, not a smaller size) */
+.hist .md{font-size:var(--md);line-height:1.6}.hist .md .md-h{font-size:var(--md)}.hist .md .md-h1{font-size:var(--lg)}
+.hist>*{flex:none}
+/* v2.2 §14.5 the PO's message: left rule + "Bạn · 14:18"; assistant text: Markdown, copy on hover */
+.m-po{display:flex;flex-direction:column;gap:var(--s1);border:1px solid var(--line-2);border-radius:8px;padding:var(--s2) var(--s4);margin-left:var(--s4);color:var(--fg)}
+.m-po .m-who{font-size:var(--xs);color:var(--fg-3)}
+.m-po .m-hold{display:inline-flex;align-items:center;gap:var(--s1);margin-left:var(--s3);padding:0 var(--s2);border:1px solid color-mix(in srgb,var(--warn) 40%,transparent);border-radius:4px;color:var(--warn);font-weight:500;vertical-align:1px} /* v2.6 §4.8 UP8 "giữ lại": a status tag, no fill */
+/* v2.4 §6.3 DK7 attachment labels: plain text, ≤ 200 px, the name cut in the middle by the component */
+.m-lbs{display:flex;flex-wrap:wrap;gap:var(--s2) var(--s2);margin-top:var(--s1)}
+.m-lb{max-width:200px;overflow:hidden;white-space:nowrap;font:400 var(--xs)/1.5 var(--f-mono);color:var(--fg-2);background:var(--line);border-radius:3px;padding:0 var(--s2)}
+.m-orch{display:flex;gap:var(--s3)}.m-orch::before{content:"";flex:none;width:7px;height:7px;margin-top:var(--s3);border-radius:50%;background:var(--c,var(--orch))}
+.m-text{position:relative}.m-text::before{display:none}.m-text>.md{flex:1;min-width:0}
+.m-copy{position:absolute;top:0;right:0;display:none;align-items:center;padding:var(--s1) var(--s2);border:1px solid var(--line);border-radius:5px;background:var(--solid);color:var(--fg-2);cursor:pointer}
+.m-text:hover>.m-copy,.m-copy:focus-visible{display:flex}
+.m-think{display:flex;align-items:center;gap:var(--s3);font-size:var(--sm);color:var(--fg-3);font-style:italic}
+.m-think .m-sec{margin-left:auto;font:400 var(--xs) var(--f-mono);font-style:normal}
+/* §14.5 S9 (F-M10) connection lost mid-stream: a red-bordered band */
+.m-lost{display:flex;align-items:center;gap:var(--s3);margin:var(--s2) 0;padding:var(--s3) var(--s4);border:1px solid color-mix(in srgb,var(--bad) 55%,transparent);border-radius:6px;background:var(--bad-2);color:var(--bad);font-size:var(--sm)}
+#reloadBand{position:fixed;top:calc(var(--bn) + var(--h-bar));left:50%;transform:translateX(-50%);z-index:40;display:flex;align-items:center;gap:var(--s4);padding:var(--s2) var(--s3) var(--s2) var(--s5);border:1px solid var(--line-2);border-radius:9px;background:var(--solid);box-shadow:var(--shadow);font-size:var(--sm);color:var(--fg)}
+.hist-new{position:sticky;bottom:4px;align-self:center;padding:var(--s1) var(--s4);border:1px solid var(--line-2);border-radius:999px;background:var(--solid);color:var(--fg);font-size:var(--xs);cursor:pointer}
+.hidetools{display:inline-flex;align-items:center;gap:var(--s2);font-size:var(--sm);color:var(--fg-2);cursor:pointer;white-space:nowrap}
+.hidetools input{appearance:none;width:26px;height:14px;border-radius:7px;background:var(--line-2);position:relative;cursor:pointer;margin:0}
+.hidetools input::after{content:"";position:absolute;top:2px;left:2px;width:10px;height:10px;border-radius:50%;background:var(--fg-2);transition:left .15s}
+.hidetools input:checked{background:var(--accent)}.hidetools input:checked::after{left:14px;background:var(--solid)}
+/* F-I8 S4 / S4-narrow the folded lane facts: one line, click opens them */
+#inspector .kvsum{display:flex;align-items:center;gap:var(--s2);width:calc(100% - 28px);margin:var(--s3) var(--s5) 0;padding:var(--s2) var(--s3);border:1px solid var(--line);border-radius:6px;background:none;color:var(--fg-2);font:400 var(--xs) var(--f-mono);text-align:left;cursor:pointer}
+#inspector .kvsum span{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#inspector .kvsum:hover{border-color:var(--line-2);color:var(--fg)}
+.m-evt{font:400 var(--xs)/1.4 var(--f-mono);color:var(--fg-3)}
+.m-sys{display:flex;align-items:center;gap:var(--s4);padding:var(--s3) var(--s4);border-radius:8px;background:var(--bad-2);border:1px solid color-mix(in srgb,var(--bad) 40%,transparent);flex-wrap:wrap}
+.m-sys>span{flex:1;min-width:200px}
+.m-sys.info{background:var(--accent-2);border-color:var(--line-2)}
+#inspector .m-sys.held{flex:none;margin:var(--s2) var(--s4) 0} /* hot fix 2026-11-16 held band: above the conversation, inset like it */
+.m-text.live .md>:last-child::after{content:"";display:inline-block;width:7px;height:14px;margin-left:var(--s1);vertical-align:-2px;background:var(--c,var(--orch));animation:blink 1s steps(2) infinite}
+@keyframes blink{50%{opacity:0}}
+/* v2.4 §6.2 D51 one frame: text full width on top, the 28 px bar (recipient · send) fixed below it */
+.inrow{position:relative;display:flex;flex-direction:column;gap:var(--s2);margin:0 var(--s4) var(--s4);padding:var(--s3) var(--s3) var(--s2);border:1px solid var(--line-2);border-radius:var(--r);background:var(--solid)}
+.inrow:has(#cmd:focus){box-shadow:inset 0 0 0 1px var(--fg-2)} /* neutral focus ring (PO 16/11 BANNED look: no accent border) */
+#cmd:focus-visible{box-shadow:none} /* the frame carries the focus ring (§6.2) */
+.cbar{display:flex;align-items:center;justify-content:space-between;gap:var(--s3);height:28px;flex:none}
+.target{display:flex;align-items:center;gap:var(--s2);height:28px;min-width:0;max-width:70%;padding:0 var(--s3);border-radius:7px;border:0;background:color-mix(in srgb,var(--c,var(--orch)) 14%,transparent);font:600 var(--sm)/1 var(--f-disp);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.target::before{content:"↳";color:var(--fg-3);font-weight:400}
+#cmd{--lh:1.4;width:100%;height:22px;max-height:120px;overflow-y:auto;resize:none;border:0;outline:0;background:transparent;color:var(--fg);font:var(--md)/var(--lh) var(--f-body);padding:0 var(--s2)}
+#cmd::placeholder{color:var(--fg-3)}
+.slash{position:absolute;left:0;right:0;bottom:calc(100% + 6px);padding:var(--s2);z-index:2}
+.slash button{display:flex;width:100%;gap:var(--s4);align-items:baseline;padding:var(--s3) var(--s3);border-radius:7px;border:0;background:transparent;text-align:left;font-size:var(--sm)}
+.slash button:first-child{background:var(--sel)}
+.slash code{font:500 var(--sm) var(--f-mono);color:var(--accent);min-width:88px}
+.slash span{color:var(--fg-2);font-size:var(--xs)}
+.kv{display:grid;grid-template-columns:96px 1fr;gap:var(--s2) var(--s4);padding:var(--s4) var(--s5);font-size:var(--sm)}
+.kv dt{color:var(--fg-3);font-size:var(--xs);padding-top:var(--s1)}.kv dd{margin:0;min-width:0}
+.kv small{display:block;color:var(--fg-3);font-size:var(--xs)}
+.acts{display:flex;flex-wrap:wrap;gap:var(--s2);padding:0 var(--s5) var(--s4);position:relative}
+.log-h{display:flex;justify-content:space-between;padding:0 var(--s5) var(--s2);font-size:var(--xs);color:var(--fg-3)}
+/* v2.1 §4.12 "⋯" action menu (ui/ActionMenu.tsx): one fixed layer, clamped inside the deck area, submenu flips left */
+.amenu-layer{position:fixed;inset:0;z-index:55;pointer-events:none}
+.amenu{position:fixed;pointer-events:auto;min-width:220px;max-width:340px;max-height:calc(100vh - 24px);display:flex;flex-direction:column;background:var(--solid);border:1px solid var(--line-2);border-radius:8px;box-shadow:var(--shadow)}
+/* v2.4 §6.8 R36 I1 the menu box animates (mo-drop), the list inside scrolls: a scroll box never carries its own animation */
+.amenu .ams{min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:var(--s2)}
+.amenu .mi{display:grid;grid-template-columns:16px 1fr auto;gap:var(--s3);align-items:center;width:100%;min-height:30px;padding:var(--s2) var(--s3);border:0;border-radius:6px;background:transparent;color:var(--fg);font-size:var(--sm);text-align:left}
+.amenu .mi .i{color:var(--fg-2)}
+.amenu .mi.on,.amenu .mi:focus-visible{background:var(--sel);outline:none}
+.amenu .mi.bad,.amenu .mi.bad .i{color:var(--bad)}
+.amenu .mi.dis{cursor:not-allowed;color:var(--fg-3)}.amenu .mi.dis .i{opacity:.55}
+.amenu .mi small{display:block;font-size:var(--xs);color:var(--fg-3);margin-top:var(--s1)}
+.amenu .mi .k{font:var(--xs) var(--f-mono);color:var(--fg-3)}
+.amenu hr{border:0;border-top:1px solid var(--line);margin:var(--s2) var(--s2)}
+.amenu h4{margin:var(--s2) var(--s3) var(--s2);font-size:var(--xs);font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--fg-3)}
+.amenu .mi.rd{grid-template-columns:16px 16px 1fr auto}.amenu .mi.rd .k{font-family:inherit}.amenu .mi[aria-checked=true] .lb{font-weight:600}
+.ib[aria-expanded=true]{background-image:linear-gradient(var(--sel),var(--sel))}
+@keyframes qp{50%{transform:scale(1.15)}}
+/* center card / full screens / modal */
+.modal h2{margin:0;font:600 var(--xl)/1.2 var(--f-disp);letter-spacing:.03em}
+.pick{width:100%;text-align:left;border:1px solid var(--line-2);border-radius:9px;padding:var(--s4);display:flex;flex-direction:column;gap:var(--s2);font-size:var(--sm)}
+.pick .path{display:flex;gap:var(--s3);align-items:center;font:400 var(--sm) var(--f-mono);padding:var(--s2) var(--s3);border-radius:7px;border:1px solid var(--bad);background:var(--bad-2)}
+.err{color:var(--bad);font-size:var(--xs);display:flex;gap:var(--s2);align-items:flex-start}
+#screen{position:fixed;inset:0;display:grid;place-items:center;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(6px);z-index:40;overflow:auto;padding:var(--s6) var(--s5)}
+.seg{display:flex;gap:var(--s2);padding:var(--s2);border-radius:8px;border:1px dashed var(--line-2);font-size:var(--xs);flex-wrap:wrap;align-items:center}
+.seg span{color:var(--fg-3);padding:0 var(--s2)}
+.seg button{border:0;background:transparent;padding:var(--s2) var(--s3);border-radius:6px;font-size:var(--xs);color:var(--fg-2)}
+.seg button.on{background:var(--accent-2);color:var(--accent)}
+.wiz{width:min(760px,100%);padding:var(--s6);display:flex;flex-direction:column;gap:var(--s5);background:var(--solid)}
+.wiz h2{margin:0;font:600 var(--xl)/1.2 var(--f-disp)}
+.stepper{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:var(--s2)}
+.stepper div{display:flex;flex-direction:column;gap:var(--s2);font-size:var(--xs);color:var(--fg-3)}
+.stepper i{height:3px;border-radius:2px;background:var(--line-2)}
+.stepper .ok i{background:var(--ok)}.stepper .now i{background:var(--accent)}.stepper .no i{background:var(--bad)}
+.stepper .now{color:var(--fg)}.stepper .ok{color:var(--fg-2)}
+.stepper span{display:flex;gap:var(--s2);align-items:center}
+/* v2.5 §6 TK1 wizard step 3: title + lead and the waiting line drawn before the lazy list chunk (its rules: skillsMcp.css) */
+.wiz-tk{display:flex;flex-direction:column;gap:var(--s3)}
+.tkhead h3{margin:0;font:600 var(--md)/1.3 var(--f-body)}.tkhead p{margin:var(--s1) 0 0;color:var(--fg-2)}
+.tkwait{display:flex;align-items:center;gap:var(--s2);margin:0;color:var(--fg-2)}
+.dep{display:grid;grid-template-columns:28px 1fr auto;gap:var(--s1) var(--s4);align-items:center;padding:var(--s4) 0;border-top:1px solid var(--line)}
+.dep .ic{width:26px;height:26px;border-radius:50%;display:grid;place-items:center}
+.ic.ok{background:var(--ok-2);color:var(--ok)}.ic.no{background:var(--bad-2);color:var(--bad)}.ic.na{background:var(--line);color:var(--fg-3)}.ic.run{background:var(--accent-2);color:var(--accent)}
+.dep b{font-size:var(--md)}.dep small{grid-column:2/3;color:var(--fg-2);font-size:var(--xs)}
+.dep .acts2{grid-row:1/3;grid-column:3;display:flex;gap:var(--s2)}
+.dep .more{grid-column:2/4}
+.addp{width:min(440px,calc(100vw - 32px))}.addp .dep small{overflow-wrap:anywhere}.addp .dep.st-wait b{color:var(--fg-3);font-weight:500}.addp .ic .spin{width:14px;height:14px;border-color:var(--fg-2);border-right-color:transparent}
+.term{font:400 var(--xs)/1.6 var(--f-mono);background:var(--term-bg);color:var(--term-fg);border:1px solid var(--line);border-radius:8px;padding:var(--s4) var(--s4);max-height:150px;overflow:auto;white-space:pre-wrap}
+.boot{display:flex;flex-direction:column;align-items:center;gap:var(--s5)}
+.boot .big{width:64px;height:64px;border-width:3px}
+.boot h1{margin:0;font:700 var(--xxl)/1 var(--f-disp);letter-spacing:.08em}
+.steps{display:flex;flex-direction:column;gap:var(--s4);width:460px;font-size:var(--md)}.steps span{white-space:nowrap}
+.steps div{display:flex;align-items:center;gap:var(--s4)}.steps small{margin-left:auto;color:var(--fg-3);font:var(--xs) var(--f-mono)}
+.spin{width:16px;height:16px;border-radius:50%;border:2px solid var(--accent);border-right-color:transparent;animation:sp .8s linear infinite;flex:none}
+.spin.sm{width:12px;height:12px;border-width:1.5px;margin-right:var(--s2)} /* a small spinner inside a field / button label */
+@keyframes sp{to{transform:rotate(1turn)}}
+.progress{width:360px;height:3px;border-radius:2px;background:var(--line-2);overflow:hidden}.progress i{display:block;height:100%;width:72%;background:var(--accent)}
+#modal{position:fixed;inset:0;display:grid;place-items:center;background:var(--scrim);z-index:50;padding:var(--s5)}
+/* G4 UX M5: account dialogs (A3–A9) over Settings / the wizard */
+#accmodal{position:fixed;inset:0;display:grid;place-items:center;background:var(--scrim-2);z-index:56;padding:var(--s5);animation:mo-fade 180ms var(--ease)}
+.modal{width:min(560px,100%);max-height:calc(100vh - 48px);overflow:auto;padding:var(--s6);display:flex;flex-direction:column;gap:var(--s5);background:var(--solid)}
+.modal.wide{width:min(980px,100%)}
+.modal.set{height:min(640px,calc(100vh - 32px));max-height:none}.modal.set .sbody{flex:1;min-height:0;overflow:auto;display:flex;flex-direction:column;gap:var(--s5)}
+/* T9b ⑥: the body scrolls; its blocks keep their height (an overflow-x table box would otherwise shrink to 0–85 px) */
+.modal.set .sbody>*{flex-shrink:0}
+.modal .mf{position:sticky;bottom:-20px;background:var(--solid);padding:var(--s4) 0 var(--s2);margin-top:auto}
+.rmenu{position:absolute;right:8px;top:calc(var(--h-ctl) + var(--s1));z-index:3;padding:var(--s2);background:var(--solid);min-width:160px}.rmenu button{display:block;width:100%;text-align:left;border:0;background:none;padding:var(--s2) var(--s4);border-radius:6px;font-size:var(--sm)}.rmenu button:hover{background:var(--sel)}
+.mh{display:flex;align-items:center;gap:var(--s4)}
+.mh .lang-sel{margin-left:auto;width:auto} /* §6A wizard step 1 top-right */
+.choice{display:flex;flex-direction:column;gap:var(--s2);text-align:left;padding:var(--s4) var(--s5);border-radius:9px;border:1px solid var(--line-2);background:transparent}
+.choice.def{background:var(--sel)}.choice.def span{color:var(--fg)}
+.choice b{font-size:var(--md)}.choice span{font-size:var(--sm);color:var(--fg-2)}
+.choice.bad b{color:var(--bad)}
+.choice[disabled]{opacity:.55;cursor:not-allowed}
+.mf{display:flex;justify-content:flex-end;gap:var(--s3);flex-wrap:wrap}
+.stabs{display:flex;gap:var(--s2);border-bottom:1px solid var(--line)}
+.stabs button{border:0;background:transparent;padding:var(--s3) var(--s4);font-size:var(--sm);color:var(--fg-2);border-bottom:2px solid transparent}
+.stabs button.on{color:var(--fg);background:var(--sel);font-weight:600}
+table.t{width:100%;border-collapse:collapse;font-size:var(--sm)}
+table.t th.wr{white-space:normal;width:96px;line-height:1.3}
+table.t td.wr{white-space:normal}
+table.t th{text-align:left;font-weight:500;font-size:var(--xs);color:var(--fg-3);padding:var(--s2) var(--s3);border-bottom:1px solid var(--line);white-space:nowrap}
+table.t td{white-space:nowrap;padding:var(--s3) var(--s3);border-bottom:1px solid var(--line);vertical-align:middle}
+table.t input[type=number],table.t select,table.t input[type=text],.field{height:var(--h-ctl);border-radius:6px;border:1px solid var(--fld-line);background:var(--fld-bg);color:var(--fg);font:var(--sm) var(--f-body);padding:0 var(--s2)}
+table.t input[type=number]{width:58px;font-family:var(--f-mono)}
+.changed{border-color:var(--warn)!important;background:var(--warn-2)!important}
+.preview{display:flex;gap:var(--s3);align-items:flex-start;padding:var(--s3) var(--s4);border-radius:8px;background:var(--warn-2);border:1px solid color-mix(in srgb,var(--warn) 45%,transparent);font-size:var(--sm)}
+.preview.bad{background:var(--bad-2);border-color:color-mix(in srgb,var(--bad) 45%,transparent)}
+.preview.inf{background:var(--accent-2);border-color:var(--line-2)}
+.tw-wrap{overflow-x:auto}
+.form{display:grid;grid-template-columns:160px 1fr;gap:var(--s3) var(--s4);align-items:center;font-size:var(--sm)}
+.form .field{height:var(--h-ctl);width:100%;font-family:var(--f-mono)}
+.toggle{display:flex;align-items:center;gap:var(--s3);font-size:var(--sm)}
+.toggle .field{width:56px;height:var(--h-ctl);font-family:var(--f-mono)}
+/* palette F22 */
+.pal{width:min(620px,100%);padding:0;gap:0;align-self:start;margin-top:12vh}
+.pal input{width:100%;height:52px;border:0;border-bottom:1px solid var(--line);background:transparent;color:var(--fg);font:var(--lg) var(--f-body);padding:0 var(--s5)}
+.pal h4{margin:var(--s4) var(--s5) var(--s2);font-size:var(--xs);color:var(--fg-3);font-weight:500;text-transform:uppercase;letter-spacing:.08em}
+.pal .pi{display:flex;align-items:center;gap:var(--s4);width:100%;padding:var(--s3) var(--s5);border:0;background:transparent;text-align:left;font-size:var(--sm)}
+.pal .pi.on{background:var(--sel)}
+.pal .pi.dis{color:var(--fg-3);cursor:not-allowed}.pal .pi small{font-size:var(--xs);color:var(--fg-3);margin-left:var(--s2)}.pal .pi small.hint{margin-left:auto}
+.pal .pi kbd{margin-left:auto;font:var(--xs) var(--f-mono);color:var(--fg-3);border:1px solid var(--line-2);border-radius:4px;padding:0 var(--s2)}
+.pal .pf{padding:var(--s3) var(--s5);border-top:1px solid var(--line);font-size:var(--xs);color:var(--fg-3)}
+/* v2.3 §4.1 one header bar in the HUD (Deck, F9 list, Code, Git), full width (R24: the switch starts at x 12, the left
+   column's edge): switch, then the v2.1 §4.8 stats line cut "…" from the right */
+.dhead{position:fixed;top:calc(var(--bn) + var(--h-bar));left:0;right:0;height:var(--h-head);z-index:6;display:flex;align-items:center;gap:var(--s5);padding:0 var(--s5) 0 calc(var(--s5) - var(--s1));
+  background:var(--dh-bg);border-bottom:1px solid var(--dh-line);font:var(--xs) var(--f-body);white-space:nowrap;min-width:0;cursor:default}
+.dhead .wss{display:flex;gap:var(--s1);flex:none}
+.dhead .wst{display:flex;align-items:center;gap:var(--s2);height:calc(var(--h-head) - var(--s3));padding:0 var(--s4);border:0;border-radius:6px;background:none;font:600 var(--sm) var(--f-body);color:var(--fg-2)}
+.dhead .wst:hover{color:var(--fg)}
+.dhead .wst.on{background:var(--sel);color:var(--fg)}
+.dhead .wst .kb{font:500 var(--xs) var(--f-mono);color:var(--fg-3)}.dhead .wst.on .kb{color:var(--fg-2)}
+.dhead .wst .od{width:7px;height:7px;border-radius:50%;background:var(--amber)} /* v2.7 §4.1 unseen issues (no number) */
+.dhead .dstat{overflow:hidden;text-overflow:ellipsis;min-width:0;color:var(--dh-fg)}
+.dhead .hp-name{color:var(--dh-hi);font:600 var(--sm) var(--f-body)}
+.dhead .hp-counts,.dhead .hp-today{color:var(--dh-mid)}
+.dhead .warn{color:var(--warn)}
+.dhead .sep{font-style:normal;color:var(--dh-sep);padding:0 var(--s2)}
+/* v2.7 §4.2-1 the issues strip: "v2.5 ▓▓░ 8/13 +1 · ngoài spec 3", a button to Tasks on that spec */
+.dhead .hstrip{display:inline-flex;align-items:center;gap:var(--s3);height:21px;margin-left:var(--s3);padding:0 var(--s3);vertical-align:middle;border:1px solid var(--line);border-radius:6px;background:none;font:500 var(--xs) var(--f-body);color:var(--dh-fg)}
+.dhead .hstrip:hover{background:var(--sel)}
+.dhead .hstrip b{font-weight:600;color:var(--dh-hi)}
+.dhead .hstrip .n{font:600 var(--xs) var(--f-mono);color:var(--dh-hi)}
+.dhead .hstrip .o{color:var(--dh-fg)}
+.narrow .dhead{padding-right:112px}
+.grp{margin-top:var(--s4)}.grp h4{margin:0 0 var(--s2);display:flex;gap:var(--s3);align-items:center;font:600 var(--xs)/1 var(--f-disp);letter-spacing:.1em;text-transform:uppercase;color:var(--fg-3)}
+.gnone{font-size:var(--xs);color:var(--fg-3);padding:var(--s1) var(--s1) var(--s2)}
+/* picker (mockup chrome) */
+/* v2.1 §4.13 / N3-k: the toast sits centred on the visible part of the graph (deck area minus the open account panel),
+   just under the deck header bar; never on the left column. Not a HUD box, so the deck never refits. */
+#toasts{position:fixed;top:calc(var(--bn) + var(--h-bar) + var(--h-head) + var(--s4));left:calc(var(--tl,0px) + (100vw - var(--tl,0px) - var(--accw,0px)) / 2);transform:translateX(-50%);display:flex;flex-direction:column;gap:var(--s2);align-items:center;z-index:57;pointer-events:none;max-width:calc(100vw - var(--tl,0px) - var(--accw,0px) - 24px)}
+#toasts .toast{padding:var(--s2) var(--s4)}
+#toasts .toast .lnk{pointer-events:auto;font-size:var(--sm)}
+.toast{display:flex;align-items:center;gap:var(--s3);padding:var(--s3) var(--s5);border-radius:9px;background:var(--solid);border:1px solid var(--line-2);box-shadow:var(--shadow);font-size:var(--sm)}
+/* narrow (F14) */
+.narrow #top{gap:var(--s3)}.narrow .tabw{min-width:210px}
+/* hot fix 2026-11-16: the 424 px drawer of a short window keeps the D53 spacing (the type stays one step up), so the
+   conversation keeps its R43 I3 ≥ 160 px at 1024 × 640 */
+.narrow #left{--s3:6px;--s4:8px;--s5:12px;--h-ctl:28px;--h-row:30px}
+.narrow #cmd{--lh:1.3} /* hot fix 2026-11-16: 14 px × 1.3 = the old 18.2 px line, R43 I3 keeps ≥ 160 px of conversation at 1024 × 640 */
+.narrow #inspector .meta{line-height:1.3}.narrow #inspector .kvsum{margin-top:var(--s2)}.narrow #inspector .iinfo .row{padding-top:var(--s3)} /* hot fix 2026-11-16: the +1 px scale costs the lane head ~8 px; the 1024 × 640 drawer wins it back here (R43 I3) */
+#top .brand b{display:none}
+#cmd:placeholder-shown{white-space:nowrap;overflow:hidden;text-overflow:ellipsis} /* UX-M12 a long placeholder ends in "…" (title has it all) */
+/* phone (§6B) */
+.subs{display:flex;flex-direction:column;gap:var(--s2);padding:0 var(--s5) var(--s3)}
+/* R43 I3 the short column: its one sub row on one line; "+n subagent ›" in the Subagent head */
+#inspector .subs.one .sub{flex-direction:row;align-items:center;gap:var(--s3)}#inspector .subs.one .sub .sl{flex:1;min-width:0}#inspector .subs.one .sub .m{flex:none}
+.log-h .submore{display:inline-flex;align-items:center;gap:var(--s1);text-transform:none;letter-spacing:0}
+.sub{display:grid;grid-template-columns:auto auto 1fr auto;gap:var(--s1) var(--s3);align-items:center;text-align:left;padding:var(--s2) var(--s4);border-radius:7px;border:1px solid var(--line);background:var(--panel-2);font-size:var(--sm)}
+.sub:hover,.sub.on{background:var(--sel)}
+.sub b{font:500 var(--xs) var(--f-mono);color:var(--accent)}.sub .d{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sub .m{grid-column:2/-1;font:var(--xs) var(--f-mono);color:var(--fg-3);white-space:normal}
+.arow{display:grid;grid-template-columns:1fr auto;gap:var(--s1) var(--s3);padding:var(--s3) var(--s4);border-radius:8px;border:1px solid var(--line);background:var(--panel-2);cursor:pointer;margin:0 var(--s5) var(--s2);font-size:var(--sm)}
+.arow .m{grid-column:1/-1;font:var(--xs) var(--f-mono);color:var(--fg-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.arow.past{cursor:default;opacity:.8}
+.sh{padding:var(--s3) var(--s5) var(--s2);font:600 var(--xs)/1 var(--f-disp);letter-spacing:.1em;text-transform:uppercase;color:var(--fg-3)}
+/* motion (§6.0 U12): one timing set — open 180 ms, close 140 ms, hover 120 ms, cubic-bezier(.2,.8,.2,1); transform/opacity only */
+:root{--ease:cubic-bezier(.2,.8,.2,1)}
+#modal:not([hidden]){animation:mo-fade 180ms var(--ease)}
+.amenu{animation:mo-drop 180ms var(--ease);transform-origin:top}
+.toast{animation:mo-down 180ms var(--ease)}
+.amenu-layer.leaving .amenu{animation:mo-drop 140ms var(--ease) reverse forwards}
+.bdg.bump{animation:mo-bump 420ms var(--ease)}
+@keyframes mo-r{from{opacity:0;transform:translateX(18px)}}
+@keyframes mo-l{from{opacity:0;transform:translateX(-18px)}}
+@keyframes mo-up{from{opacity:0;transform:translateY(14px)}}
+@keyframes mo-down{from{opacity:0;transform:translateY(-6px)}}
+@keyframes mo-drop{from{opacity:0;transform:translateY(-6px) scaleY(.96)}}
+@keyframes mo-fade{from{opacity:0}}
+@keyframes mo-bump{30%{transform:scale(1.35)}60%{transform:scale(.9)}}
+/* hf1117-p4 (C6): a state fade is 120 ms like the rest of the app; hover = a neutral --sel step over the fill (no lift,
+   no brightness, no accent border); keyboard focus = the static ring below, no pulse */
+:is(.btn,.ib,.tab,.arow,.choice){transition:opacity 120ms var(--ease)}
+:is(.btn,.ib,.tab,.arow,.choice):not(:disabled):hover{background-image:linear-gradient(var(--sel),var(--sel))}
+button:focus-visible,textarea:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible,[tabindex]:focus-visible{outline:none;box-shadow:inset 0 0 0 1px var(--fg-2)}
+/* v2.8 L10: on a filled button the inset ring would sit on the fill (1.24 / 1.29:1) → the ring goes outside it, both themes */
+.btn.pri:focus-visible,.btn.bad.solid:focus-visible,#inspector .send:focus-visible,.tsk .tbtn:focus-visible,.tsk .idet .dok:focus-visible{box-shadow:0 0 0 1px var(--solid),0 0 0 2px var(--fg-2)}
+/* reduced motion (prefers-reduced-motion or the picker toggle): only a 100 ms fade, no slide / glide / pulse */
+.rm :is(#modal,.amenu,.toast){animation:mo-fade 100ms linear}
+.rm .amenu-layer.leaving .amenu{animation:mo-fade 100ms linear reverse forwards}
+.rm .bdg.bump,.rm .m-text.live .md>:last-child::after,.rm .spin{animation:none}
+.rm :is(.btn,.ib,.tab,.arow,.choice){transition-duration:100ms}
+/* §8.4: CSS loops pause when the window is blurred, hidden, idle 60 s or on low battery */
+.still .m-text.live .md>:last-child::after,.still .spin{animation-play-state:paused}
+/* v1.1 §4.5: > 8 accounts → "kho N %" / "K cần xem" chips (buttons → F9 filtered) */
+@media (prefers-reduced-motion:reduce){.m-text.live .md>:last-child::after,.spin{animation:none}#inbox .card{transition:none}}
+/* --- web app additions (not in the mockup) --- */
+#map{position:fixed;inset:0;width:100%;height:100%}
+.stale{font-size:var(--xs);color:var(--fg-3);font-weight:400}
+/* v2 Settings › Account (§6 A1–A9): plain table + small dialogs, existing tokens only */
+.acc-empty{display:flex;flex-direction:column;gap:var(--s3);align-items:flex-start;padding:var(--s6);border:1px solid var(--line);border-radius:var(--r)}
+.acc-empty h3,.acc-h{margin:0;font:600 var(--lg)/1.2 var(--f-disp)}
+table.acc-t{table-layout:fixed;width:100%}table.acc-t td.wr b{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+table.acc-t tr.dim td{color:var(--fg-3)}
+.role{font-size:var(--sm)}.role.r-orchestrator{color:var(--orch)}.role.r-backup{color:var(--backup)}
+button.pill{cursor:pointer;background:transparent}button.pill.bad{background:var(--bad-2)}button.pill.warn{background:var(--warn-2)}
+code.url{display:block;min-width:0;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font:var(--xs) var(--f-mono);padding:var(--s2) var(--s3);border-radius:6px;border:1px solid var(--line);background:var(--bg-2);color:var(--fg-2)}
+.rmenu hr{border:0;border-top:1px solid var(--line);margin:var(--s2) 0}.rmenu button.dis{color:var(--fg-3);cursor:not-allowed}.rmenu button.dis:hover{background:none}
+.acc-dlg{width:min(480px,100%)}.acc-dlg .row{flex-wrap:wrap}
+.acc-f{display:flex;flex-direction:column;gap:var(--s2)}.acc-lead{margin:0;font-size:var(--sm);color:var(--fg-2)}
+.acc-timer{font-size:var(--lg)}
+.acc-form{display:grid;grid-template-columns:110px 1fr;gap:var(--s4) var(--s4);align-items:center}.acc-form .field.num{width:72px}
+.acc-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s4)}.acc-cols.two{grid-template-columns:1fr 1fr}
+.acc-cols h4{margin:0 0 var(--s2);font-size:var(--sm)}
+.acc-l{margin:0;padding-left:var(--s5);font-size:var(--sm);color:var(--fg-2);line-height:1.6}
+.acc-files{max-height:180px;overflow:auto}
+.rm #left{transition:none}
+/* v2.4 §6.2 a hover / focus tip (DK8 copy note, DK5 send lock) */
+[data-tip]:hover::after,[data-tip]:focus-visible::after{content:attr(data-tip);position:absolute;z-index:20;left:-8px;bottom:calc(100% + 8px);width:300px;white-space:normal;padding:var(--s3) var(--s4);border-radius:8px;
+  background:var(--solid);border:1px solid var(--line-2);box-shadow:var(--shadow);font:var(--xs)/1.5 var(--f-body);color:var(--fg)}
+/* §6.2 the composer's notice line sits right above the frame (DK6, DK14) */
+.aline{margin:0 var(--s5) var(--s2);font-size:var(--xs);color:var(--fg-2)}
+/* UX I4 / m7 / m8: a clipped scroll box fades the edge past which content hides (lib/fade.ts) */
+/* v2.4 MD13 / R43 M1 the read-only reason line (wifi icon + "Mất kết nối …"): model picker, Settings › Model, the Chờ PO box */
+.mro{display:flex;gap:var(--s3);align-items:center;padding:0 var(--s2);color:var(--fg-2);font-size:var(--xs)}
+.gfade{-webkit-mask-image:linear-gradient(black calc(100% - 20px),transparent);mask-image:linear-gradient(black calc(100% - 20px),transparent)}
+.gfade-up{-webkit-mask-image:linear-gradient(transparent,black 20px);mask-image:linear-gradient(transparent,black 20px)}
+.gfade.gfade-up{-webkit-mask-image:linear-gradient(transparent,black 20px calc(100% - 20px),transparent);mask-image:linear-gradient(transparent,black 20px calc(100% - 20px),transparent)}
+.aline.bad{display:flex;gap:var(--s2);align-items:flex-start;color:var(--bad-txt)}.aline.bad svg{flex:none;margin-top:var(--s1)}
+/* DK5 the send button locked by chips: hover / focus shows why (a disabled button gets no hover, so aria-disabled) */
+#inspector .send.dis{background:color-mix(in srgb,var(--accent) 50%,transparent);cursor:not-allowed}
+#inspector .send.dis>svg{opacity:.5}
+#inspector .cbar .send[data-tip]{position:relative}
+#inspector .cbar .send[data-tip]:hover::after,#inspector .cbar .send[data-tip]:focus-visible::after{left:auto;right:0;width:auto;white-space:nowrap}
+/* §6.2 DK2b: with chips the text stops at 3 lines */
+.inrow.att #cmd{max-height:calc(3 * var(--lh) * var(--md))}
+/* §6.1 DK3 while dragging over the window: everything dims (black 50 %), the composer frame rings in accent, the label
+   names the target where toasts show */
+.inrow.drop{z-index:31;border-color:var(--accent);box-shadow:0 0 0 1.5px var(--accent),0 0 0 4000px var(--drop-scrim)}
+#inspector:has(.inrow.drop){z-index:30;overflow:visible}
+#left:has(.inrow.drop){z-index:56}
+.narrow:not(.drawer):has(.inrow.drop)::after{content:"";position:fixed;inset:0;z-index:55;background:var(--drop-scrim);pointer-events:none} /* the closed drawer hides the frame */
+#toasts .toast.drop{border-radius:999px;border-color:var(--accent);padding:var(--s3) var(--s5);font-weight:600;font-size:var(--sm)}
+#toasts .toast.drop svg{color:var(--accent)}
+/* R21 DK11 an icon toast (the locked composer refused a paste / drop): the mockup's `.toast.bad` */
+#toasts .toast.ic{padding:var(--s3) var(--s5)}
+#toasts .toast.ic.error{border-color:color-mix(in srgb,var(--bad) 40%,transparent)}
+#toasts .toast.ic.error svg{color:var(--bad)}
+body.offline #toasts{top:calc(var(--bn) + var(--h-bar) + var(--h-head) + var(--h-ctl) + var(--s5))} /* DK11 under the deck's 28 px (--h-ctl) offline band, not over it */
+#inspector .aline{margin-top:auto}
+#inspector .aline+.inrow{margin-top:0}
+/* v2.4 §6.8 D54 auto-hide scrollbars, the one home of every scrollbar rule: dark at rest (a fixed 10 px / 6 px gutter, no shift),
+   lit while the user scrolls a box (`data-sb`, lib/scrollbars.ts) or the pointer is over it, wider + brighter on the bar itself.
+   Keyframes on the registered --sb-c, not a transition: WebKit paints a transition of it as one step. Never scrollbar-width /
+   scrollbar-color (either one turns every ::-webkit-scrollbar rule off) — check:structure keeps both out. */
+@property --sb-c{syntax:'<color>';inherits:true;initial-value:transparent}
+:root{--sb-size:10px;--sb-x:6px;--sb-in:120ms;--sb-out:450ms;--sb-on:color-mix(in srgb,var(--fg-3) 60%,transparent);--sb-hi:color-mix(in srgb,var(--fg-2) 80%,transparent)}
+*{--sb-c:transparent}
+[data-sb=on],*:hover{--sb-c:var(--sb-on)}
+@media (prefers-reduced-motion:no-preference){[data-sb=on]{animation:sb-in var(--sb-in)}[data-sb=off]:not(:hover){animation:sb-out var(--sb-out)}}
+@keyframes sb-in{from{--sb-c:transparent}}
+@keyframes sb-out{from{--sb-c:var(--sb-on)}}
+::-webkit-scrollbar{width:var(--sb-size);height:var(--sb-x)}
+::-webkit-scrollbar-track,::-webkit-scrollbar-corner{background:transparent}
+::-webkit-scrollbar-thumb{border:3px solid transparent;border-radius:var(--sb-size);background:var(--sb-c) padding-box}
+::-webkit-scrollbar-thumb:horizontal{border-width:1px}
+::-webkit-scrollbar-thumb:hover,::-webkit-scrollbar-thumb:active{border-width:1px;background-color:var(--sb-hi)}
+::-webkit-scrollbar-thumb:horizontal:hover,::-webkit-scrollbar-thumb:horizontal:active{border-width:0}
+.tabs::-webkit-scrollbar{display:none} /* hot fix 2026-11-16 the tab strip: the fades + "Tất cả project" say it scrolls */

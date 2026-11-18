@@ -1,0 +1,1 @@
+{ "init": { "claude_code_version": "2.1.324" }, "steps": [{ "waitUser": true }] }

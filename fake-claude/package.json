@@ -1,0 +1,6 @@
+{
+  "name": "@cc-slaves/fake-claude",
+  "private": true,
+  "type": "module",
+  "bin": { "fake-claude": "./src/index.ts" }
+}

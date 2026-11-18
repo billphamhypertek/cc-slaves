@@ -1,0 +1,14 @@
+{
+  "deps": "Kiểm tra phụ thuộc",
+  "connTry": "nối engine… lần {n}",
+  "conn": "nối engine…",
+  "accounts": "Đọc account & quota",
+  "nAcc": "{n} account",
+  "resume": "Nối lại phiên điều phối và lane",
+  "nLanes": "{n} lane…",
+  "late": "Không nối được với engine sau 30 s",
+  "lateAt": "· số liệu lúc {at}.",
+  "restart": "Khởi động lại engine",
+  "lost": "Mất kết nối với engine — đang nối lại (lần {n})…",
+  "lostNote": "Số liệu lúc {at} · lane vẫn chạy."
+}

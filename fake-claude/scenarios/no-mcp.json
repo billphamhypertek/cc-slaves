@@ -1,0 +1,1 @@
+{ "init": { "mcp_servers": [] }, "steps": [{ "waitUser": true }] }

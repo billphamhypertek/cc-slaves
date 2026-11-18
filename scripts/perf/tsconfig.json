@@ -1,0 +1,12 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "rootDir": "../..",
+    "outDir": "../../.tsbuild/perf",
+    "tsBuildInfoFile": "../../.tsbuild/perf.tsbuildinfo",
+    "lib": ["ES2023", "DOM", "DOM.Iterable"],
+    "types": ["bun"]
+  },
+  "include": ["*.ts"],
+  "references": [{ "path": "../../engine" }]
+}

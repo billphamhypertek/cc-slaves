@@ -1,0 +1,10 @@
+/* spec v2.3 §6.1 Đồ thị (mockup G1 / G5 `.gr` rows): 26 px rows, rail svg, subject cut "…", branch pill, relative time. */
+.grph{flex:1;min-height:0;overflow-y:auto}
+.grow{display:flex;align-items:center;gap:var(--s3);width:100%;height:26px;padding:0 var(--s4);border:0;background:transparent;font-size:var(--sm);white-space:nowrap;text-align:left}
+.grow:hover{background:var(--sel)}
+.grow.sel{background:var(--sel)}
+.grail{height:26px;flex:none}
+.gsub{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;color:var(--fg)}
+.gref{flex:none;font:600 var(--xs)/1.4 var(--f-mono);border:1px solid;border-radius:99px;padding:0 var(--s2)}
+.gago{flex:none;min-width:44px;text-align:right;color:var(--fg-3);font:var(--xs) var(--f-mono)}
+.grow.sel .gago{color:var(--fg-2)}

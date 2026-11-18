@@ -1,0 +1,103 @@
+/* Chờ PO — v2.1 §4.11b block (top of the left column) + v2.4 §6.7 D52 rows and the detail box (CP1–CP6). */
+/* §6.7 R32 (PO 16/11): Chờ PO takes at most 30 % of the column at every window size and shrinks to its rows when fewer; past
+   that its rows scroll with a bottom fade; Điều phối / Đang xem take the rest (≥ 70 %). One line when nothing waits. */
+#inbox{flex:0 1 auto;max-height:30%;min-height:0;display:flex;flex-direction:column}
+#inbox.line{flex:none}
+#inbox.line header{border-bottom:0}
+#inbox header{display:flex;align-items:center;gap:var(--s3);padding:var(--s2) var(--s3) var(--s2) var(--s5);border-bottom:1px solid var(--line)}
+#inbox header b{font:600 var(--lg)/1 var(--f-disp);letter-spacing:.04em}
+#inbox header .sp{flex:1}
+#inbox header .none{display:inline-flex;align-items:center;gap:var(--s2);font-size:var(--sm);color:var(--fg-2);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#inbox header .none .i{color:var(--ok)}
+#inbox .fold{width:var(--h-ctl-sm);height:var(--h-ctl-sm);border-radius:7px;border:1px solid transparent;background:transparent;color:var(--fg-2);font:600 var(--md)/1 var(--f-body)}
+#inbox .fold:hover{border-color:var(--line-2)}
+#inbox .res{white-space:nowrap}
+/* R43 I2 a few rows: 4 px under the last one; the 16 px band (under the .gfade edge fade) only while the rows overflow */
+#inbox .cards{flex:1;overflow:auto;display:flex;flex-direction:column;padding:var(--s2) 0}
+#inbox .cards.gscroll{padding-bottom:var(--s6)}
+
+/* §6.7 one row: glyph · source · one line · time · a fixed 52 px action cell (≤ 2 icon buttons 24 × 24, or "›") */
+#inbox .card{position:relative;display:flex;align-items:center;gap:var(--s3);height:var(--h-row);flex:none;padding:0 var(--s2) 0 var(--s4);cursor:pointer;transition:opacity 120ms var(--ease)}
+#inbox .card:hover{background:var(--hov)}
+#inbox .card.focus{background:var(--sel)}
+#inbox .card .ki{display:flex;color:var(--warn)}
+#inbox .card.bad .ki{color:var(--bad)}
+#inbox .card.info .ki{color:var(--fg-3)}
+#inbox .card .src{flex:none;max-width:84px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font:600 var(--xs) var(--f-mono);color:var(--fg-2)}
+#inbox .card .tt{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:var(--sm);color:var(--fg)}
+#inbox .card .tt code{font:var(--xs) var(--f-mono);background:var(--accent-2);border-radius:3px;padding:0 var(--s1);color:var(--fg)}
+#inbox .card .tm{flex:none;font:var(--xxs) var(--f-mono);color:var(--fg-3)}
+#inbox .card .ra{flex:none;width:52px;display:flex;justify-content:flex-end;gap:var(--s1)}
+#inbox .card .an{flex:none;max-width:110px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:var(--xs);color:var(--fg-2)}
+#inbox .card.done{opacity:.55;cursor:default}
+#inbox .card.done .ki{color:var(--ok)}
+#inbox .card.un .tt{color:var(--accent)}
+#inbox .card.new{animation:mo-up 180ms var(--ease)}
+.rm #inbox .card.new{animation:mo-fade 100ms linear}
+/* v1.1 §4.4 / U6: a deck card was clicked → its row takes the grey step for 1.2 s (v2.8 §7.1, no box; static, so reduced motion keeps it) */
+#inbox .card.flash{background:var(--sel)}
+.cdiv{display:flex;align-items:center;gap:var(--s3);height:22px;padding:0 var(--s4);font-size:var(--xxs);letter-spacing:.06em;text-transform:uppercase;color:var(--fg-3)}
+.cdiv::after{content:"";flex:1;height:1px;background:var(--line)}
+
+/* icon buttons (row + box ×): 24 × 24 target (WCAG 2.5.8); CP3 tip "<nhãn> ⌥n" on hover, left of the button so the
+   scrolling list (overflow:auto) never clips it */
+.ia{position:relative;width:var(--h-ctl-sm);height:var(--h-ctl-sm);flex:none;border-radius:5px;border:1px solid transparent;background:transparent;display:flex;align-items:center;justify-content:center;color:var(--fg-2);padding:0}
+.ia:not(:disabled):hover{border-color:var(--line-2);background:var(--bg-2);color:var(--fg)}
+.ia.op,.ia.lock{color:var(--fg-3)}
+.ia:disabled{cursor:default}
+#inbox .ia:disabled:not(.lock){opacity:.4}
+.ia[data-tip]:is(:hover,:focus-visible)::after{left:auto;bottom:auto;right:calc(100% + 6px);top:50%;transform:translateY(-50%);z-index:5;width:auto;white-space:nowrap;padding:var(--s2) var(--s3);border-radius:6px} /* the global [data-tip] tip, moved beside the button */
+/* the 5 s undo: "Đã chọn “…” · gửi sau n s" + "Hoàn tác (n)" with its countdown ring */
+.und{flex:none;display:flex;align-items:center;gap:var(--s2);height:var(--h-ctl-sm);padding:0 var(--s3);border-radius:5px;border:1px solid color-mix(in srgb,var(--accent) 40%,transparent);background:transparent;color:var(--accent);font-size:var(--xs);font-weight:600;white-space:nowrap}
+.und .ring{width:14px;height:14px;border-radius:50%;background:conic-gradient(var(--accent) calc(var(--p) * 1%),var(--line-2) 0);-webkit-mask:radial-gradient(circle,transparent 4px,black 4.5px);mask:radial-gradient(circle,transparent 4px,black 4.5px);flex:none}
+
+/* §6.7 the detail box (a modal over the whole window; CP2 / CP2b / CP6) */
+#cardbox{position:fixed;inset:0;display:grid;place-items:center;background:var(--scrim);z-index:50;padding:var(--s5);animation:mo-fade 180ms var(--ease)}
+.rm #cardbox{animation:mo-fade 100ms linear}
+.modal.cpm{padding:0;gap:0}.modal.cpm:focus-visible{box-shadow:none} /* the box container takes focus on open (keys); its buttons keep their ring */
+.cpm .mh{gap:var(--s3);height:40px;flex:none;padding:0 var(--s3) 0 var(--s5);border-bottom:1px solid var(--line)}
+.cpm .mh .ki{display:flex;color:var(--warn)}
+.cpm .mh.bad .ki{color:var(--bad)}
+.cpm .mh.info .ki{color:var(--fg-3)}
+.cpm .mh .src{font:600 var(--xs) var(--f-mono);color:var(--fg-2)}
+.cpm .mh .tm{font:var(--xxs) var(--f-mono);color:var(--fg-3)}
+.cpm .mh .ia{margin-left:auto}
+.cpm .mb{padding:var(--s5) var(--s5) var(--s5);display:flex;flex-direction:column;gap:var(--s4)}
+.cpm .q2{font-size:var(--md);font-weight:600;line-height:1.45}
+.cpm .ctx{max-height:240px;overflow:auto;border:1px solid var(--line);border-radius:6px;background:var(--bg);padding:var(--s2) var(--s4);color:var(--fg-2);font-size:var(--sm);line-height:1.5;white-space:pre-wrap}
+.cpm .ctx.mono{font:var(--xs)/1.6 var(--f-mono);color:var(--fg)}
+.cpm .ops{display:flex;flex-direction:column;gap:var(--s2)}
+.cpm .opt{display:flex;align-items:center;gap:var(--s4);text-align:left;padding:var(--s2) var(--s4);border-radius:6px;border:1px solid var(--line-2);background:transparent;font-size:var(--sm)}
+.cpm .opt:not(:disabled):hover{border-color:var(--line-2);background:var(--hov)}
+.cpm .opt .od{display:block;color:var(--fg-2);font-size:var(--xs)}
+.cpm .opt .tag{margin-left:auto;font-size:var(--xs);color:var(--accent);font-weight:600;border:1px solid color-mix(in srgb,var(--accent) 45%,transparent);border-radius:4px;padding:0 var(--s2)}
+.cpm kbd{font:var(--xxs) var(--f-mono);color:var(--fg-3)}
+.cpm .btn kbd{margin-left:var(--s1)}
+.cpm .bts{display:flex;flex-wrap:wrap;gap:var(--s2)}
+.cpm .row2{display:flex;align-items:center;gap:var(--s3);font-size:var(--xs);color:var(--fg-3)}
+.cpm .row2.k13r{align-items:flex-start;color:var(--fg-2)}
+.cpm .row2.k13r b{color:var(--fg)}
+.cpm .field{height:30px;width:100%}
+.cpm .other{display:flex;gap:var(--s2)}
+.cpm .other textarea{flex:1;min-height:40px;resize:vertical;border-radius:8px;border:1px solid var(--line-2);background:var(--solid);color:var(--fg);font:var(--sm)/1.4 var(--f-body);padding:var(--s2) var(--s3)}
+.cpm .mro{padding:var(--s3) var(--s5) 0}
+.cpm .ft{display:flex;justify-content:flex-end;padding:var(--s3) var(--s5);border-top:1px solid var(--line)}
+.cpm .ft .hint{font:var(--xxs) var(--f-mono);color:var(--fg-3)}
+/* offline: the box is read only (§6.7 "Mất kết nối") */
+.cpm.off :is(.opt,.btn,textarea,input,.lnk):disabled{opacity:.5}
+.modal.cpm:focus{outline:none} /* the dialog takes focus for Esc / ⌥n; it is not itself a control */
+/* v2.7 the issue cards (mockup IS1 / IS3b / IS11 / IS5b): orange key / count, text buttons, the two-line red rows */
+#inbox .card .src.am,#inbox .card .tt.am{color:var(--amber)}
+#inbox .card.two{height:auto;min-height:var(--h-row);padding-top:var(--s2);padding-bottom:var(--s3);align-items:flex-start;flex-wrap:wrap}
+#inbox .card.two .ki{margin-top:var(--s1)}
+#inbox .card.two .tt{white-space:normal;overflow-wrap:anywhere;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;line-height:1.45}
+#inbox .card .sub{flex-basis:100%;display:flex;align-items:center;gap:var(--s3);padding-left:calc(var(--s6) + var(--s3) - var(--s2));margin-top:var(--s2);min-width:0}
+#inbox .card .sub .nt{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:var(--xs);color:var(--fg-3)}
+#inbox .rb{height:var(--h-ctl-sm);display:inline-flex;align-items:center;gap:var(--s2);padding:0 var(--s3);border-radius:5px;border:1px solid var(--line-2);background:transparent;font:600 var(--xs) var(--f-body);color:var(--fg);white-space:nowrap;flex:none}
+#inbox .rb:disabled{opacity:.4;cursor:default}
+#inbox .rb.acc{border-color:color-mix(in srgb,var(--accent) 45%,transparent);color:var(--accent)}
+#inbox .rb.def{border-color:var(--fg-2)}
+#inbox .rb.red{border-color:color-mix(in srgb,var(--bad) 50%,transparent);color:var(--bad)}
+#inbox .rb:not(:disabled):hover{background:var(--bg-2)}
+#inbox .rb kbd{font:var(--xxs) var(--f-mono);color:var(--fg-3)}
+#inbox .card .ra:has(.rb){width:auto;min-width:52px}

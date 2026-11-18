@@ -1,0 +1,127 @@
+/* v2.7.1 §4.3 account panel (AC1–AC11). Overlays the deck from the overlay layer; never changes the deck's size.
+   Colours only through the 14 --ap-* variables (styles.css :root, §17); selection = the neutral --sel step (BANNED accent look). */
+.accp{font:var(--xs)/1.4 var(--f-body);color:var(--ap-fg);pointer-events:auto}
+.accp .aring{color:var(--ap-ok)}
+.accp .aring .arc{transform-origin:center;transform-box:fill-box;animation:acspin 1.2s linear infinite}
+@keyframes acspin{to{transform:rotate(360deg)}}
+/* collapsed card: 44 px wide, 12 px from the top / right of the deck area (under the header bar) */
+.accp.mini{position:absolute;top:calc(var(--h-head) + var(--s5));right:12px;width:44px;z-index:7;display:flex;flex-direction:column;align-items:center;gap:var(--s2);padding:var(--s3) 0 var(--s2);
+  background:var(--ap-bg);border:1px solid var(--ap-line);border-radius:10px;cursor:pointer;color:var(--ap-fg)}
+.accp.mini:hover,.accp.mini:focus-visible{background-image:linear-gradient(var(--sel),var(--sel));outline:none}
+.accp .pool{position:relative;display:grid;place-items:center}
+.accp .pool b{position:absolute;font:600 var(--xs) var(--f-mono);color:var(--ap-hi)}
+.accp.mini .n{font:var(--xs) var(--f-mono);color:var(--ap-mut)}
+.accp .acnt{display:flex;align-items:center;gap:var(--s2);font:600 var(--xs) var(--f-mono)}
+.accp .acnt i{width:5px;height:5px;border-radius:50%;background:currentColor}
+.accp .acnt.bad{color:var(--ap-bad)}.accp .acnt.warn{color:var(--ap-warn)}.accp .acnt.unk{color:var(--ap-unk)}
+.accp .chev{color:var(--ap-mut);font-size:var(--xs);line-height:1}
+.accp .chev.hold{color:var(--ap-warn)}
+.accp .ctip,.accp .htip,.accp-tip{position:absolute;width:max-content;flex-direction:column;gap:var(--s2);padding:var(--s3) var(--s4);text-align:left;white-space:normal;
+  background:var(--solid);border:1px solid var(--line-2);border-radius:8px;box-shadow:var(--shadow);color:var(--fg);font:var(--xs)/1.5 var(--f-body);z-index:8}
+.accp .ctip{right:52px;top:0;max-width:300px;display:none}
+.accp .ctip span:last-child,.accp .htip span+span,.accp-tip span+span{color:var(--fg-3)}
+.accp.mini:hover .ctip,.accp.mini:focus-visible .ctip{display:flex}
+/* open panel: 400 px (380 px under a 1280 px window), full height of the deck area under the header bar, shadow on the left */
+.accp.open{position:absolute;top:var(--h-head);right:0;bottom:0;width:400px;z-index:7;display:flex;flex-direction:column;
+  background:var(--ap-bg);border-left:1px solid var(--ap-line);box-shadow:var(--shadow-panel)}
+@media (max-width:1279px){.accp.open{width:380px}}
+.accp .ah{position:relative;display:flex;align-items:center;gap:var(--s3);height:46px;flex:none;box-sizing:border-box;padding:0 var(--s4) 0 var(--s5);border-bottom:1px solid var(--ap-div)}
+.accp .ah>b{font:600 var(--sm) var(--f-body);color:var(--ap-hi)}
+.accp .badge{font:var(--xs) var(--f-mono);color:var(--ap-mut);border:1px solid var(--ap-ctl);border-radius:4px;padding:0 var(--s2)}
+.accp .upd{margin-left:auto;color:var(--ap-mut);white-space:nowrap;outline:none}
+.accp .upd.off{color:var(--ap-warn)}
+.accp .htip{right:0;top:40px;max-width:340px;display:none;white-space:normal}
+.accp .upd:hover .htip,.accp .upd:focus-visible .htip{display:flex}
+.accp .acb{height:var(--h-ctl-sm);min-width:var(--h-ctl-sm);padding:0 var(--s3);box-sizing:border-box;border:1px solid var(--ap-ctl);border-radius:5px;background:transparent;color:var(--ap-fg);cursor:pointer;
+  font:600 var(--xs) var(--f-body);display:inline-flex;align-items:center;justify-content:center;gap:var(--s2);white-space:nowrap}
+.accp .acb:disabled{opacity:.45;cursor:not-allowed}
+.accp .acb.busy:disabled{opacity:1;color:var(--ap-mut)}
+.accp .acb:hover:not(:disabled),.accp .acb:focus-visible{background:var(--sel);outline:none}
+.accp .ah>.upd:empty{margin-left:0}.accp .ah>.upd:empty+.acb{margin-left:auto}
+.accp .aico{width:12px;height:12px;flex:none}
+.accp .aspin{display:inline-grid;place-items:center;width:12px;height:12px;animation:acspin 1s linear infinite}
+.accp .abnr{display:grid;grid-template-columns:16px 1fr;gap:var(--s3);padding:var(--s3) var(--s5);border-bottom:1px solid var(--ap-div);background:var(--panel-2);color:var(--ap-fg);flex:none}
+.accp .abnr .aico{width:14px;height:14px;color:var(--ap-mut)}
+.accp .abnr .aico.warn{color:var(--ap-warn)}
+.accp .abnr .m{color:var(--ap-mut)}
+.accp .aov{display:flex;gap:var(--s5);align-items:center;padding:var(--s4) var(--s5);border-bottom:1px solid var(--ap-div);flex:none}
+.accp .pool.abig b{font-size:var(--sm)}
+.accp .aovr{flex:1;min-width:0;display:flex;flex-direction:column;gap:var(--s2)}
+.accp .lbl{font:600 var(--xs) var(--f-body);letter-spacing:.08em;color:var(--ap-mut)}
+.accp .sbar{display:flex;height:5px;border-radius:3px;overflow:hidden;background:var(--ap-track)}
+.accp .sbar i{display:block;height:100%}
+.accp .leg{display:flex;flex-wrap:wrap;gap:var(--s1) var(--s5);color:var(--ap-fg)}
+.accp .leg span{display:flex;align-items:center;gap:var(--s2);white-space:nowrap}
+.accp .leg i{width:6px;height:6px;border-radius:1px;background:currentColor}
+.accp .s-ready{color:var(--ap-ok);background-color:var(--ap-ok)}.accp .s-inuse{color:var(--ap-use);background-color:var(--ap-use)}
+.accp .s-warn{color:var(--ap-warn);background-color:var(--ap-warn)}.accp .s-block{color:var(--ap-bad);background-color:var(--ap-bad)}
+.accp .s-unk{color:var(--ap-unk);background-color:var(--ap-unk)}
+.accp .leg span{background:none}
+.accp .atok{display:flex;justify-content:space-between;flex:none;padding:var(--s2) var(--s5);border-bottom:1px solid var(--ap-div);font:var(--xs) var(--f-mono);color:var(--ap-mut)}
+.accp .alist{position:relative;flex:1;min-height:0}
+.accp .ascroll{position:absolute;inset:0;overflow-y:auto}
+.accp .alist.afade::after{content:"";position:absolute;left:0;right:8px;bottom:0;height:36px;pointer-events:none;background:linear-gradient(transparent,var(--ap-bg))}
+.accp .gh{display:flex;align-items:flex-end;gap:var(--s2);padding:0 var(--s5) var(--s2);box-sizing:border-box;font:600 var(--xs) var(--f-body);letter-spacing:.06em;text-transform:uppercase;color:var(--ap-mut)}
+.accp .gh.g-attention{color:var(--ap-warn)}
+.accp .gh .gn{font-weight:400}
+.accp .gh .cols{margin-left:auto;margin-right:calc(var(--s6) * 3);text-transform:none;letter-spacing:0;font-weight:400;color:var(--ap-mut2)}
+.accp .gmore{display:block;width:100%;text-align:left;padding:0 var(--s5);border:0;background:transparent;color:var(--ap-mut);font-size:var(--xs);cursor:pointer}
+.accp .gmore:hover,.accp .gmore:focus-visible{color:var(--ap-hi);outline:none}
+/* row: dot 6 px · content · numbers 132 px · buttons 48 px; line 3 spans content → buttons */
+.accp .acrow{position:relative;display:grid;grid-template-columns:6px minmax(0,1fr) 132px 48px;column-gap:var(--s3);align-items:start;align-content:start;padding:var(--s3) var(--s2) var(--s3) var(--s5);box-sizing:border-box}
+.accp .acrow .hit{position:absolute;inset:0;cursor:pointer;outline:none}
+.accp .acrow:hover,.accp .acrow.alit,.accp .acrow:focus-within{background:var(--sel)}
+.accp .acrow:has(.hit:focus-visible){box-shadow:inset 0 0 0 1px var(--fg-2)}
+.accp .acrow.glow::after{content:"";position:absolute;inset:0;background:var(--ap-ok);opacity:0;pointer-events:none;animation:accglow 1.4s ease-out}
+@keyframes accglow{0%{opacity:.28}100%{opacity:0}}
+.accp .adot{width:6px;height:6px;border-radius:50%;margin-top:var(--s2);background:var(--ap-ok)}
+.accp .t-bad .adot{background:var(--ap-bad)}.accp .t-warn .adot{background:var(--ap-warn)}.accp .t-unk .adot{background:var(--ap-unk)}
+.accp .main{min-width:0;pointer-events:none}
+.accp .em{display:block;font:500 var(--xs)/18px var(--f-mono);color:var(--ap-hi);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.accp .l2{display:flex;gap:var(--s2);align-items:center;flex-wrap:wrap;line-height:17px;color:var(--ap-mut2)}
+.accp .l2 .asub{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.accp .atag{font:600 var(--xxs)/15px var(--f-body);letter-spacing:.04em;text-transform:uppercase;padding:0 var(--s2);border:1px solid var(--ap-ctl);border-radius:3px;color:var(--ap-mut)}
+.accp .atag.orch{color:var(--accent);border-color:color-mix(in srgb,var(--accent) 40%,transparent)}
+.accp .aic.bad{color:var(--ap-bad)}.accp .aic.warn{color:var(--ap-warn)}
+.accp .why{color:var(--ap-bad)}.accp .wtxt{color:var(--ap-warn)}
+/* v2.2 §6 ACC (F-I6) "⚠ cấu hình chung lỗi ›": the reason in words, amber, on the row's second line */
+.accp .achip{display:inline-block;max-width:100%;padding:0 var(--s2);font-size:var(--xxs);border:1px solid color-mix(in srgb,var(--ap-warn) 55%,transparent);border-radius:4px;color:var(--ap-warn);line-height:16px;overflow:hidden;text-overflow:ellipsis;vertical-align:top}
+.accp .l2 .alnk{pointer-events:auto;position:relative;border:0;background:none;color:var(--ap-ok);padding:0;font:inherit;cursor:pointer}
+.accp .l3{grid-column:2/-1;line-height:17px;margin-top:var(--s1);color:var(--ap-mut2);pointer-events:none}
+.accp .l3 .nw{display:inline-block;max-width:100%;margin-right:var(--s2)}
+.accp .l3 .st{color:var(--ap-mut)}
+.accp .l3 .st .aico,.accp .l3 .st .aspin{width:11px;height:11px;margin-right:var(--s2);vertical-align:-1px}
+.accp .rt{display:flex;flex-direction:column;gap:var(--s1);pointer-events:none}
+.accp .apc{text-align:right;font:600 var(--xs)/18px var(--f-mono);color:var(--ap-hi)}
+.accp .t-bad .apc{color:var(--ap-bad)}.accp .t-warn .apc{color:var(--ap-warn)}.accp .t-unk .apc{color:var(--ap-mut)}
+.accp .bl{display:grid;grid-template-columns:28px 1fr 24px;align-items:center;gap:var(--s2);font:var(--xxs)/13px var(--f-mono);color:var(--ap-mut)}
+.accp .bl>span:last-child{text-align:right}
+.accp .bl>i{position:relative;display:block;height:3px;background:var(--ap-track);border-radius:2px}
+.accp .bl i i{display:block;height:100%;border-radius:2px;background:var(--ap-ok)}
+.accp .bl i i.f{background:var(--ap-bad)}.accp .bl i i.w{background:var(--ap-warn)}
+.accp .bl i s{position:absolute;top:-2px;width:1px;height:7px;background:var(--ap-mut)}
+.accp .stale .bl,.accp .stale .apc{opacity:.45}
+.accp .acts{position:relative;display:flex;flex-wrap:nowrap;padding:0;gap:var(--s1);justify-content:flex-end;opacity:0}
+.accp .acrow:hover .acts,.accp .acrow.alit .acts,.accp .acts:focus-within{opacity:1}
+.accp .ib{width:22px;height:22px;border:0;border-radius:4px;background:transparent;color:var(--ap-mut);display:grid;place-items:center;padding:0;cursor:pointer;font:600 var(--sm)/1 var(--f-body)}
+.accp .ib .aico{width:13px;height:13px}
+.accp .ib:hover:not(:disabled),.accp .ib:focus-visible{background:var(--sel);color:var(--ap-hi);outline:none}
+.accp .ib:focus-visible{box-shadow:0 0 0 1px var(--fg-2)}
+.accp .ib:disabled{opacity:.4;cursor:not-allowed}
+/* AC8 380 px: the buttons take no column; on hover / focus the number gives way to them (it is in the tooltip, UX MINOR-3) */
+@media (max-width:1279px){
+  .accp .acrow{grid-template-columns:6px minmax(0,1fr) 132px 0}
+  .accp .acts{position:absolute;right:var(--s2);top:var(--s3);padding-left:var(--s3);background:var(--ap-bg)}
+  .accp .acrow:hover .acts,.accp .acrow:focus-within .acts{background:linear-gradient(var(--sel),var(--sel)),var(--ap-bg)}
+  .accp .acrow:hover .apc,.accp .acrow:focus-within .apc{visibility:hidden}
+  .accp .gh .cols{margin-right:var(--s2)}
+}
+.accp .sk{display:block;width:110px;height:7px;border-radius:3px;background:var(--sk);margin-top:var(--s2)}
+.accp .aempty{display:flex;flex-direction:column;align-items:center;gap:var(--s4);padding:var(--s6) var(--s5);color:var(--ap-mut)}
+.accp .aempty b{color:var(--ap-hi);font-weight:600}
+.accp .anone{padding:var(--s5);color:var(--ap-mut2)}
+.accp .afilter{margin:var(--s3) var(--s4) var(--s4);padding:var(--s3) var(--s4);border:1px solid var(--ap-ctl);border-radius:6px;background:transparent;color:var(--ap-hi);font:var(--xs) var(--f-body)}
+.accp .afilter:focus{outline:none;border-color:var(--fg-2)}
+.accp-tip{right:calc(100% + 8px);max-width:340px;display:flex;pointer-events:none}
+.accp-tip span:first-child{font-family:var(--f-mono);color:var(--fg)}
+.accp-tip span.b{color:var(--bad)}

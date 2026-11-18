@@ -1,0 +1,12 @@
+{
+  "steps": [
+    { "waitUser": true },
+    { "stream": { "id": "msg_fake_1", "chunk": 4, "everyMs": 5, "blocks": [
+      { "thinking": "nghĩ một chút" },
+      { "text": "Xin chào, đây là **đậm** và `code`." },
+      { "tool_use": { "id": "toolu_fake_1", "name": "Read", "input": { "file_path": "/tmp/a.ts" } } }
+    ] } },
+    { "stream": { "id": "msg_fake_2", "parent": "toolu_fake_1", "blocks": [{ "text": "sub nói" }] } },
+    { "emit": { "type": "result", "subtype": "success", "is_error": false, "result": "ok", "num_turns": 1, "total_cost_usd": 0.01, "permission_denials": [] } }
+  ]
+}

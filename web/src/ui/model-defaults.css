@@ -1,0 +1,19 @@
+/* v2.4 §4.5 LM3 Cài đặt › Model (lazy, with ModelDefaults.tsx); fields reuse the §4.4 .mpick / .mpop of model.css */
+.mdef{display:flex;flex-direction:column;gap:var(--s4)}
+.mdef h3{margin:0 0 var(--s1);font:600 var(--md)/1.3 var(--f-body)}
+.mdt{table-layout:fixed}
+.mdt th.mdr,.mdt td.mdr{width:96px}
+.mdt th:nth-child(2){width:220px}.mdt th:nth-child(3){width:200px}
+.mdt td{padding:var(--s2) var(--s3)}
+.mdt .mpick{width:100%;min-width:0;padding:0 var(--s3)}
+.mdt .mpick .mdl{display:flex;gap:var(--s3);min-width:0;overflow:hidden;white-space:nowrap}
+.mdt .mpick .mdl>span{overflow:hidden;text-overflow:ellipsis}
+.mdt .mpick .mut{color:var(--fg-3)}
+.mdt .mpick.lack .mdl{opacity:.5}
+.mdt .car{font:normal var(--xxs)/1 system-ui,sans-serif;font-style:normal;color:var(--fg-3)}
+.mdt td.res{color:var(--fg-2)}
+.mdt td.res small{display:block;color:var(--fg-3);font-size:var(--xs)}
+.mnt{display:flex;gap:var(--s3);align-items:flex-start;color:var(--fg-2);font-size:var(--xs);line-height:1.5}
+.mnt svg{flex:none;margin-top:var(--s1)}
+.mdef .mfail,.mdef .mro{padding:0}
+.mdpop .mrow:not(.grp){grid-template-columns:16px 128px minmax(0,1fr)} /* "Theo Claude Code" fits the name column */

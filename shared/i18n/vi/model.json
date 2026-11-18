@@ -1,0 +1,14 @@
+{
+  "chipTip": "Model và effort của {name} · bấm để đổi",
+  "chipEnded": "Model và effort lần cuối phiên này chạy",
+  "chipMismatch": "Model đang chạy khác lựa chọn",
+  "chipMac": "Đổi model trên Mac",
+  "waitTurn": "chờ hết lượt",
+  "byDefault": "Theo mặc định",
+  "phPending": "Gửi khi lượt này xong…",
+  "blockedClear": "/clear không dùng được ở đây · dùng /new",
+  "blockedLogin": "Đăng nhập account làm ở bảng Account",
+  "slashModel": "đổi model của {name}",
+  "slashEffort": "đổi effort của {name}",
+  "offline": "Mất kết nối · số liệu lúc {hm} · đang nối lại"
+}

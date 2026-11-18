@@ -1,0 +1,6 @@
+{
+  "name": "@cc-slaves/fake-mcp",
+  "private": true,
+  "type": "module",
+  "bin": { "fake-mcp": "./src/index.ts" }
+}

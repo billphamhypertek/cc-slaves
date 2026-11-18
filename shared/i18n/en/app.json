@@ -1,0 +1,12 @@
+{
+  "newCard": "New card from {who}",
+  "interrupted": "Interrupt sent — {who}'s turn stops, the session lives on",
+  "stopAll": "Safe-stop all lanes? Each lane finishes its current work, commits, writes a handoff, then stops.",
+  "soundOn": "Sound on (M)",
+  "soundOff": "Sound off (M)",
+  "local.lanes": "[cc-slaves] {n} lanes on {project}",
+  "local.handoff": "[cc-slaves] /handoff — safe-stopping {n} lanes, each writes a handoff",
+  "local.new": "[cc-slaves] /new — the old session is writing its handoff…",
+  "switching": "Moving {name} to {to} — resumes the same session",
+  "autoAcc": "the engine's pick"
+}
